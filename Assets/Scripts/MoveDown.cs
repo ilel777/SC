@@ -25,7 +25,7 @@ public class MoveDown : MonoBehaviour
     void Update()
     {
         rb.velocity = Vector3.back * speed;
-        Debug.Log(Vector3.back);
-        Debug.Log(Vector3.back * speed * Time.deltaTime);
+        // Debug.Log(Vector3.back);
+        // Debug.Log(Vector3.back * speed * Time.deltaTime);
     }
 }
