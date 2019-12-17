@@ -1,0 +1,16 @@
+{
+    "playerShipConfig": {
+        "speed": 20.0,
+        "health": 100
+    },
+    "enemyShipConfig": {
+        "speed": 10.0,
+        "health": 50
+    },
+    "asteroidConfig": {
+        "speed": 10.0
+    },
+    "collectibleConfig": {
+        "speed": 15.0
+    }
+}
