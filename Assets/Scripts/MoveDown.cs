@@ -24,7 +24,8 @@ public class MoveDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = Vector3.back * speed;
+        rb.AddForce(-speed * rb.mass * Vector3.forward);
+        // rb.velocity = Vector3.back * speed;
         // Debug.Log(Vector3.back);
         // Debug.Log(Vector3.back * speed * Time.deltaTime);
     }

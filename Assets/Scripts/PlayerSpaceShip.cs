@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 ///   Player
 /// </summary>
-public class PlayerSpaceShip : SpaceShip
+public class Player : SpaceShip
 {
     #region Fields
 

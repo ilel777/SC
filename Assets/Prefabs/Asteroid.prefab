@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2517451682857881765}
   - component: {fileID: 2517451682857881766}
   - component: {fileID: 2517451682857881767}
+  - component: {fileID: 1112894623}
+  - component: {fileID: 1112894618}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Asteroid
@@ -26,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2517451682857881760}
-  m_LocalRotation: {x: -0.29725996, y: 0.055975653, z: -0.17625707, w: 0.936716}
+  m_LocalRotation: {x: -0.2972611, y: 0.055972468, z: -0.17625813, w: 0.93671554}
   m_LocalPosition: {x: 1.13, y: 0, z: 2.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -91,3 +93,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1112894623
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2517451682857881760}
+  serializedVersion: 2
+  m_Mass: 10000
+  m_Drag: 1
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0
+--- !u!114 &1112894618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2517451682857881760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601cb182d1d483e42900d962d9cdde97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
