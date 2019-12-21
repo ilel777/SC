@@ -25,4 +25,14 @@ public class Asteroid : MonoBehaviour
     {
         rb.AddTorque(torqueVector * rotationSpeed * rb.mass);
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player Bolt") || other.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            EventManager.Invoke(EventName.AsteroidDestroyed);
+        }
+    }
+
 }

@@ -6,28 +6,36 @@ using UnityEngine;
 /// <summary>
 ///   Player
 /// </summary>
-public class PlayerSpaceShip : SpaceShip
+public class Player : SpaceShip
 {
-    #region Fields
+
+#region Fields
 
     // Player Movement Support
     private Rigidbody rb;
+
     [SerializeField]
     private float speed = 20;
-    #endregion
 
-    #region Methods
+#endregion
+
+#region Methods
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        speed = ConfigurationUtils.PlayerShipConfig.speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetButtonUp("Fire1"))
+        {
+            Debug.Log("Space pressed");
+            FireBolt(Resources.Load<GameObject>("Prefabs/PlayerBolt"));
+        }
     }
 
     void FixedUpdate()
@@ -47,5 +55,5 @@ public class PlayerSpaceShip : SpaceShip
     }
 
 
-    #endregion
+#endregion
 }

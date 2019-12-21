@@ -11,8 +11,10 @@ public class ConfigurationData
     public EnemyShipConfig enemyShipConfig;
     public AsteroidConfig asteroidConfig;
     public CollectibleConfig collectibleConfig;
+    public PlayerBoltConfig playerBoltConfig;
 
-    private ConfigurationData(){
+    private ConfigurationData()
+    {
         // set default values for player configs
         playerShipConfig.health = 100;
         playerShipConfig.speed = 20;
@@ -27,7 +29,11 @@ public class ConfigurationData
 
         // set default values for collectible config
         collectibleConfig.speed = 15;
+
+        // set default values for player bolt config
+        playerBoltConfig.impulseForce = 1000;
     }
+
     internal static ConfigurationData getConfigurationData()
     {
         ConfigurationData configData = new ConfigurationData();
@@ -38,7 +44,7 @@ public class ConfigurationData
                 configData = JsonUtility.FromJson<ConfigurationData>(sr.ReadToEnd());
             }
         }
-        catch (Exception e)
+        catch
         {
             SaveConfigurationData();
         }
@@ -63,18 +69,27 @@ public struct PlayerShipConfig
 }
 
 [System.Serializable]
-public struct EnemyShipConfig{
+public struct EnemyShipConfig
+{
     public float speed;
     public int health;
 }
 
 [System.Serializable]
-public struct CollectibleConfig{
+public struct CollectibleConfig
+{
     public float speed;
 }
 
 [System.Serializable]
-public struct AsteroidConfig{
+public struct AsteroidConfig
+{
     public float speed;
-    internal double rotationSpeed;
+    public double rotationSpeed;
+}
+
+[System.Serializable]
+public struct PlayerBoltConfig
+{
+    public float impulseForce;
 }

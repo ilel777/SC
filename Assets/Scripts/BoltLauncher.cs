@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : SpaceShip
+public class BoltLauncher : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,11 @@ public class Enemy : SpaceShip
     void Update()
     {
 
+    }
+
+    // Spawn a Bolt on the location of the game object
+    public void LaunchBolt(GameObject boltPrefab)
+    {
+        Instantiate(boltPrefab, transform.position, Quaternion.identity);
     }
 }
