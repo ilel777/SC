@@ -1,7 +1,8 @@
 {
   "playerShipConfig": {
     "speed": 20.0,
-    "health": 100
+    "health": 100,
+    "cooldown":0.5
   },
   "enemyShipConfig": {
     "speed": 10.0,

@@ -17,6 +17,12 @@ public class Player : SpaceShip
     [SerializeField]
     private float speed = 20;
 
+    // Support shoting bolts
+    private GameObject boltPrefab;
+    private Timer _cooldownTimer;
+
+    public override Timer CooldownTimer => _cooldownTimer;
+
 #endregion
 
 #region Methods
@@ -25,6 +31,10 @@ public class Player : SpaceShip
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        _cooldownTimer = gameObject.AddComponent<Timer>();
+        _cooldownTimer.Duration = ConfigurationUtils.PlayerShipConfig.cooldown;
+        _cooldownTimer.Run();
+        boltPrefab = Resources.Load<GameObject>("Prefabs/PlayerBolt");
         speed = ConfigurationUtils.PlayerShipConfig.speed;
     }
 
@@ -34,7 +44,7 @@ public class Player : SpaceShip
         if (Input.GetButtonUp("Fire1"))
         {
             Debug.Log("Space pressed");
-            FireBolt(Resources.Load<GameObject>("Prefabs/PlayerBolt"));
+            FireBolt(boltPrefab);
         }
     }
 
@@ -52,6 +62,21 @@ public class Player : SpaceShip
 
         rb.AddForce(speed * direction * rb.mass, ForceMode.Force);
 
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
+    public override bool Equals(object other)
+    {
+        return base.Equals(other);
+    }
+
+    public override string ToString()
+    {
+        return base.ToString();
     }
 
 

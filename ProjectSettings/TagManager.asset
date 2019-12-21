@@ -8,6 +8,7 @@ TagManager:
   - Asteroid
   - Powerup
   - Player Bolt
+  - Boundary
   layers:
   - Default
   - TransparentFX

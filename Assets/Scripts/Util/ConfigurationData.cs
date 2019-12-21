@@ -18,6 +18,7 @@ public class ConfigurationData
         // set default values for player configs
         playerShipConfig.health = 100;
         playerShipConfig.speed = 20;
+        playerShipConfig.cooldown = 0.5f;
 
         // set default values for enemy config
         enemyShipConfig.health = 50;
@@ -66,6 +67,7 @@ public struct PlayerShipConfig
 {
     public float speed;
     public int health;
+    public float cooldown;
 }
 
 [System.Serializable]

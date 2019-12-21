@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : SpaceShip
 {
+    public override Timer CooldownTimer => throw new System.NotImplementedException();
+
     // Start is called before the first frame update
     void Start()
     {

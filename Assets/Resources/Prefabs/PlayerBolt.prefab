@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8765876926959108787}
   - component: {fileID: 8765876926959108786}
   - component: {fileID: 8765876926959108785}
-  - component: {fileID: 8765876926959108789}
   - component: {fileID: 8765876926959108790}
+  - component: {fileID: 5063409202085937130}
   m_Layer: 0
-  m_Name: Bolt
+  m_Name: PlayerBolt
   m_TagString: Player Bolt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,18 +94,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8765876926959108789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8765876926959108784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8abc901c6e4c1ec44ab4db6fb0e42d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &8765876926959108790
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -122,3 +110,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 118
   m_CollisionDetection: 0
+--- !u!114 &5063409202085937130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8765876926959108784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fffc1ca3e7599e438e5aee495417e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

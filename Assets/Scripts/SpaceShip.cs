@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShip : MonoBehaviour
+public abstract class SpaceShip : MonoBehaviour
 {
+    // Support limiting fire rate
+    public bool ReadyToFire { get => CooldownTimer.Finished; }
+    public abstract Timer CooldownTimer { get; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +22,7 @@ public class SpaceShip : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.CompareTag("Boundary")) return;
         Destroy(gameObject);
         EventManager.Invoke(EventName.ShipDestroyed);
     }
@@ -25,9 +30,10 @@ public class SpaceShip : MonoBehaviour
     public void FireBolt(GameObject boltPrefab)
     {
         BoltLauncher boltLauncher = GetComponentInChildren<BoltLauncher>();
-        if (boltLauncher)
+        if (boltLauncher && ReadyToFire)
         {
             boltLauncher.LaunchBolt(boltPrefab);
+            CooldownTimer.Run();
         }
     }
 }

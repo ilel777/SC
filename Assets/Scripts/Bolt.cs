@@ -20,4 +20,9 @@ public class Bolt : MonoBehaviour
     {
 
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Destroy(gameObject);
+    }
 }
