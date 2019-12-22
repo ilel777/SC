@@ -9,11 +9,10 @@ using UnityEngine;
 public class Player : SpaceShip
 {
 
-#region Fields
+    #region Fields
 
     // Player Movement Support
     private Rigidbody rb;
-
     [SerializeField]
     private float speed = 20;
 
@@ -23,13 +22,14 @@ public class Player : SpaceShip
 
     public override Timer CooldownTimer => _cooldownTimer;
 
-#endregion
+    #endregion
 
-#region Methods
+    #region Methods
 
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody>();
         _cooldownTimer = gameObject.AddComponent<Timer>();
         _cooldownTimer.Duration = ConfigurationUtils.PlayerShipConfig.cooldown;
@@ -51,6 +51,16 @@ public class Player : SpaceShip
     void FixedUpdate()
     {
         Move();
+        KeepInsideScreen();
+    }
+
+    void KeepInsideScreen()
+    {
+        rb.position = new Vector3(
+                                  Mathf.Clamp(rb.position.x, ScreenUtils.ScreenLeft + (ShipWidth / 2), ScreenUtils.ScreenRight - (ShipWidth / 2)),
+                                  rb.position.y,
+                                  Mathf.Clamp(rb.position.z, ScreenUtils.ScreenBottom + (ShipHeight / 2), ScreenUtils.ScreenTop - (ShipHeight / 2))
+                                  );
     }
 
     // Move Player
@@ -64,21 +74,5 @@ public class Player : SpaceShip
 
     }
 
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
-    public override bool Equals(object other)
-    {
-        return base.Equals(other);
-    }
-
-    public override string ToString()
-    {
-        return base.ToString();
-    }
-
-
-#endregion
+    #endregion
 }

@@ -9,10 +9,25 @@ public abstract class SpaceShip : MonoBehaviour
     public bool ReadyToFire { get => CooldownTimer.Finished; }
     public abstract Timer CooldownTimer { get; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    // Support storing ship's with and height
+    float _shipWidth;
+    float _shipHeight;
 
+
+    #region Properties
+
+    public float ShipWidth { get => _shipWidth; }
+    public float ShipHeight { get => _shipHeight; }
+
+    #endregion
+
+
+    // Start is called before the first frame update
+    protected void Start()
+    {
+        SphereCollider collider = GetComponent<SphereCollider>();
+        _shipWidth = collider.radius * 2;
+        _shipHeight = collider.radius * 2;
     }
 
     // Update is called once per frame

@@ -273,7 +273,6 @@ GameObject:
   m_Component:
   - component: {fileID: 740451118}
   - component: {fileID: 740451117}
-  - component: {fileID: 740451119}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -307,18 +306,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &740451119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 740451116}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 682f0f3188c55c342bb86b29dfdc746e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1105509113
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1105509114
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -616,6 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84905c05b0d4dde4a9f72ee015bf06a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerScore: {fileID: 1906059680}
 --- !u!1 &1440435638
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +622,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1440435639
 BoxCollider:
   m_ObjectHideFlags: 0
