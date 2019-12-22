@@ -31,7 +31,7 @@ public class Asteroid : MonoBehaviour
         if (other.gameObject.CompareTag("Player Bolt") || other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            EventManager.Invoke(EventName.AsteroidDestroyed);
+            EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));
         }
     }
 

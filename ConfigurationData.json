@@ -1,6 +1,6 @@
 {
   "playerShipConfig": {
-    "speed": 20.0,
+    "speed": 15.0,
     "health": 100,
     "cooldown":0.5
   },
@@ -10,7 +10,8 @@
   },
   "asteroidConfig": {
     "speed": 10.0,
-    "rotationSpeed": 0.25
+    "rotationSpeed": 0.25,
+    "scoreValue": 100
   },
   "collectibleConfig": {
     "speed": 15.0

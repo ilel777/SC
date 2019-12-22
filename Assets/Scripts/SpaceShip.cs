@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ public abstract class SpaceShip : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Boundary")) return;
         Destroy(gameObject);
-        EventManager.Invoke(EventName.ShipDestroyed);
+        EventManager.TriggerEvent(EventName.ShipDestroyed, new EventArgs());
     }
 
     public void FireBolt(GameObject boltPrefab)

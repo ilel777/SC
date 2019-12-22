@@ -27,6 +27,7 @@ public class ConfigurationData
         // set default values for asteroid config
         asteroidConfig.speed = 10;
         asteroidConfig.rotationSpeed = 0.25;
+        asteroidConfig.scoreValue = 100;
 
         // set default values for collectible config
         collectibleConfig.speed = 15;
@@ -88,6 +89,7 @@ public struct AsteroidConfig
 {
     public float speed;
     public double rotationSpeed;
+    public int scoreValue;
 }
 
 [System.Serializable]

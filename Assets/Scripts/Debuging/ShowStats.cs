@@ -13,20 +13,23 @@ public class ShowStats : MonoBehaviour
     private Text playerSpeedText;
     private Rigidbody playerRb;
     private Vector3 playerOldPos;
+    private float playerMaxSpeed;
 
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GameObject.Find("Player").GetComponent<Rigidbody>();
-        playerOldPos = playerRb.transform.position;
+        // playerOldPos = playerRb.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float playerSpeed = (playerRb.transform.position - playerOldPos).magnitude / Time.deltaTime;
-        playerSpeedText.text = "Player Speed: " + playerSpeed;
-        playerOldPos = playerRb.transform.position;
+        // float playerSpeed = (playerRb.transform.position - playerOldPos).magnitude / Time.deltaTime;
+        if (playerMaxSpeed < playerRb.velocity.magnitude)
+            playerMaxSpeed = playerRb.velocity.magnitude;
+        playerSpeedText.text = "Player Speed: " + playerMaxSpeed;
+        // playerOldPos = playerRb.transform.position;
     }
 }
