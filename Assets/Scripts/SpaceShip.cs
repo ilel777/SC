@@ -5,9 +5,9 @@ using UnityEngine;
 
 public abstract class SpaceShip : MonoBehaviour
 {
-    // Support limiting fire rate
-    public bool ReadyToFire { get => CooldownTimer.Finished; }
-    public abstract Timer CooldownTimer { get; }
+    // Support movement
+    private Rigidbody _rb;
+
 
     // Support storing ship's with and height
     float _shipWidth;
@@ -16,8 +16,20 @@ public abstract class SpaceShip : MonoBehaviour
 
     #region Properties
 
+    /// <summary>
+    ///   Get Ship's width and height
+    /// </summary>
     public float ShipWidth { get => _shipWidth; }
     public float ShipHeight { get => _shipHeight; }
+
+    /// <summary>
+    ///   Get Rigidbody reference
+    /// </summary>
+    public Rigidbody Rb { get => _rb; }
+
+    // Support limiting fire rate
+    public bool ReadyToFire { get => CooldownTimer.Finished; }
+    public abstract Timer CooldownTimer { get; }
 
     #endregion
 
@@ -25,6 +37,10 @@ public abstract class SpaceShip : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
+        //get Rigidbody
+        _rb = GetComponent<Rigidbody>();
+
+        // set ship width and height using collider
         SphereCollider collider = GetComponent<SphereCollider>();
         _shipWidth = collider.radius * 2;
         _shipHeight = collider.radius * 2;

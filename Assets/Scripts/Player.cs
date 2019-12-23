@@ -12,7 +12,6 @@ public class Player : SpaceShip
     #region Fields
 
     // Player Movement Support
-    private Rigidbody rb;
     [SerializeField]
     private float speed = 20;
 
@@ -20,17 +19,24 @@ public class Player : SpaceShip
     private GameObject boltPrefab;
     private Timer _cooldownTimer;
 
+
+
+    #endregion
+
+
+    #region Properties
+
     public override Timer CooldownTimer => _cooldownTimer;
 
     #endregion
 
+
     #region Methods
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody>();
         _cooldownTimer = gameObject.AddComponent<Timer>();
         _cooldownTimer.Duration = ConfigurationUtils.PlayerShipConfig.cooldown;
         _cooldownTimer.Run();
@@ -54,12 +60,26 @@ public class Player : SpaceShip
         KeepInsideScreen();
     }
 
+    /// <summary>
+    ///   Handle Collision with other objects
+    /// </summary>
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Boundary") || other.gameObject.CompareTag("Player Bolt")) return;
+        Destroy(gameObject);
+        EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());
+    }
+
+
+    /// <summary>
+    ///   Keep Player Ship inside screen Boundaries
+    /// </summary>
     void KeepInsideScreen()
     {
-        rb.position = new Vector3(
-                                  Mathf.Clamp(rb.position.x, ScreenUtils.ScreenLeft + (ShipWidth / 2), ScreenUtils.ScreenRight - (ShipWidth / 2)),
-                                  rb.position.y,
-                                  Mathf.Clamp(rb.position.z, ScreenUtils.ScreenBottom + (ShipHeight / 2), ScreenUtils.ScreenTop - (ShipHeight / 2))
+        Rb.position = new Vector3(
+                                  Mathf.Clamp(Rb.position.x, ScreenUtils.ScreenLeft + (ShipWidth / 2), ScreenUtils.ScreenRight - (ShipWidth / 2)),
+                                  Rb.position.y,
+                                  Mathf.Clamp(Rb.position.z, ScreenUtils.ScreenBottom + (ShipHeight / 2), ScreenUtils.ScreenTop - (ShipHeight / 2))
                                   );
     }
 
@@ -70,7 +90,7 @@ public class Player : SpaceShip
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
 
-        rb.AddForce(speed * direction * rb.mass, ForceMode.Force);
+        Rb.AddForce(speed * direction * Rb.mass, ForceMode.Force);
 
     }
 

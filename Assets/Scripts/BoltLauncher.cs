@@ -19,6 +19,6 @@ public class BoltLauncher : MonoBehaviour
     // Spawn a Bolt on the location of the game object
     public void LaunchBolt(GameObject boltPrefab)
     {
-        Instantiate(boltPrefab, transform.position, Quaternion.identity);
+        GameObject bolt = Instantiate(boltPrefab, transform.position, boltPrefab.transform.rotation);
     }
 }

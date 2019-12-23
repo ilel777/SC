@@ -6,35 +6,40 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    // Support displaying player score
+    // Support displaying level stats
     [SerializeField]
-    private Text playerScore;
+    private Text playerScore, enemyShipsDestroyed, asteroidsDestroyed, livesLeft;
 
+    // Store a reference to LevelStat object containing level statistics
+    private LevelStat levelStat;
     // Start is called before the first frame update
     void Start()
     {
-
+        levelStat = GameObject.FindObjectOfType<LevelStat>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        playerScore.text = "Score: " + levelStat.Score;
+        enemyShipsDestroyed.text = "Enemy Ships Destroyed: " + levelStat.EnemyShipsDestroyed;
+        asteroidsDestroyed.text = "Asteroids Destroyed: " + levelStat.AsteroidsDestroyed;
+        livesLeft.text = "Lives Left: " + levelStat.PlayerLives;
     }
 
-    void OnEnable()
-    {
-        EventManager.StartListening(EventName.ScoreChanged, HandleScoreChangedEvent);
-    }
+    //     void OnEnable()
+    //     {
+    //         EventManager.StartListening(EventName.ScoreChanged, HandleScoreChangedEvent);
+    //     }
 
-    void OnDesable()
-    {
-        EventManager.StopListening(EventName.ScoreChanged, HandleScoreChangedEvent);
+    //     void OnDesable()
+    //     {
+    //         EventManager.StopListening(EventName.ScoreChanged, HandleScoreChangedEvent);
 
-    }
+    //     }
 
-    void HandleScoreChangedEvent(EventArgs e)
-    {
-        playerScore.text = "Score: " + (e as ScoreChangedEventArgs).Score;
-    }
+    //     void HandleScoreChangedEvent(EventArgs e)
+    //     {
+    //         playerScore.text = "Score: " + (e as ScoreChangedEventArgs).Score;
+    //     }
 }

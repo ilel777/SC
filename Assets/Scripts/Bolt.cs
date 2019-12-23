@@ -23,6 +23,7 @@ public class Bolt : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.CompareTag("Player")) return;
         Destroy(gameObject);
     }
 }

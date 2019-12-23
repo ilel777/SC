@@ -80,5 +80,7 @@ public class EventManager
 public enum EventName
 {
     AsteroidDestroyed, ShipDestroyed,
-    ScoreChanged
+    ScoreChanged,
+    PlayerDestroyed,
+    GameOver
 }
