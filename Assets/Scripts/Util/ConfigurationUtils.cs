@@ -11,7 +11,7 @@ public static class ConfigurationUtils
     public static AsteroidConfig AsteroidConfig { get => configurationData.asteroidConfig; }
     public static CollectibleConfig CollectibleConfig { get => configurationData.collectibleConfig; }
     public static PlayerBoltConfig PlayerBoltConfig { get => configurationData.playerBoltConfig; }
-
+    public static EnemyBoltConfig EnemyBoltConfig { get => configurationData.enemyBoltConfig; }
     public static void Initialize()
     {
         configurationData = ConfigurationData.getConfigurationData();

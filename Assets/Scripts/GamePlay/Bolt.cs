@@ -2,28 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bolt : MonoBehaviour
+public abstract class Bolt : MonoBehaviour
 {
     // Support movement
-    private Rigidbody rb;
-    private float shotForce;
+    private Rigidbody _rb;
+    private float _shotForce;
+
+    // give fields access to child classes
+    public Rigidbody Rb { get => _rb; }
+    public float ShotForce { get => _shotForce; set => _shotForce = value; }
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.AddForce(Vector3.forward * rb.mass * ConfigurationUtils.PlayerBoltConfig.impulseForce, ForceMode.Impulse);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player")) return;
-        Destroy(gameObject);
+        _rb = GetComponent<Rigidbody>();
     }
 }

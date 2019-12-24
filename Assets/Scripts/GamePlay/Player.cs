@@ -10,24 +10,10 @@ public class Player : SpaceShip
 {
 
     #region Fields
-
-    // Player Stats
-    float _speed, _health, _power;
-
-    // Support shoting bolts
-    private GameObject boltPrefab;
-    private Timer _cooldownTimer;
-
-
-
     #endregion
 
 
     #region Properties
-
-    public override Timer CooldownTimer => _cooldownTimer;
-
-
     #endregion
 
 
@@ -38,27 +24,18 @@ public class Player : SpaceShip
     {
         base.Start();
         FireRate = 1 / ConfigurationUtils.PlayerShipConfig.cooldown;
-        _cooldownTimer = gameObject.AddComponent<Timer>();
-        _cooldownTimer.Duration = 1 / FireRate;
-        _cooldownTimer.Run();
-        boltPrefab = Resources.Load<GameObject>("Prefabs/PlayerBolt");
-        _speed = ConfigurationUtils.PlayerShipConfig.speed;
+        CooldownTimer.Duration = 1 / FireRate;
+        BoltPrefab = Resources.Load<GameObject>("Prefabs/PlayerBolt");
+        Speed = ConfigurationUtils.PlayerShipConfig.speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void FireBolt()
     {
         if (Input.GetButtonUp("Fire1"))
         {
             Debug.Log("Space pressed");
-            FireBolt(boltPrefab);
+            base.FireBolt();
         }
-    }
-
-    void FixedUpdate()
-    {
-        Move();
-        KeepInsideScreen();
     }
 
     /// <summary>
@@ -75,7 +52,7 @@ public class Player : SpaceShip
     /// <summary>
     ///   Keep Player Ship inside screen Boundaries
     /// </summary>
-    void KeepInsideScreen()
+    internal override void KeepInsideScreen()
     {
         Rb.position = new Vector3(
                                   Mathf.Clamp(Rb.position.x, ScreenUtils.ScreenLeft + (ShipWidth / 2), ScreenUtils.ScreenRight - (ShipWidth / 2)),
@@ -85,13 +62,19 @@ public class Player : SpaceShip
     }
 
     // Move Player
-    private void Move()
+    internal override void Move()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
 
-        Rb.AddForce(_speed * direction * Rb.mass, ForceMode.Force);
+        // horizontalInput = Mathf.Sign(horizontalInput) * (Mathf.Ceil(Mathf.Abs(horizontalInput)));
+        // verticalInput = Mathf.Sign(verticalInput) * (Mathf.Ceil(Mathf.Abs(verticalInput)));
+
+        Vector3 direction = new Vector3(horizontalInput, 0, verticalInput).normalized;
+        if (direction == Vector3.zero) Rb.drag = 10;
+        else Rb.drag = 1;
+
+        Rb.AddForce(Speed * direction * Rb.mass, ForceMode.Force);
 
     }
 

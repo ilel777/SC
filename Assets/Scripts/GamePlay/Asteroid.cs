@@ -8,12 +8,14 @@ public class Asteroid : MonoBehaviour
     [SerializeField]
     private float rotationSpeed;
     private Vector3 torqueVector;
+    private float _speed;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         torqueVector = Random.insideUnitSphere.normalized;
-        rotationSpeed = 0.25f;
+        rotationSpeed = ConfigurationUtils.AsteroidConfig.rotationSpeed;
+        _speed = ConfigurationUtils.AsteroidConfig.speed;
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class Asteroid : MonoBehaviour
     private void FixedUpdate()
     {
         rb.AddTorque(torqueVector * rotationSpeed * rb.mass);
+        rb.AddForce(-_speed * rb.mass * Vector3.forward);
     }
 
     private void OnCollisionEnter(Collision other)
