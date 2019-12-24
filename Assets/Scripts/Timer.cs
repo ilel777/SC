@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /// </summary>
 public class Timer : MonoBehaviour
 {
-#region Fields
+    #region Fields
 
     // timer duration
     float totalSeconds = 0;
@@ -27,9 +27,9 @@ public class Timer : MonoBehaviour
     TimerChangedEvent timerChangedEvent = new TimerChangedEvent();
     TimerFinishedEvent timerFinishedEvent = new TimerFinishedEvent();
 
-#endregion
+    #endregion
 
-#region Properties
+    #region Properties
 
     /// <summary>
     /// Sets the duration of the timer
@@ -78,9 +78,22 @@ public class Timer : MonoBehaviour
         get { return timerChangedEvent; }
     }
 
-#endregion
+    public float TimeLeft
+    {
+        get
+        {
+            if (running)
+            {
+                return totalSeconds - elapsedSeconds;
+            }
+            else
+                return 0;
+        }
+    }
 
-#region Public methods
+    #endregion
+
+    #region Public methods
 
     /// <summary>
     /// Update is called once per frame
@@ -113,7 +126,7 @@ public class Timer : MonoBehaviour
     /// Runs the timer
     /// Because a timer of 0 duration doesn't really make sense,
     /// the timer only runs if the total seconds is larger than 0
-    /// This also makes sure the consumer of the class has actually 
+    /// This also makes sure the consumer of the class has actually
     /// set the duration to something higher than 0
     /// </summary>
     public void Run()
@@ -158,9 +171,9 @@ public class Timer : MonoBehaviour
         timerFinishedEvent.AddListener(handler);
     }
 
-#endregion
+    #endregion
 
-#region Private methods
+    #region Private methods
 
     /// <summary>
     /// Gets the current countdown value
@@ -171,7 +184,7 @@ public class Timer : MonoBehaviour
         return (int)Mathf.Ceil(totalSeconds - elapsedSeconds);
     }
 
-#endregion
+    #endregion
 }
 
 public class TimerFinishedEvent : UnityEvent

@@ -11,9 +11,8 @@ public class Player : SpaceShip
 
     #region Fields
 
-    // Player Movement Support
-    [SerializeField]
-    private float speed = 20;
+    // Player Stats
+    float _speed, _health, _power;
 
     // Support shoting bolts
     private GameObject boltPrefab;
@@ -28,6 +27,7 @@ public class Player : SpaceShip
 
     public override Timer CooldownTimer => _cooldownTimer;
 
+
     #endregion
 
 
@@ -37,11 +37,12 @@ public class Player : SpaceShip
     new void Start()
     {
         base.Start();
+        FireRate = 1 / ConfigurationUtils.PlayerShipConfig.cooldown;
         _cooldownTimer = gameObject.AddComponent<Timer>();
-        _cooldownTimer.Duration = ConfigurationUtils.PlayerShipConfig.cooldown;
+        _cooldownTimer.Duration = 1 / FireRate;
         _cooldownTimer.Run();
         boltPrefab = Resources.Load<GameObject>("Prefabs/PlayerBolt");
-        speed = ConfigurationUtils.PlayerShipConfig.speed;
+        _speed = ConfigurationUtils.PlayerShipConfig.speed;
     }
 
     // Update is called once per frame
@@ -90,7 +91,7 @@ public class Player : SpaceShip
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
 
-        Rb.AddForce(speed * direction * Rb.mass, ForceMode.Force);
+        Rb.AddForce(_speed * direction * Rb.mass, ForceMode.Force);
 
     }
 

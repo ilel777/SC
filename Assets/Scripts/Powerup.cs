@@ -3,18 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Powerup : MonoBehaviour
+public abstract class Powerup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    // Support Powerup Effect Duration
+    Timer _powerupTimer;
 
+    public float EffectDuration { get => 3; }
+    public Timer PowerupTimer { get => _powerupTimer; set => _powerupTimer = value; }
+
+
+    // Start is called before the first frame update
+    protected virtual void Start()
+    {
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-
     }
 
     /// <summary>
@@ -25,9 +30,12 @@ public class Powerup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Collected by player");
-            Destroy(gameObject);
-            EventManager.TriggerEvent(EventName.PowerupCollected, new EventArgs());
+            EventManager.TriggerEvent(EventName.PowerupCollected, new PowerupCollectedEventArgs(this));
         }
     }
+
+    public abstract void ApplyEffect(Player player);
+
+    public abstract void DisableEffect(Player player);
+
 }

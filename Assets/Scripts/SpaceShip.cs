@@ -13,6 +13,8 @@ public abstract class SpaceShip : MonoBehaviour
     float _shipWidth;
     float _shipHeight;
 
+    // Support limiting fire rate
+    float _fireRate;
 
     #region Properties
 
@@ -30,6 +32,7 @@ public abstract class SpaceShip : MonoBehaviour
     // Support limiting fire rate
     public bool ReadyToFire { get => CooldownTimer.Finished; }
     public abstract Timer CooldownTimer { get; }
+    public float FireRate { get => _fireRate; set => _fireRate = value; }
 
     #endregion
 
@@ -65,6 +68,7 @@ public abstract class SpaceShip : MonoBehaviour
         if (boltLauncher && ReadyToFire)
         {
             boltLauncher.LaunchBolt(boltPrefab);
+            CooldownTimer.Duration = 1 / FireRate;
             CooldownTimer.Run();
         }
     }
