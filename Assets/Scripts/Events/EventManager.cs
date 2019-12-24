@@ -84,5 +84,6 @@ public enum EventName
     PlayerDestroyed,
     GameOver,
     EnemyShipDestroyed,
-    PowerupCollected
+    PowerupCollected,
+    MissionComplete
 }
