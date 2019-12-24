@@ -37,6 +37,31 @@ public class GameManager : MonoBehaviour
     {
         EventManager.StartListening(EventName.AsteroidDestroyed, HandleAsteroidDestroyedEvent);
         EventManager.StartListening(EventName.PlayerDestroyed, HandlePlayerDestroyedEvent);
+        EventManager.StartListening(EventName.GameOver, HandleGameOverEvent);
+        EventManager.StartListening(EventName.EnemyShipDestroyed, HandleEnemyShipDestroyedEvent);
+        EventManager.StartListening(EventName.PowerupCollected, HandlePowerupCollectedEvent);
+    }
+
+    private void HandlePowerupCollectedEvent(EventArgs arg)
+    {
+        levelStat.PowerupsCollected++;
+    }
+
+    /// <summary>
+    ///   Use LevelStat object to update statistics
+    /// </summary>
+    private void HandleEnemyShipDestroyedEvent(EventArgs arg)
+    {
+        levelStat.UpdateScore((arg as EnemyShipDestroyedEventArgs).ScoreValue);
+        levelStat.EnemyShipsDestroyed++;
+    }
+
+    /// <summary>
+    ///   just print "game over" on console
+    /// </summary>
+    private void HandleGameOverEvent(EventArgs arg0)
+    {
+        Debug.Log("Game Over");
     }
 
     /// <summary>
@@ -68,5 +93,7 @@ public class GameManager : MonoBehaviour
     void OnDisable()
     {
         EventManager.StopListening(EventName.AsteroidDestroyed, HandleAsteroidDestroyedEvent);
+        EventManager.StopListening(EventName.PlayerDestroyed, HandlePlayerDestroyedEvent);
+        EventManager.StopListening(EventName.GameOver, HandleGameOverEvent);
     }
 }

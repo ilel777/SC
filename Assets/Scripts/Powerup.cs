@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ public class Powerup : MonoBehaviour
         {
             Debug.Log("Collected by player");
             Destroy(gameObject);
+            EventManager.TriggerEvent(EventName.PowerupCollected, new EventArgs());
         }
     }
 }

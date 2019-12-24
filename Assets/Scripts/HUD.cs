@@ -8,7 +8,7 @@ public class HUD : MonoBehaviour
 {
     // Support displaying level stats
     [SerializeField]
-    private Text playerScore, enemyShipsDestroyed, asteroidsDestroyed, livesLeft;
+    private Text playerScore, enemyShipsDestroyed, asteroidsDestroyed, livesLeft, powerupsCollected;
 
     // Store a reference to LevelStat object containing level statistics
     private LevelStat levelStat;
@@ -25,6 +25,7 @@ public class HUD : MonoBehaviour
         enemyShipsDestroyed.text = "Enemy Ships Destroyed: " + levelStat.EnemyShipsDestroyed;
         asteroidsDestroyed.text = "Asteroids Destroyed: " + levelStat.AsteroidsDestroyed;
         livesLeft.text = "Lives Left: " + levelStat.PlayerLives;
+        powerupsCollected.text = "Powerups Collected: " + levelStat.PowerupsCollected;
     }
 
     //     void OnEnable()

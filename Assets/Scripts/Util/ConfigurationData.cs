@@ -23,6 +23,7 @@ public class ConfigurationData
         // set default values for enemy config
         enemyShipConfig.health = 50;
         enemyShipConfig.speed = 10;
+        enemyShipConfig.scoreValue = 150;
 
         // set default values for asteroid config
         asteroidConfig.speed = 10;
@@ -76,6 +77,7 @@ public struct EnemyShipConfig
 {
     public float speed;
     public int health;
+    public int scoreValue;
 }
 
 [System.Serializable]

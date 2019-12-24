@@ -7,7 +7,7 @@ public class Enemy : SpaceShip
     public override Timer CooldownTimer => throw new System.NotImplementedException();
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
         base.Start();
     }
@@ -16,5 +16,12 @@ public class Enemy : SpaceShip
     void Update()
     {
 
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Boundary")) return;
+        Destroy(gameObject);
+        EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(ConfigurationUtils.EnemyShipConfig.scoreValue));
     }
 }

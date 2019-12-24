@@ -11,6 +11,7 @@ public class LevelStat : MonoBehaviour
     private int _enemyShipsDestroyed;
     private int _playerLives;
     private int _asteroidsDestroyed;
+    private int _powerupsCollected;
 
 
     #endregion
@@ -21,6 +22,7 @@ public class LevelStat : MonoBehaviour
     public int Score { get => _score; set => _score = value; }
     public int EnemyShipsDestroyed { get => _enemyShipsDestroyed; set => _enemyShipsDestroyed = value; }
     public int PlayerLives { get => _playerLives; set => _playerLives = value; }
+    public int PowerupsCollected { get => _powerupsCollected; set => _powerupsCollected = value; }
 
     #endregion
 

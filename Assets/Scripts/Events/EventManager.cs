@@ -82,5 +82,7 @@ public enum EventName
     AsteroidDestroyed, ShipDestroyed,
     ScoreChanged,
     PlayerDestroyed,
-    GameOver
+    GameOver,
+    EnemyShipDestroyed,
+    PowerupCollected
 }
