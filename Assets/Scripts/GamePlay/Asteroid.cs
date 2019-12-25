@@ -29,9 +29,20 @@ public class Asteroid : MonoBehaviour
         rb.AddForce(-_speed * rb.mass * Vector3.forward);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player Bolt") || other.gameObject.CompareTag("Player"))
+        Debug.Log(other.tag);
+        if (other.gameObject.CompareTag("Player Bolt")
+            || other.gameObject.CompareTag("Boundary"))
+        {
+            Destroy(gameObject);
+            EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
             EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));

@@ -13,9 +13,14 @@ public class EnemyBolt : Bolt
     }
 
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy")) return;
-        Destroy(gameObject);
+        if (other.gameObject.CompareTag("Player") ||
+            other.gameObject.CompareTag("Player Bolt") ||
+            other.gameObject.CompareTag("Boundary"))
+        {
+            Destroy(gameObject);
+        }
     }
+
 }

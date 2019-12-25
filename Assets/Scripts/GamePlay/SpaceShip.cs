@@ -87,7 +87,7 @@ public abstract class SpaceShip : MonoBehaviour
     internal abstract void KeepInsideScreen();
     internal abstract void Move();
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Boundary")) return;
         Destroy(gameObject);

@@ -13,9 +13,9 @@ public class PlayerBolt : Bolt
     }
 
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) return;
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Powerup")) return;
         Destroy(gameObject);
     }
 }

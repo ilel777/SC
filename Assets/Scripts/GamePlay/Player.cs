@@ -41,9 +41,17 @@ public class Player : SpaceShip
     /// <summary>
     ///   Handle Collision with other objects
     /// </summary>
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Boundary") || other.gameObject.CompareTag("Player Bolt")) return;
+        Destroy(gameObject);
+        EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player Bolt")
+            || other.gameObject.CompareTag("Powerup")) return;
+
         Destroy(gameObject);
         EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());
     }
