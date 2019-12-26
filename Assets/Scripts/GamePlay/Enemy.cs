@@ -15,7 +15,10 @@ public class Enemy : SpaceShip
         base.Start();
         FireRate = 1 / ConfigurationUtils.EnemyShipConfig.cooldown;
         CooldownTimer.Duration = 1 / FireRate;
-        BoltPrefab = Resources.Load<GameObject>("Prefabs/EnemyBolt");
+
+        Bolt.AddComponent<EnemyBolt>();
+        BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.impulseForce;
+
         Speed = ConfigurationUtils.EnemyShipConfig.speed;
 
         _dodgeCooldown = gameObject.AddComponent<Timer>();

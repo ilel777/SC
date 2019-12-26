@@ -20,8 +20,9 @@ public abstract class SpaceShip : MonoBehaviour
     private Timer _cooldownTimer;
 
     // Support shooting bolts
-    private GameObject _boltPrefab;
+    private GameObject _bolt;
     private BoltLauncher _boltLauncher;
+    private float _boltThrustForce;
 
 
     #region Properties
@@ -48,8 +49,9 @@ public abstract class SpaceShip : MonoBehaviour
     public int Power { get => _power; set => _power = value; }
 
     // Bolt shooting Support
-    public GameObject BoltPrefab { get => _boltPrefab; set => _boltPrefab = value; }
+    public GameObject Bolt { get => _bolt; set => _bolt = value; }
     public BoltLauncher BoltLauncher { get => _boltLauncher; set => _boltLauncher = value; }
+    public float BoltThrustForce { get => _boltThrustForce; set => _boltThrustForce = value; }
 
     #endregion
 
@@ -64,6 +66,10 @@ public abstract class SpaceShip : MonoBehaviour
         _cooldownTimer = gameObject.AddComponent<Timer>();
 
         _boltLauncher = GetComponentInChildren<BoltLauncher>();
+
+        GameObject boltPrefab = Resources.Load<GameObject>("Prefabs/Bolt");
+        _bolt = Instantiate(boltPrefab);
+        _bolt.SetActive(false);
 
 
         // set ship width and height using collider
@@ -98,7 +104,7 @@ public abstract class SpaceShip : MonoBehaviour
     {
         if (BoltLauncher && ReadyToFire)
         {
-            BoltLauncher.LaunchBolt(BoltPrefab);
+            BoltLauncher.LaunchBolt();
             CooldownTimer.Duration = 1 / FireRate;
             CooldownTimer.Run();
         }

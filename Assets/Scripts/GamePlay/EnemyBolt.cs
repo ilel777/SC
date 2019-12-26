@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +9,8 @@ public class EnemyBolt : Bolt
     new void Start()
     {
         base.Start();
-        ShotForce = ConfigurationUtils.EnemyBoltConfig.impulseForce;
-        Rb.AddForce(-Vector3.forward * Rb.mass * ShotForce, ForceMode.Impulse);
+        GetComponent<MeshRenderer>().material = new Material(Resources.Load<Material>("Materials/EnemyBolt"));
+        tag = "Enemy Bolt";
     }
 
 

@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class BoltLauncher : MonoBehaviour
 {
-    // Start is called before the first frame update
+    SpaceShip _ship;
+
     void Start()
     {
-
+        _ship = GetComponentInParent<SpaceShip>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     // Spawn a Bolt on the location of the game object
-    public void LaunchBolt(GameObject boltPrefab)
+    public void LaunchBolt()
     {
-        GameObject bolt = Instantiate(boltPrefab, transform.position, boltPrefab.transform.rotation);
+        _ship.Bolt.transform.Rotate(new Vector3(0, 0, Vector3.Angle(_ship.Bolt.transform.up, transform.forward)));
+        GameObject bolt = Instantiate(_ship.Bolt, transform.position, _ship.Bolt.transform.rotation);
+        bolt.SetActive(true);
+        bolt.GetComponent<Rigidbody>().AddForce(transform.forward * _ship.BoltThrustForce * bolt.GetComponent<Rigidbody>().mass, ForceMode.Impulse);
     }
 }

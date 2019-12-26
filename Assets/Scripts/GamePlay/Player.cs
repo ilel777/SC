@@ -23,9 +23,13 @@ public class Player : SpaceShip
     new void Start()
     {
         base.Start();
+
         FireRate = 1 / ConfigurationUtils.PlayerShipConfig.cooldown;
         CooldownTimer.Duration = 1 / FireRate;
-        BoltPrefab = Resources.Load<GameObject>("Prefabs/PlayerBolt");
+
+        Bolt.AddComponent<PlayerBolt>();
+        BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
+
         Speed = ConfigurationUtils.PlayerShipConfig.speed;
     }
 

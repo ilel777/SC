@@ -8,8 +8,8 @@ public class PlayerBolt : Bolt
     new void Start()
     {
         base.Start();
-        ShotForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
-        Rb.AddForce(Vector3.forward * Rb.mass * ShotForce, ForceMode.Impulse);
+        GetComponent<MeshRenderer>().material = new Material(Resources.Load<Material>("Materials/PlayerBolt"));
+        tag = "Player Bolt";
     }
 
 
