@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SpaceShip : MonoBehaviour
+public abstract class SpaceShip : MonoBehaviour, ISize
 {
     // Support movement
     private Rigidbody _rb;
@@ -21,7 +21,7 @@ public abstract class SpaceShip : MonoBehaviour
 
     // Support shooting bolts
     private GameObject _bolt;
-    private BoltLauncher _boltLauncher;
+    private List<BoltLauncher> _boltLaunchers;
     private float _boltThrustForce;
 
 
@@ -50,7 +50,7 @@ public abstract class SpaceShip : MonoBehaviour
 
     // Bolt shooting Support
     public GameObject Bolt { get => _bolt; set => _bolt = value; }
-    public BoltLauncher BoltLauncher { get => _boltLauncher; set => _boltLauncher = value; }
+    public List<BoltLauncher> BoltLaunchers { get => _boltLaunchers; set => _boltLaunchers = value; }
     public float BoltThrustForce { get => _boltThrustForce; set => _boltThrustForce = value; }
 
     #endregion
@@ -65,17 +65,14 @@ public abstract class SpaceShip : MonoBehaviour
         // add cooldown timer
         _cooldownTimer = gameObject.AddComponent<Timer>();
 
-        _boltLauncher = GetComponentInChildren<BoltLauncher>();
+        _boltLaunchers = new List<BoltLauncher>();
+        _boltLaunchers.AddRange(GetComponentsInChildren<BoltLauncher>()); ;
 
         GameObject boltPrefab = Resources.Load<GameObject>("Prefabs/Bolt");
         _bolt = Instantiate(boltPrefab);
         _bolt.SetActive(false);
 
-
-        // set ship width and height using collider
-        SphereCollider collider = GetComponent<SphereCollider>();
-        _shipWidth = collider.radius * 2;
-        _shipHeight = collider.radius * 2;
+        StoreShipDimensions();
     }
 
     // Update is called once per frame
@@ -102,11 +99,46 @@ public abstract class SpaceShip : MonoBehaviour
 
     public virtual void FireBolt()
     {
-        if (BoltLauncher && ReadyToFire)
+        foreach (BoltLauncher boltLauncher in BoltLaunchers)
         {
-            BoltLauncher.LaunchBolt();
-            CooldownTimer.Duration = 1 / FireRate;
-            CooldownTimer.Run();
+            if (ReadyToFire && boltLauncher.ReadyToFire)
+            {
+                boltLauncher.LaunchBolt();
+                CooldownTimer.Duration = 1 / FireRate;
+                CooldownTimer.Run();
+                break;
+            }
         }
     }
+
+    public float GetWidth()
+    {
+        if (ShipWidth > 0) return ShipWidth;
+        else
+        {
+            StoreShipDimensions();
+        }
+
+        return _shipWidth;
+    }
+
+    public float GetHeight()
+    {
+        if (ShipHeight > 0) return ShipHeight;
+        else
+        {
+            StoreShipDimensions();
+        }
+
+        return _shipHeight;
+    }
+
+    protected virtual void StoreShipDimensions()
+    {
+        // set ship width and height using collider
+        SphereCollider collider = GetComponent<SphereCollider>();
+        _shipWidth = collider.radius * 2 * transform.localScale.x;
+        _shipHeight = collider.radius * 2 * transform.localScale.z;
+    }
+
 }

@@ -24,7 +24,8 @@ public class Enemy : SpaceShip
         _dodgeCooldown = gameObject.AddComponent<Timer>();
         _dodgeCooldown.Duration = 1.0f;
         _minDodgeForce = 1;
-        _width = GetComponent<SphereCollider>().radius * transform.localScale.x;
+
+        transform.Rotate(Vector3.up, Mathf.PI * Mathf.Rad2Deg);
     }
 
     // Update is called once per frame
@@ -58,7 +59,7 @@ public class Enemy : SpaceShip
 
     internal override void Move()
     {
-        Rb.AddForce(-Speed * Rb.mass * Vector3.forward * Rb.drag);
+        Rb.AddRelativeForce(Speed * Rb.mass * Vector3.forward * Rb.drag);
         if (_dodgeCooldown.Finished || !_dodgeCooldown.Running)
         {
             Dodge();

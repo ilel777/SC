@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour
+public class Asteroid : MonoBehaviour, ISize
 {
     private Rigidbody rb;
     [SerializeField]
     private float rotationSpeed;
     private Vector3 torqueVector;
     private float _speed;
+
+    // holds Asteroid width and hight
+    float _width, _height;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +20,9 @@ public class Asteroid : MonoBehaviour
         torqueVector = Random.insideUnitSphere.normalized;
         rotationSpeed = ConfigurationUtils.AsteroidConfig.rotationSpeed;
         _speed = ConfigurationUtils.AsteroidConfig.speed;
+
+        // extract the size from the Collider
+        StoreAsteroidDimensions();
     }
 
     // Update is called once per frame
@@ -49,4 +56,27 @@ public class Asteroid : MonoBehaviour
         }
     }
 
+    public float GetWidth()
+    {
+        if (!(_width > 0))
+            StoreAsteroidDimensions();
+
+        return _width;
+    }
+
+    public float GetHeight()
+    {
+        if (!(_height > 0))
+            StoreAsteroidDimensions();
+
+        return _height;
+    }
+
+    void StoreAsteroidDimensions()
+    {
+        // extract the size from the Collider
+        BoxCollider collider = GetComponent<BoxCollider>();
+        _width = collider.size.x * transform.localScale.x;
+        _height = collider.size.z * transform.localScale.z;
+    }
 }
