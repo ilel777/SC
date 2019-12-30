@@ -20,9 +20,9 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     private Timer _cooldownTimer;
 
     // Support shooting bolts
-    private GameObject _bolt;
     private List<BoltLauncher> _boltLaunchers;
     private float _boltThrustForce;
+    private BoltPool _bolts;
 
 
     #region Properties
@@ -49,7 +49,6 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     public int Power { get => _power; set => _power = value; }
 
     // Bolt shooting Support
-    public GameObject Bolt { get => _bolt; set => _bolt = value; }
     public List<BoltLauncher> BoltLaunchers { get => _boltLaunchers; set => _boltLaunchers = value; }
     public float BoltThrustForce { get => _boltThrustForce; set => _boltThrustForce = value; }
 
@@ -65,12 +64,11 @@ public abstract class SpaceShip : MonoBehaviour, ISize
         // add cooldown timer
         _cooldownTimer = gameObject.AddComponent<Timer>();
 
+        // store bolts pool reference for later access
+        _bolts = PoolsContainer.Bolts;
+
         _boltLaunchers = new List<BoltLauncher>();
         _boltLaunchers.AddRange(GetComponentsInChildren<BoltLauncher>()); ;
-
-        GameObject boltPrefab = Resources.Load<GameObject>("Prefabs/Bolt");
-        _bolt = Instantiate(boltPrefab);
-        _bolt.SetActive(false);
 
         StoreShipDimensions();
     }
@@ -141,4 +139,11 @@ public abstract class SpaceShip : MonoBehaviour, ISize
         _shipHeight = collider.radius * 2 * transform.localScale.z;
     }
 
+    /// <summary>
+    ///   Prepare a new Bolt for the launcher
+    /// </summary>
+    public virtual GameObject PrepareNewBolt()
+    {
+        return _bolts.Get();
+    }
 }

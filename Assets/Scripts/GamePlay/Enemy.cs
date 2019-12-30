@@ -16,7 +16,6 @@ public class Enemy : SpaceShip
         FireRate = 1 / ConfigurationUtils.EnemyShipConfig.cooldown;
         CooldownTimer.Duration = 1 / FireRate;
 
-        Bolt.AddComponent<EnemyBolt>();
         BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.impulseForce;
 
         Speed = ConfigurationUtils.EnemyShipConfig.speed;
@@ -85,4 +84,10 @@ public class Enemy : SpaceShip
         Rb.AddRelativeForce(movementDirection * _thrustForce * Rb.mass * Rb.drag, ForceMode.Impulse);
     }
 
+    public override GameObject PrepareNewBolt()
+    {
+        GameObject bolt = base.PrepareNewBolt();
+        bolt.AddComponent<EnemyBolt>();
+        return bolt;
+    }
 }

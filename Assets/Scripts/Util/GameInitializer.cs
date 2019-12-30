@@ -11,5 +11,6 @@ public class GameInitializer : MonoBehaviour
     {
         ConfigurationUtils.Initialize();
         ScreenUtils.Initialize();
+        PoolsContainer.Initialize();
     }
 }

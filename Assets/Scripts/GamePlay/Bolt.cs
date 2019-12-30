@@ -15,4 +15,13 @@ public abstract class Bolt : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
     }
+
+    protected void Update()
+    {
+        // make sure the bolt is out of screen
+        if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
+        {
+            PoolsContainer.Bolts.Return(gameObject);
+        }
+    }
 }

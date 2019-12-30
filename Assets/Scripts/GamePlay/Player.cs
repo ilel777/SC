@@ -27,7 +27,6 @@ public class Player : SpaceShip
         FireRate = 1 / ConfigurationUtils.PlayerShipConfig.cooldown;
         CooldownTimer.Duration = 1 / FireRate;
 
-        Bolt.AddComponent<PlayerBolt>();
         BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
 
         Speed = ConfigurationUtils.PlayerShipConfig.speed;
@@ -90,5 +89,11 @@ public class Player : SpaceShip
 
     }
 
+    public override GameObject PrepareNewBolt()
+    {
+        GameObject bolt = base.PrepareNewBolt();
+        bolt.AddComponent<PlayerBolt>();
+        return bolt;
+    }
     #endregion
 }
