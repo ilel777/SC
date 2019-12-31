@@ -15,7 +15,7 @@ public abstract class Pool<T>
         {
             T item = _items[_items.Count - 1];
             _items.RemoveAt(_items.Count - 1);
-            return item;
+            return OnGet(item);
         }
         else
         {
@@ -29,6 +29,11 @@ public abstract class Pool<T>
     {
         OnReturn(item);
         _items.Add(item);
+    }
+
+    protected virtual T OnGet(T item)
+    {
+        return item;
     }
 
     protected abstract T CreateNewObject();

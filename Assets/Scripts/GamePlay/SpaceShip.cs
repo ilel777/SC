@@ -22,16 +22,8 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     // Support shooting bolts
     private List<BoltLauncher> _boltLaunchers;
     private float _boltThrustForce;
-    private BoltPool _bolts;
-
 
     #region Properties
-
-    /// <summary>
-    ///   Get Ship's width and height
-    /// </summary>
-    public float ShipWidth { get => _shipWidth; }
-    public float ShipHeight { get => _shipHeight; }
 
     /// <summary>
     ///   Get Rigidbody reference
@@ -51,6 +43,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     // Bolt shooting Support
     public List<BoltLauncher> BoltLaunchers { get => _boltLaunchers; set => _boltLaunchers = value; }
     public float BoltThrustForce { get => _boltThrustForce; set => _boltThrustForce = value; }
+    public abstract Pool<GameObject> Bolts { get; }
 
     #endregion
 
@@ -63,9 +56,6 @@ public abstract class SpaceShip : MonoBehaviour, ISize
 
         // add cooldown timer
         _cooldownTimer = gameObject.AddComponent<Timer>();
-
-        // store bolts pool reference for later access
-        _bolts = PoolsContainer.Bolts;
 
         _boltLaunchers = new List<BoltLauncher>();
         _boltLaunchers.AddRange(GetComponentsInChildren<BoltLauncher>()); ;
@@ -111,7 +101,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize
 
     public float GetWidth()
     {
-        if (ShipWidth > 0) return ShipWidth;
+        if (_shipHeight > 0) return _shipHeight;
         else
         {
             StoreShipDimensions();
@@ -122,7 +112,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize
 
     public float GetHeight()
     {
-        if (ShipHeight > 0) return ShipHeight;
+        if (_shipWidth > 0) return _shipWidth;
         else
         {
             StoreShipDimensions();
@@ -144,6 +134,6 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     /// </summary>
     public virtual GameObject PrepareNewBolt()
     {
-        return _bolts.Get();
+        return Bolts.Get();
     }
 }

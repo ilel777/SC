@@ -14,6 +14,9 @@ public class Player : SpaceShip
 
 
     #region Properties
+
+    public override Pool<GameObject> Bolts => PoolsContainer.PlayerBolts;
+
     #endregion
 
 
@@ -66,9 +69,9 @@ public class Player : SpaceShip
     internal override void KeepInsideScreen()
     {
         Rb.position = new Vector3(
-                                  Mathf.Clamp(Rb.position.x, ScreenUtils.ScreenLeft + (ShipWidth / 2), ScreenUtils.ScreenRight - (ShipWidth / 2)),
+            Mathf.Clamp(Rb.position.x, ScreenUtils.ScreenLeft + (GetWidth() / 2), ScreenUtils.ScreenRight - (GetWidth() / 2)),
                                   Rb.position.y,
-                                  Mathf.Clamp(Rb.position.z, ScreenUtils.ScreenBottom + (ShipHeight / 2), ScreenUtils.ScreenTop - (ShipHeight / 2))
+            Mathf.Clamp(Rb.position.z, ScreenUtils.ScreenBottom + (GetHeight() / 2), ScreenUtils.ScreenTop - (GetHeight() / 2))
                                   );
     }
 
@@ -89,11 +92,5 @@ public class Player : SpaceShip
 
     }
 
-    public override GameObject PrepareNewBolt()
-    {
-        GameObject bolt = base.PrepareNewBolt();
-        bolt.AddComponent<PlayerBolt>();
-        return bolt;
-    }
     #endregion
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     float waveSpawnZ, waveSpawnXOffset;
-    List<GameObject> spaceObjects = new List<GameObject>();
+    List<Pool<GameObject>> spaceObjectPools = new List<Pool<GameObject>>();
 
     // stores the max width and height of objects to be spawned
     float _maxWidth, _maxHeight;
@@ -15,14 +15,19 @@ public class WaveManager : MonoBehaviour
     {
         waveSpawnZ = ScreenUtils.ScreenTop + (ScreenUtils.ScreenTop / 5);
         waveSpawnXOffset = ScreenUtils.ScreenRight;
-        spaceObjects.AddRange(Resources.LoadAll<GameObject>("Prefabs/SpaceItems"));
+        // spaceObjects.AddRange(Resources.LoadAll<GameObject>("Prefabs/SpaceItems"));
+        spaceObjectPools = new List<Pool<GameObject>>();
+        spaceObjectPools.Add(PoolsContainer.Enemies);
+        spaceObjectPools.Add(PoolsContainer.Asteroids);
+        spaceObjectPools.Add(PoolsContainer.Powerups);
 
-        foreach (GameObject prefab in spaceObjects)
+        foreach (Pool<GameObject> pool in spaceObjectPools)
         {
-            GameObject obj = Instantiate(prefab);
+            GameObject obj = pool.Get();
             float width = obj.GetComponent<ISize>().GetWidth();
             float height = obj.GetComponent<ISize>().GetHeight();
-            Destroy(obj);
+            obj.SetActive(false);
+            pool.Return(obj);
 
             if (_maxWidth < width)
             {
@@ -44,14 +49,16 @@ public class WaveManager : MonoBehaviour
 
     void SpawnWave()
     {
-        SpawnItem(spaceObjects[Random.Range(0, 3)]);
+        Pool<GameObject> pool = spaceObjectPools[Random.Range(0, spaceObjectPools.Count)];
+        SpawnItem(pool.Get());
     }
 
     void SpawnItem(GameObject item)
     {
         Vector3 itemSpawnPostition = SpawnPosition(item.GetComponent<ISize>());
         if (itemSpawnPostition != Vector3.zero)
-            Instantiate(item, itemSpawnPostition, Quaternion.identity);
+            item.transform.position = itemSpawnPostition;
+        // Instantiate(item, itemSpawnPostition, Quaternion.identity);
     }
 
     /// <summary>

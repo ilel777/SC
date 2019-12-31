@@ -21,7 +21,14 @@ public abstract class Bolt : MonoBehaviour
         // make sure the bolt is out of screen
         if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
         {
-            PoolsContainer.Bolts.Return(gameObject);
+            if (gameObject.GetComponent<PlayerBolt>())
+            {
+                PoolsContainer.PlayerBolts.Return(gameObject);
+            }
+            else if (gameObject.GetComponent<EnemyBolt>())
+            {
+                PoolsContainer.EnemyBolts.Return(gameObject);
+            }
         }
     }
 }

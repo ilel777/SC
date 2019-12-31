@@ -16,6 +16,7 @@ public class PlayerBolt : Bolt
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Powerup")) return;
-        Destroy(gameObject);
+        PoolsContainer.PlayerBolts.Return(gameObject);
+        // Destroy(gameObject);
     }
 }

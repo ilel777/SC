@@ -8,6 +8,12 @@ public class Enemy : SpaceShip
     float _thrustForce, _minDodgeForce, _width;
     Timer _dodgeCooldown;
 
+    #region Properties
+
+    public override Pool<GameObject> Bolts => PoolsContainer.EnemyBolts;
+
+    #endregion
+
 
     // Start is called before the first frame update
     new void Start()
@@ -31,6 +37,12 @@ public class Enemy : SpaceShip
     void Update()
     {
         FireBolt();
+
+        // make sure the bolt is out of screen
+        if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
+        {
+            PoolsContainer.Enemies.Return(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,7 +51,8 @@ public class Enemy : SpaceShip
             || other.gameObject.CompareTag("Enemy Bolt")
             || other.gameObject.CompareTag("Powerup")) return;
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        PoolsContainer.Enemies.Return(gameObject);
         EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(ConfigurationUtils.EnemyShipConfig.scoreValue));
     }
 
@@ -47,13 +60,19 @@ public class Enemy : SpaceShip
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            PoolsContainer.Enemies.Return(gameObject);
             EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(ConfigurationUtils.EnemyShipConfig.scoreValue));
         }
     }
 
     internal override void KeepInsideScreen()
     {
+        Debug.Log(GetWidth());
+        Rb.position = new Vector3(
+            Mathf.Clamp(Rb.position.x, ScreenUtils.ScreenLeft + (GetWidth() / 2), ScreenUtils.ScreenRight - (GetWidth() / 2)),
+            Rb.position.y,
+            Rb.position.z
+            );
     }
 
     internal override void Move()
@@ -73,21 +92,14 @@ public class Enemy : SpaceShip
         float xDistance = 0;
         if (rightOrLeft == 1)
         {
-            xDistance = Mathf.Abs(ScreenUtils.ScreenLeft - (Rb.position.x - _width));
+            xDistance = Mathf.Abs(ScreenUtils.ScreenLeft - (Rb.position.x - GetWidth()));
         }
         else
         {
-            xDistance = Mathf.Abs(ScreenUtils.ScreenRight - (Rb.position.x + _width));
+            xDistance = Mathf.Abs(ScreenUtils.ScreenRight - (Rb.position.x + GetHeight()));
         }
 
         _thrustForce = _minDodgeForce < xDistance ? Random.Range(_minDodgeForce, xDistance) : 0;
         Rb.AddRelativeForce(movementDirection * _thrustForce * Rb.mass * Rb.drag, ForceMode.Impulse);
-    }
-
-    public override GameObject PrepareNewBolt()
-    {
-        GameObject bolt = base.PrepareNewBolt();
-        bolt.AddComponent<EnemyBolt>();
-        return bolt;
     }
 }
