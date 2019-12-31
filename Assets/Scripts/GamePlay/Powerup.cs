@@ -14,16 +14,27 @@ public abstract class Powerup : MonoBehaviour, ISize
     public float EffectDuration { get => 3; }
     public Timer PowerupTimer { get => _powerupTimer; set => _powerupTimer = value; }
 
+    // support movement
+    Rigidbody _rb;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        _rb = GetComponent<Rigidbody>();
         StorePowerupDimensions();
     }
 
     // Update is called once per frame
     protected void Update()
     {
+        _rb.AddForce(-ConfigurationUtils.CollectibleConfig.speed * _rb.mass * Vector3.forward);
+
+        // make sure the powerup is out of screen
+        if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
+        {
+            PoolsContainer.Powerups.Return(gameObject);
+        }
     }
 
     /// <summary>

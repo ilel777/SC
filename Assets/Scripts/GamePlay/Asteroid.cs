@@ -28,6 +28,11 @@ public class Asteroid : MonoBehaviour, ISize
     // Update is called once per frame
     void Update()
     {
+        // make sure the asteroid is out of screen
+        if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
+        {
+            PoolsContainer.Asteroids.Return(gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -42,7 +47,7 @@ public class Asteroid : MonoBehaviour, ISize
         if (other.gameObject.CompareTag("Player Bolt")
             || other.gameObject.CompareTag("Boundary"))
         {
-            Destroy(gameObject);
+            PoolsContainer.Asteroids.Return(gameObject);
             EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));
         }
     }
@@ -51,7 +56,7 @@ public class Asteroid : MonoBehaviour, ISize
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            PoolsContainer.Asteroids.Return(gameObject);
             EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));
         }
     }

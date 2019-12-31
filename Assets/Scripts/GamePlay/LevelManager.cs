@@ -52,7 +52,7 @@ public abstract class LevelManager : MonoBehaviour
         _levelStatistics.PowerupsCollected++;
         Powerup powerup = (arg as PowerupCollectedEventArgs).Powerup;
         powerup.ApplyEffect(_player);
-        powerup.gameObject.GetComponent<Renderer>().enabled = false;
+        powerup.gameObject.GetComponentInChildren<Renderer>().enabled = false;
         powerup.PowerupTimer = gameObject.AddComponent<Timer>();
         powerup.PowerupTimer.Duration = powerup.EffectDuration;
         powerup.PowerupTimer.Run();
@@ -62,6 +62,7 @@ public abstract class LevelManager : MonoBehaviour
     private void HandlePowerupDurationEnded(EventArgs arg)
     {
         (arg as PowerupDurationEndedEventArgs).Powerup.DisableEffect(_player);
+        PoolsContainer.Powerups.Return((arg as PowerupDurationEndedEventArgs).Powerup.gameObject);
     }
 
     /// <summary>

@@ -22,6 +22,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     // Support shooting bolts
     private List<BoltLauncher> _boltLaunchers;
     private float _boltThrustForce;
+    private int _currentReady;
 
     #region Properties
 
@@ -87,15 +88,23 @@ public abstract class SpaceShip : MonoBehaviour, ISize
 
     public virtual void FireBolt()
     {
-        foreach (BoltLauncher boltLauncher in BoltLaunchers)
+        // foreach (BoltLauncher boltLauncher in BoltLaunchers)
+        // {
+        //     if (ReadyToFire && boltLauncher.ReadyToFire)
+        //     {
+        //         boltLauncher.LaunchBolt();
+        //         CooldownTimer.Duration = 1 / FireRate;
+        //         CooldownTimer.Run();
+        //         break;
+        //     }
+        // }
+
+        if (ReadyToFire && BoltLaunchers[_currentReady].ReadyToFire)
         {
-            if (ReadyToFire && boltLauncher.ReadyToFire)
-            {
-                boltLauncher.LaunchBolt();
-                CooldownTimer.Duration = 1 / FireRate;
-                CooldownTimer.Run();
-                break;
-            }
+            BoltLaunchers[_currentReady].LaunchBolt();
+            CooldownTimer.Duration = 1 / FireRate;
+            CooldownTimer.Run();
+            if (++_currentReady >= BoltLaunchers.Count) _currentReady = 0;
         }
     }
 
