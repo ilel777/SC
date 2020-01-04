@@ -22,13 +22,13 @@ public abstract class Powerup : MonoBehaviour, ISize
     protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        gameObject.AddComponent<PowerupMovement>();
         StorePowerupDimensions();
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        _rb.AddForce(-ConfigurationUtils.CollectibleConfig.speed * _rb.mass * Vector3.forward);
 
         // make sure the powerup is out of screen
         if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)

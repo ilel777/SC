@@ -70,15 +70,6 @@ public abstract class SpaceShip : MonoBehaviour, ISize
         FireBolt();
     }
 
-    void FixedUpdate()
-    {
-        Move();
-        KeepInsideScreen();
-    }
-
-    internal abstract void KeepInsideScreen();
-    internal abstract void Move();
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Boundary")) return;

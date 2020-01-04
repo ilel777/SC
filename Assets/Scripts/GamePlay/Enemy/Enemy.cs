@@ -24,13 +24,9 @@ public class Enemy : SpaceShip
 
         BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.impulseForce;
 
-        Speed = ConfigurationUtils.EnemyShipConfig.speed;
-
-        _dodgeCooldown = gameObject.AddComponent<Timer>();
-        _dodgeCooldown.Duration = 1.0f;
-        _minDodgeForce = 1;
-
         transform.Rotate(Vector3.up, Mathf.PI * Mathf.Rad2Deg);
+
+        gameObject.AddComponent<EnemyMovement>();
     }
 
     // Update is called once per frame
@@ -63,43 +59,5 @@ public class Enemy : SpaceShip
             PoolsContainer.Enemies.Return(gameObject);
             EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(ConfigurationUtils.EnemyShipConfig.scoreValue));
         }
-    }
-
-    internal override void KeepInsideScreen()
-    {
-        Debug.Log(GetWidth());
-        Rb.position = new Vector3(
-            Mathf.Clamp(Rb.position.x, ScreenUtils.ScreenLeft + (GetWidth() / 2), ScreenUtils.ScreenRight - (GetWidth() / 2)),
-            Rb.position.y,
-            Rb.position.z
-            );
-    }
-
-    internal override void Move()
-    {
-        Rb.AddRelativeForce(Speed * Rb.mass * Vector3.forward * Rb.drag);
-        if (_dodgeCooldown.Finished || !_dodgeCooldown.Running)
-        {
-            Dodge();
-            _dodgeCooldown.Run();
-        }
-    }
-
-    void Dodge()
-    {
-        float rightOrLeft = Random.Range(0, 2);
-        Vector3 movementDirection = rightOrLeft == 1 ? Vector3.left : Vector3.right;
-        float xDistance = 0;
-        if (rightOrLeft == 1)
-        {
-            xDistance = Mathf.Abs(ScreenUtils.ScreenLeft - (Rb.position.x - GetWidth()));
-        }
-        else
-        {
-            xDistance = Mathf.Abs(ScreenUtils.ScreenRight - (Rb.position.x + GetHeight()));
-        }
-
-        _thrustForce = _minDodgeForce < xDistance ? Random.Range(_minDodgeForce, xDistance) : 0;
-        Rb.AddRelativeForce(movementDirection * _thrustForce * Rb.mass * Rb.drag, ForceMode.Impulse);
     }
 }

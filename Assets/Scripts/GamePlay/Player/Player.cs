@@ -32,7 +32,8 @@ public class Player : SpaceShip
 
         BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
 
-        Speed = ConfigurationUtils.PlayerShipConfig.speed;
+        // Speed = ConfigurationUtils.PlayerShipConfig.speed;
+        gameObject.AddComponent<PlayerMovement>();
     }
 
     public override void FireBolt()
@@ -60,36 +61,6 @@ public class Player : SpaceShip
 
         Destroy(gameObject);
         EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());
-    }
-
-
-    /// <summary>
-    ///   Keep Player Ship inside screen Boundaries
-    /// </summary>
-    internal override void KeepInsideScreen()
-    {
-        Rb.position = new Vector3(
-            Mathf.Clamp(Rb.position.x, ScreenUtils.ScreenLeft + (GetWidth() / 2), ScreenUtils.ScreenRight - (GetWidth() / 2)),
-                                  Rb.position.y,
-            Mathf.Clamp(Rb.position.z, ScreenUtils.ScreenBottom + (GetHeight() / 2), ScreenUtils.ScreenTop - (GetHeight() / 2))
-                                  );
-    }
-
-    // Move Player
-    internal override void Move()
-    {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        // horizontalInput = Mathf.Sign(horizontalInput) * (Mathf.Ceil(Mathf.Abs(horizontalInput)));
-        // verticalInput = Mathf.Sign(verticalInput) * (Mathf.Ceil(Mathf.Abs(verticalInput)));
-
-        Vector3 direction = new Vector3(horizontalInput, 0, verticalInput).normalized;
-        if (direction == Vector3.zero) Rb.drag = 10;
-        else Rb.drag = 1;
-
-        Rb.AddForce(Speed * direction * Rb.mass, ForceMode.Force);
-
     }
 
     #endregion

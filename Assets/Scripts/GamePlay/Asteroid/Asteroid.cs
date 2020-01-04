@@ -17,9 +17,7 @@ public class Asteroid : MonoBehaviour, ISize
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        torqueVector = Random.insideUnitSphere.normalized;
-        rotationSpeed = ConfigurationUtils.AsteroidConfig.rotationSpeed;
-        _speed = ConfigurationUtils.AsteroidConfig.speed;
+        gameObject.AddComponent<AsteroidMovement>();
 
         // extract the size from the Collider
         StoreAsteroidDimensions();
@@ -37,8 +35,6 @@ public class Asteroid : MonoBehaviour, ISize
 
     private void FixedUpdate()
     {
-        rb.AddTorque(torqueVector * rotationSpeed * rb.mass);
-        rb.AddForce(-_speed * rb.mass * Vector3.forward);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -57,5 +57,9 @@ public class ScreenUtils
         instance.screenRight = screenBounds.x;
         instance.screenTop = screenBounds.z;
         instance.screenBottom = -screenBounds.z;
+        Debug.Log(instance.screenLeft);
+        Debug.Log(instance.screenRight);
+        Debug.Log(instance.screenTop);
+        Debug.Log(instance.screenBottom);
     }
 }
