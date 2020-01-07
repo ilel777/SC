@@ -7,6 +7,10 @@ public class WaveManager : MonoBehaviour
     float waveSpawnZ, waveSpawnXOffset;
     List<Pool<GameObject>> spaceObjectPools = new List<Pool<GameObject>>();
 
+    int _objectSpawned;
+    int _waveNumber;
+    float _speedScale;
+
     // stores the max width and height of objects to be spawned
     float _maxWidth, _maxHeight;
 
@@ -38,23 +42,28 @@ public class WaveManager : MonoBehaviour
                 _maxHeight = height;
             }
         }
-        InvokeRepeating("SpawnWave", 2.0f, 1.5f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        InvokeRepeating("SpawnWave", 1.0f, 1.0f);
     }
 
     void SpawnWave()
     {
         Pool<GameObject> pool = spaceObjectPools[Random.Range(0, spaceObjectPools.Count)];
         SpawnItem(pool.Get());
+        if (++_objectSpawned == 5)
+        {
+            _waveNumber++;
+            _speedScale = 0.1f * _waveNumber;
+            Debug.Log("Movement Speed: " + _speedScale);
+            _objectSpawned = 0;
+        }
     }
 
     void SpawnItem(GameObject item)
     {
+        Movement movement = item.GetComponent<Movement>();
+
+        movement.Speed += (movement.Speed * _speedScale);
+
         Vector3 itemSpawnPostition = SpawnPosition(item.GetComponent<ISize>());
         if (itemSpawnPostition != Vector3.zero)
             item.transform.position = itemSpawnPostition;

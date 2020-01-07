@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Pool<T>
 {
-    List<T> _items;
+    protected List<T> _items;
 
     #region Methods
 
@@ -20,7 +20,7 @@ public abstract class Pool<T>
         else
         {
             _items.Capacity++;
-            return CreateNewObject();
+            return OnGet(CreateNewObject());
         }
     }
 

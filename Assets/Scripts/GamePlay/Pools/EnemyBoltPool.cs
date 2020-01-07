@@ -4,6 +4,7 @@ public class EnemyBoltPool : BoltPool
 {
     public EnemyBoltPool(GameObject boltPrefab, int initialCapacity = 10) : base(boltPrefab, initialCapacity)
     {
+        PoolGameObject.name = "Enemy Bolt Pool";
     }
 
     protected override GameObject CreateNewObject()

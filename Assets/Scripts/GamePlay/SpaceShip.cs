@@ -16,6 +16,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     float _shipWidth;
     float _shipHeight;
 
+
     // Support limiting fire rate
     private Timer _cooldownTimer;
 
@@ -48,15 +49,18 @@ public abstract class SpaceShip : MonoBehaviour, ISize
 
     #endregion
 
+    protected void Awake()
+    {
+        // add cooldown timer
+        _cooldownTimer = gameObject.AddComponent<Timer>();
+    }
+
 
     // Start is called before the first frame update
     protected void Start()
     {
         //get Rigidbody
         _rb = GetComponent<Rigidbody>();
-
-        // add cooldown timer
-        _cooldownTimer = gameObject.AddComponent<Timer>();
 
         _boltLaunchers = new List<BoltLauncher>();
         _boltLaunchers.AddRange(GetComponentsInChildren<BoltLauncher>()); ;

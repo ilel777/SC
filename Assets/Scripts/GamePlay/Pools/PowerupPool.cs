@@ -8,6 +8,7 @@ public class PowerupPool : GameObjectPool
 
     public PowerupPool(GameObject powerupPrefab, int initialCapacity = 10) : base(powerupPrefab, initialCapacity)
     {
+        PoolGameObject.name = "Powerup Pool";
     }
 
     #endregion

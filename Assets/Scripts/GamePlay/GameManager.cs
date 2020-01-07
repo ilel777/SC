@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleMissionCompleteEvent(EventArgs arg0)
     {
-        Debug.Log("Mission Complete");
+        // Debug.Log("Mission Complete");
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void HandleGameOverEvent(EventArgs arg0)
     {
-        Debug.Log("Game Over");
+        // Debug.Log("Game Over");
     }
 
     void OnDisable()

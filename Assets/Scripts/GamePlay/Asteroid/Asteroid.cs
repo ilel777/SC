@@ -13,11 +13,15 @@ public class Asteroid : MonoBehaviour, ISize
     // holds Asteroid width and hight
     float _width, _height;
 
+    void Awake()
+    {
+        gameObject.AddComponent<AsteroidMovement>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        gameObject.AddComponent<AsteroidMovement>();
 
         // extract the size from the Collider
         StoreAsteroidDimensions();
@@ -39,7 +43,6 @@ public class Asteroid : MonoBehaviour, ISize
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.gameObject.CompareTag("Player Bolt")
             || other.gameObject.CompareTag("Boundary"))
         {

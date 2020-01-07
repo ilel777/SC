@@ -51,15 +51,15 @@ public class ScreenUtils
 
         instance = new ScreenUtils();
         Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, -Camera.main.transform.position.y));
-        Debug.Log(Screen.width + " " + Screen.height);
-        Debug.Log(screenBounds);
+        // Debug.Log(Screen.width + " " + Screen.height);
+        // Debug.Log(screenBounds);
         instance.screenLeft = -screenBounds.x;
         instance.screenRight = screenBounds.x;
         instance.screenTop = screenBounds.z;
         instance.screenBottom = -screenBounds.z;
-        Debug.Log(instance.screenLeft);
-        Debug.Log(instance.screenRight);
-        Debug.Log(instance.screenTop);
-        Debug.Log(instance.screenBottom);
+        // Debug.Log(instance.screenLeft);
+        // Debug.Log(instance.screenRight);
+        // Debug.Log(instance.screenTop);
+        // Debug.Log(instance.screenBottom);
     }
 }

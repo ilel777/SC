@@ -17,12 +17,15 @@ public abstract class Powerup : MonoBehaviour, ISize
     // support movement
     Rigidbody _rb;
 
+    void Awake()
+    {
+        gameObject.AddComponent<PowerupMovement>();
+    }
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        gameObject.AddComponent<PowerupMovement>();
         StorePowerupDimensions();
     }
 

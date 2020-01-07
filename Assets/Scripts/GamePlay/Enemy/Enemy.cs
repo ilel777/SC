@@ -14,6 +14,11 @@ public class Enemy : SpaceShip
 
     #endregion
 
+    void Awake()
+    {
+        base.Awake();
+        gameObject.AddComponent<EnemyMovement>();
+    }
 
     // Start is called before the first frame update
     new void Start()
@@ -26,7 +31,6 @@ public class Enemy : SpaceShip
 
         transform.Rotate(Vector3.up, Mathf.PI * Mathf.Rad2Deg);
 
-        gameObject.AddComponent<EnemyMovement>();
     }
 
     // Update is called once per frame

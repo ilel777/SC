@@ -22,6 +22,12 @@ public class Player : SpaceShip
 
     #region Methods
 
+    new void Awake()
+    {
+        base.Awake();
+        gameObject.AddComponent<PlayerMovement>();
+    }
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -33,7 +39,6 @@ public class Player : SpaceShip
         BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
 
         // Speed = ConfigurationUtils.PlayerShipConfig.speed;
-        gameObject.AddComponent<PlayerMovement>();
     }
 
     public override void FireBolt()
