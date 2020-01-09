@@ -10,7 +10,8 @@ public abstract class SpaceShip : MonoBehaviour, ISize
 
     // Ship Stats
     float _speed, _fireRate;
-    int _health, _power;
+    int _power;
+    private Health _health;
 
     // Support storing ship's with and height
     float _shipWidth;
@@ -39,8 +40,8 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     // give access to ship stats
     public float FireRate { get => _fireRate; set => _fireRate = value; }
     public float Speed { get => _speed; set => _speed = value; }
-    public int Health { get => _health; set => _health = value; }
     public int Power { get => _power; set => _power = value; }
+    public Health Health { get => _health; set => _health = value; }
 
     // Bolt shooting Support
     public List<BoltLauncher> BoltLaunchers { get => _boltLaunchers; set => _boltLaunchers = value; }
@@ -53,6 +54,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     {
         // add cooldown timer
         _cooldownTimer = gameObject.AddComponent<Timer>();
+        _health = gameObject.AddComponent<Health>();
     }
 
 

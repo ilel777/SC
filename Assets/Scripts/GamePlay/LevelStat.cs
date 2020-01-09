@@ -12,6 +12,7 @@ public class LevelStat : MonoBehaviour
     private int _playerLives;
     private int _asteroidsDestroyed;
     private int _powerupsCollected;
+    private Health _playerHealth;
 
 
     #endregion
@@ -23,10 +24,16 @@ public class LevelStat : MonoBehaviour
     public int EnemyShipsDestroyed { get => _enemyShipsDestroyed; set => _enemyShipsDestroyed = value; }
     public int PlayerLives { get => _playerLives; set => _playerLives = value; }
     public int PowerupsCollected { get => _powerupsCollected; set => _powerupsCollected = value; }
+    public Health PlayerHealth { get => _playerHealth; set => _playerHealth = value; }
 
     #endregion
 
     #region Methods
+
+    void Awake()
+    {
+        _playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +44,7 @@ public class LevelStat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!_playerHealth) _playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
     }
 
     public void UpdateScore(int scoreValue)

@@ -42,7 +42,7 @@ public class PoolsContainer
         _enemyBolts = new EnemyBoltPool(Resources.Load<GameObject>("Prefabs/Bolt"), 100);
         _enemies = new EnemyPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Enemy"), 10);
         _asteroids = new AsteroidPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Asteroid"), 10);
-        _powerups = new PowerupPool(Resources.Load<GameObject>("Prefabs/SpaceItems/FireRatePowerup"), 20);
+        _powerups = new PowerupPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Health Powerup"), 20);
     }
 
     #endregion

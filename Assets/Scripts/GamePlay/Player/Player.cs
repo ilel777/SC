@@ -39,6 +39,7 @@ public class Player : SpaceShip
         BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
 
         // Speed = ConfigurationUtils.PlayerShipConfig.speed;
+        Health.LifePoints = (uint)ConfigurationUtils.PlayerShipConfig.health;
     }
 
     public override void FireBolt()
@@ -55,8 +56,14 @@ public class Player : SpaceShip
     /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
-        EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());
+        Health health = GetComponent<Health>();
+        health.Lose(20);
+
+        if (health.LifePoints <= 0)
+        {
+            Destroy(gameObject);
+            EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
