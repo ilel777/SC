@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoltLauncher : MonoBehaviour
 {
     // holds SpaceShip reference
-    SpaceShip _ship;
+    Attack _shipAttack;
 
     // Support cooldown
     Timer _cooldown;
@@ -15,21 +15,21 @@ public class BoltLauncher : MonoBehaviour
 
     void Start()
     {
-        _ship = GetComponentInParent<SpaceShip>();
+        _shipAttack = GetComponentInParent<Attack>();
         _cooldown = gameObject.AddComponent<Timer>();
     }
 
     // Spawn a Bolt on the location of the game object
     public void LaunchBolt()
     {
-        GameObject bolt = _ship.PrepareNewBolt();
+        GameObject bolt = _shipAttack.PrepareNewBolt();
         bolt.transform.Rotate(new Vector3(0, 0, Vector3.Angle(bolt.transform.up, transform.forward)));
         bolt.transform.position = transform.position;
         bolt.SetActive(true);
-        bolt.GetComponent<Rigidbody>().AddForce(transform.forward * _ship.BoltThrustForce * bolt.GetComponent<Rigidbody>().mass, ForceMode.Impulse);
+        bolt.GetComponent<Rigidbody>().AddForce(transform.forward * _shipAttack.BoltThrustForce * bolt.GetComponent<Rigidbody>().mass, ForceMode.Impulse);
 
         // Start CooldownTimer
-        _cooldown.Duration = 1 / (_ship.FireRate / 2);
+        _cooldown.Duration = 1 / (_shipAttack.FireRate / 2);
         _cooldown.Run();
     }
 }

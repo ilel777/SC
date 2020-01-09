@@ -1,0 +1,3 @@
+internal class PlayerDefence : Defence
+{
+}

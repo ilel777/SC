@@ -16,7 +16,6 @@ public class PlayerMovement : Movement
     {
         _rb = GetComponent<Rigidbody>();
         _size = GetComponent<ISize>();
-        Speed = ConfigurationUtils.PlayerShipConfig.speed;
     }
 
     protected override void Move()

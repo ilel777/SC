@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,15 +7,15 @@ using UnityEngine;
 /// </summary>
 public class Player : SpaceShip
 {
-
     #region Fields
+
+    private PlayerMovement _movement;
+    private PlayerAttack _attack;
+
     #endregion
 
 
     #region Properties
-
-    public override Pool<GameObject> Bolts => PoolsContainer.PlayerBolts;
-
     #endregion
 
 
@@ -25,7 +24,14 @@ public class Player : SpaceShip
     new void Awake()
     {
         base.Awake();
-        gameObject.AddComponent<PlayerMovement>();
+
+        // initialize movement component
+        _movement = gameObject.AddComponent<PlayerMovement>();
+
+        // initialize attack component
+        _attack = gameObject.AddComponent<PlayerAttack>();
+
+        gameObject.AddComponent<PlayerDefence>();
     }
 
     // Start is called before the first frame update
@@ -33,23 +39,19 @@ public class Player : SpaceShip
     {
         base.Start();
 
-        FireRate = 1 / ConfigurationUtils.PlayerShipConfig.cooldown;
-        CooldownTimer.Duration = 1 / FireRate;
+        // configure movement component
+        _movement.Speed = ConfigurationUtils.PlayerShipConfig.speed;
 
-        BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
 
-        // Speed = ConfigurationUtils.PlayerShipConfig.speed;
+        // configure attack component
+        _attack.FireRate = 1 / ConfigurationUtils.PlayerShipConfig.cooldown;
+        _attack.BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
+        _attack.Bolts = PoolsContainer.PlayerBolts;
+
+
         Health.LifePoints = (uint)ConfigurationUtils.PlayerShipConfig.health;
     }
 
-    public override void FireBolt()
-    {
-        if (Input.GetButtonUp("Fire1"))
-        {
-            Debug.Log("Space pressed");
-            base.FireBolt();
-        }
-    }
 
     /// <summary>
     ///   Handle Collision with other objects

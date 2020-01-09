@@ -4,40 +4,50 @@ using UnityEngine;
 
 public class Enemy : SpaceShip
 {
+    #region Fields
+
     // Support Enemy Dodge
     float _thrustForce, _minDodgeForce, _width;
     Timer _dodgeCooldown;
-
-    #region Properties
-
-    public override Pool<GameObject> Bolts => PoolsContainer.EnemyBolts;
+    private EnemyMovement _movement;
+    private EnemyAttack _attack;
 
     #endregion
 
-    void Awake()
+
+    #region Properties
+    #endregion
+
+    new void Awake()
     {
         base.Awake();
-        gameObject.AddComponent<EnemyMovement>();
+
+        // initialize movement component
+        _movement = gameObject.AddComponent<EnemyMovement>();
+
+        // initialize attack component
+        _attack = gameObject.AddComponent<EnemyAttack>();
     }
 
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
-        FireRate = 1 / ConfigurationUtils.EnemyShipConfig.cooldown;
-        CooldownTimer.Duration = 1 / FireRate;
 
-        BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.impulseForce;
+        // configure movement component
+        _movement.Speed = ConfigurationUtils.EnemyShipConfig.speed;
+
+        // configure attack component
+        _attack.FireRate = 1 / ConfigurationUtils.EnemyShipConfig.cooldown;
+        _attack.BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.impulseForce;
+        _attack.Bolts = PoolsContainer.EnemyBolts;
 
         transform.Rotate(Vector3.up, Mathf.PI * Mathf.Rad2Deg);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        FireBolt();
-
         // make sure the bolt is out of screen
         if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
         {

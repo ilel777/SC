@@ -20,7 +20,6 @@ public class EnemyMovement : Movement
         _rb = GetComponent<Rigidbody>();
         _size = GetComponent<ISize>();
 
-        Speed = ConfigurationUtils.EnemyShipConfig.speed;
 
         _dodgeCooldown = gameObject.AddComponent<Timer>();
         _dodgeCooldown.Duration = 1.0f;

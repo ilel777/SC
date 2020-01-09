@@ -8,12 +8,12 @@ public class FireRatePowerup : Powerup
     public override void ApplyEffect(Player player)
     {
         Debug.Log("Applaying Effects");
-        player.FireRate *= 5;
+        player.GetComponent<Attack>().FireRate *= 5;
     }
 
     public override void DisableEffect(Player player)
     {
         Debug.Log("Removing Effects");
-        player.FireRate /= 5;
+        player.GetComponent<Attack>().FireRate /= 5;
     }
 }
