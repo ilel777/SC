@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1658230077435148963}
   - component: {fileID: 335159279151684058}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BoltLauncher (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 19283457538057988}
   - component: {fileID: 7337987943437452703}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BoltLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6098512507480525723}
   - component: {fileID: 6074148408420793791}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6105932281844891211}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6098553029182606071}
   - component: {fileID: 6072380087006499713}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 6098892208801938743}
   - component: {fileID: 6112568040924972991}
   - component: {fileID: 6124675789855703831}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StarSparrow13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6098445214825874699}
   - component: {fileID: 6071980364888590309}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 7434681301262033157}
   - component: {fileID: 924877074}
   - component: {fileID: 924877075}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

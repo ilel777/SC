@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class PlayerAttack : Attack
+public class EnemyAttack : SpaceShipAttack
 {
-
     protected override void Awake()
     {
         base.Awake();
@@ -18,14 +17,9 @@ public class PlayerAttack : Attack
         base.Update();
     }
 
-
     public override void FireBolt()
     {
-        if (Input.GetButtonUp("Fire1"))
-        {
-            Debug.Log("Space pressed");
-            base.FireBolt();
-        }
+        base.FireBolt();
     }
 
     public override GameObject PrepareNewBolt()

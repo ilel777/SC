@@ -29,7 +29,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize
 
     public float Speed { get => _speed; set => _speed = value; }
     public int Power { get => _power; set => _power = value; }
-    public Health Health { get => _health; set => _health = value; }
+    public Health Health { get => _health; }
 
 
     #endregion

@@ -44,12 +44,13 @@ public class Player : SpaceShip
 
 
         // configure attack component
+        _attack.Power = ConfigurationUtils.PlayerShipConfig.power;
         _attack.FireRate = 1 / ConfigurationUtils.PlayerShipConfig.cooldown;
         _attack.BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
         _attack.Bolts = PoolsContainer.PlayerBolts;
 
 
-        Health.LifePoints = (uint)ConfigurationUtils.PlayerShipConfig.health;
+        Health.LifePoints = ConfigurationUtils.PlayerShipConfig.health;
     }
 
 
@@ -58,10 +59,8 @@ public class Player : SpaceShip
     /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
-        Health health = GetComponent<Health>();
-        health.Lose(20);
-
-        if (health.LifePoints <= 0)
+        Health.TakeDamage((uint)collision.gameObject.GetComponent<Attack>().Power);
+        if (Health.IsDestroyed)
         {
             Destroy(gameObject);
             EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());

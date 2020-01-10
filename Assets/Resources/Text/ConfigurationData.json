@@ -1,27 +1,33 @@
 {
     "playerShipConfig": {
-        "speed": 100.0,
+        "speed": 80.0,
         "health": 100,
-        "cooldown": 0.5
+        "cooldown": 0.5,
+        "power": 200
     },
     "enemyShipConfig": {
-        "speed": 30.0,
+        "speed": 40.0,
         "health": 50,
-        "scoreValue": 150,
-        "cooldown": 2.0
+        "cooldown": 1.0,
+        "power": 70,
+        "scoreValue": 150
     },
     "asteroidConfig": {
-        "speed": 30.0,
-        "rotationSpeed": 25,
+        "speed": 40.0,
+        "health": 100,
+        "power": 1000,
+        "rotationSpeed": 0.25,
         "scoreValue": 100
     },
     "collectibleConfig": {
-        "speed": 10.0
+        "speed": 55.0
     },
     "playerBoltConfig": {
-        "impulseForce": 70.0
+        "impulseForce": 70.0,
+        "power": 50
     },
-    "enemyBoltConfig":{
-        "impulseForce": 50.0
+    "enemyBoltConfig": {
+        "impulseForce": 60.0,
+        "power": 30
     }
 }

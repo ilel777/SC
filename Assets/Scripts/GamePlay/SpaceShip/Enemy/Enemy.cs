@@ -6,10 +6,10 @@ public class Enemy : SpaceShip
 {
     #region Fields
 
-    // Support Enemy Dodge
-    float _thrustForce, _minDodgeForce, _width;
-    Timer _dodgeCooldown;
+    // Support Movement
     private EnemyMovement _movement;
+
+    // Support Attack
     private EnemyAttack _attack;
 
     #endregion
@@ -38,9 +38,13 @@ public class Enemy : SpaceShip
         _movement.Speed = ConfigurationUtils.EnemyShipConfig.speed;
 
         // configure attack component
+        _attack.Power = ConfigurationUtils.EnemyShipConfig.power;
         _attack.FireRate = 1 / ConfigurationUtils.EnemyShipConfig.cooldown;
         _attack.BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.impulseForce;
         _attack.Bolts = PoolsContainer.EnemyBolts;
+
+        // configure health component
+        Health.LifePoints = ConfigurationUtils.EnemyShipConfig.health;
 
         transform.Rotate(Vector3.up, Mathf.PI * Mathf.Rad2Deg);
     }
@@ -68,7 +72,8 @@ public class Enemy : SpaceShip
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        Health.TakeDamage((uint)collision.gameObject.GetComponent<Attack>().Power);
+        if (Health.IsDestroyed)
         {
             PoolsContainer.Enemies.Return(gameObject);
             EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(ConfigurationUtils.EnemyShipConfig.scoreValue));

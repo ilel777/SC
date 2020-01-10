@@ -10,6 +10,9 @@ public class PlayerBolt : Bolt
         base.Start();
         GetComponent<MeshRenderer>().material = new Material(Resources.Load<Material>("Materials/PlayerBolt"));
         tag = "Player Bolt";
+        gameObject.layer = 9;
+
+        Attack.Power = ConfigurationUtils.PlayerBoltConfig.power;
     }
 
 
@@ -19,4 +22,10 @@ public class PlayerBolt : Bolt
         PoolsContainer.PlayerBolts.Return(gameObject);
         // Destroy(gameObject);
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        PoolsContainer.PlayerBolts.Return(gameObject);
+    }
+
 }

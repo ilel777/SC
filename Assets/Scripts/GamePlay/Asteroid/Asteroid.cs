@@ -4,24 +4,39 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour, ISize
 {
+    // Movement Support
     private Rigidbody rb;
     [SerializeField]
     private float rotationSpeed;
     private Vector3 torqueVector;
     private float _speed;
 
+    // Support Health Stats
+    private Health _health;
+
     // holds Asteroid width and hight
     float _width, _height;
+
+    // Support damage
+    Attack _attack;
+
+    public Health Health { get => _health; }
 
     void Awake()
     {
         gameObject.AddComponent<AsteroidMovement>();
+        _health = gameObject.AddComponent<Health>();
+        _attack = gameObject.AddComponent<Attack>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        _health.LifePoints = ConfigurationUtils.AsteroidConfig.health;
+
+        _attack.Power = ConfigurationUtils.AsteroidConfig.power;
 
         // extract the size from the Collider
         StoreAsteroidDimensions();
@@ -41,19 +56,21 @@ public class Asteroid : MonoBehaviour, ISize
     {
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player Bolt")
-            || other.gameObject.CompareTag("Boundary"))
-        {
-            PoolsContainer.Asteroids.Return(gameObject);
-            EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag("Player Bolt")
+    //         || other.gameObject.CompareTag("Boundary"))
+    //     {
+    //         PoolsContainer.Asteroids.Return(gameObject);
+    //         EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));
+    //     }
+    // }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        Health.TakeDamage((uint)collision.gameObject.GetComponent<Attack>().Power);
+        Debug.Log(Health.LifePoints);
+        if (Health.IsDestroyed)
         {
             PoolsContainer.Asteroids.Return(gameObject);
             EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));

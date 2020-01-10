@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoltLauncher : MonoBehaviour
 {
     // holds SpaceShip reference
-    Attack _shipAttack;
+    SpaceShipAttack _shipAttack;
 
     // Support cooldown
     Timer _cooldown;
@@ -15,7 +15,7 @@ public class BoltLauncher : MonoBehaviour
 
     void Start()
     {
-        _shipAttack = GetComponentInParent<Attack>();
+        _shipAttack = GetComponentInParent<SpaceShipAttack>();
         _cooldown = gameObject.AddComponent<Timer>();
     }
 

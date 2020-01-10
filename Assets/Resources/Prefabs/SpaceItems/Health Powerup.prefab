@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1743590154233138031}
   - component: {fileID: 937549349036088686}
   - component: {fileID: 1743590154233138017}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Health Powerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3938903108522235823}
   - component: {fileID: 3930869192352380189}
   - component: {fileID: 3983984448762730579}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BeveledStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

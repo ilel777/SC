@@ -18,28 +18,34 @@ public class ConfigurationData
     {
         // set default values for player configs
         playerShipConfig.health = 100;
-        playerShipConfig.speed = 20;
+        playerShipConfig.speed = 80;
         playerShipConfig.cooldown = 0.5f;
+        playerShipConfig.power = 200;
 
         // set default values for enemy config
         enemyShipConfig.health = 50;
-        enemyShipConfig.speed = 10;
+        enemyShipConfig.speed = 40;
         enemyShipConfig.scoreValue = 150;
         enemyShipConfig.cooldown = 1.0f;
+        enemyShipConfig.power = 70;
 
         // set default values for asteroid config
-        asteroidConfig.speed = 10;
+        asteroidConfig.health = 100;
+        asteroidConfig.speed = 40;
         asteroidConfig.rotationSpeed = 0.25f;
         asteroidConfig.scoreValue = 100;
+        asteroidConfig.power = 1000;
 
         // set default values for collectible config
-        collectibleConfig.speed = 15;
+        collectibleConfig.speed = 55;
 
         // set default values for player bolt config
-        playerBoltConfig.impulseForce = 17;
+        playerBoltConfig.impulseForce = 70;
+        playerBoltConfig.power = 50;
 
         // set default values for enemy bolt config
-        enemyBoltConfig.impulseForce = 15;
+        enemyBoltConfig.impulseForce = 60;
+        enemyBoltConfig.power = 30;
     }
 
     internal static ConfigurationData getConfigurationData()
@@ -74,17 +80,19 @@ public class ConfigurationData
 public struct PlayerShipConfig
 {
     public float speed;
-    public int health;
+    public uint health;
     public float cooldown;
+    public uint power;
 }
 
 [System.Serializable]
 public struct EnemyShipConfig
 {
     public float speed;
-    public int health;
-    public int scoreValue;
+    public uint health;
     public float cooldown;
+    public uint power;
+    public int scoreValue;
 }
 
 [System.Serializable]
@@ -97,6 +105,8 @@ public struct CollectibleConfig
 public struct AsteroidConfig
 {
     public float speed;
+    public uint health;
+    public uint power;
     public float rotationSpeed;
     public int scoreValue;
 }
@@ -105,10 +115,12 @@ public struct AsteroidConfig
 public struct PlayerBoltConfig
 {
     public float impulseForce;
+    public uint power;
 }
 
 [System.Serializable]
 public struct EnemyBoltConfig
 {
     public float impulseForce;
+    public uint power;
 }

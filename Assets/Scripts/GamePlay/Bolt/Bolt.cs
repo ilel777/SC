@@ -7,8 +7,16 @@ public abstract class Bolt : MonoBehaviour
     // Support movement
     private Rigidbody _rb;
 
+    private Attack _attack;
+
     // give fields access to child classes
     public Rigidbody Rb { get => _rb; }
+    public Attack Attack { get => _attack; set => _attack = value; }
+
+    protected void Awake()
+    {
+        Attack = gameObject.AddComponent<Attack>();
+    }
 
     // Start is called before the first frame update
     protected void Start()
@@ -31,4 +39,5 @@ public abstract class Bolt : MonoBehaviour
             }
         }
     }
+
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 603954552252404528}
   - component: {fileID: 578368957649550970}
   - component: {fileID: 586230900295760884}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Asteroid Lava Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,8 +89,8 @@ GameObject:
   - component: {fileID: 8794009800228378509}
   - component: {fileID: 8794009800228378505}
   - component: {fileID: 8794009800228378508}
-  m_Layer: 0
-  m_Name: Asteroid 1
+  m_Layer: 10
+  m_Name: Asteroid
   m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
