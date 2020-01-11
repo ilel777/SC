@@ -18,6 +18,12 @@ public class PlayerMovement : Movement
         _size = GetComponent<ISize>();
     }
 
+    void OnEnable()
+    {
+        // configure movement component
+        Speed = ConfigurationUtils.PlayerShipConfig.speed;
+    }
+
     protected override void Move()
     {
         float horizontalInput = Input.GetAxis("Horizontal");

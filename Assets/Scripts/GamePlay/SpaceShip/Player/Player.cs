@@ -39,10 +39,6 @@ public class Player : SpaceShip
     {
         base.Start();
 
-        // configure movement component
-        _movement.Speed = ConfigurationUtils.PlayerShipConfig.speed;
-
-
         // configure attack component
         _attack.Power = ConfigurationUtils.PlayerShipConfig.power;
         _attack.FireRate = 1 / ConfigurationUtils.PlayerShipConfig.cooldown;

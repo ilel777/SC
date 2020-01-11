@@ -15,6 +15,10 @@ public class AsteroidMovement : Movement
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+    }
+
+    void OnEnable()
+    {
         _torqueVector = Random.insideUnitSphere.normalized;
         _rotationSpeed = ConfigurationUtils.AsteroidConfig.rotationSpeed;
         Speed = ConfigurationUtils.AsteroidConfig.speed;

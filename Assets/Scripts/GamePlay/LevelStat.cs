@@ -32,12 +32,12 @@ public class LevelStat : MonoBehaviour
 
     void Awake()
     {
-        _playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        _playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         _playerLives = 3;
     }
 

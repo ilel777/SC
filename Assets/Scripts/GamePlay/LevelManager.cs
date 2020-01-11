@@ -32,7 +32,8 @@ public abstract class LevelManager : MonoBehaviour
     {
         _levelStatistics = gameObject.AddComponent<LevelStat>();
         _playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-        _player = GameObject.FindObjectOfType<Player>();
+        _player = Instantiate(_playerPrefab).GetComponent<Player>();
+        // _player = GameObject.FindObjectOfType<Player>();
         _powerups = new List<Powerup>();
     }
 

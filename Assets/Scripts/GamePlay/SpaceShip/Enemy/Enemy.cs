@@ -34,9 +34,6 @@ public class Enemy : SpaceShip
     {
         base.Start();
 
-        // configure movement component
-        _movement.Speed = ConfigurationUtils.EnemyShipConfig.speed;
-
         // configure attack component
         _attack.Power = ConfigurationUtils.EnemyShipConfig.power;
         _attack.FireRate = 1 / ConfigurationUtils.EnemyShipConfig.cooldown;

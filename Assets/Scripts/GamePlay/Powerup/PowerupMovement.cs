@@ -14,6 +14,10 @@ public class PowerupMovement : Movement
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+    }
+
+    void OnEnable()
+    {
         Speed = ConfigurationUtils.CollectibleConfig.speed;
     }
 

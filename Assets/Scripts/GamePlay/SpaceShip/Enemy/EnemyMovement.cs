@@ -27,6 +27,12 @@ public class EnemyMovement : Movement
         _maxDodgeForce = 30;
     }
 
+    void OnEnable()
+    {
+        // configure movement component
+        Speed = ConfigurationUtils.EnemyShipConfig.speed;
+    }
+
     protected override void Move()
     {
         _rb.AddRelativeForce(Speed * _rb.mass * Vector3.forward * _rb.drag);
