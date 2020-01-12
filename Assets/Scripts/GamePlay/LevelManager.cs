@@ -18,6 +18,9 @@ public abstract class LevelManager : MonoBehaviour
     // Store player reference to apply effects
     Player _player;
 
+    // Support respawn delay
+    private Timer _respawnTimer;
+
 
     #region Properties
 
@@ -32,7 +35,9 @@ public abstract class LevelManager : MonoBehaviour
     {
         _levelStatistics = gameObject.AddComponent<LevelStat>();
         _playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-        _player = Instantiate(_playerPrefab).GetComponent<Player>();
+        _respawnTimer = gameObject.AddComponent<Timer>();
+        _respawnTimer.AddTimerFinishedEventListener(SpawnPlayer);
+        SpawnPlayer();
         // _player = GameObject.FindObjectOfType<Player>();
         _powerups = new List<Powerup>();
     }
@@ -84,12 +89,20 @@ public abstract class LevelManager : MonoBehaviour
         if (_levelStatistics.PlayerLives > 0)
         {
             _levelStatistics.PlayerLives--;
-            _player = Instantiate(_playerPrefab).GetComponent<Player>();
+            _respawnTimer.Duration = 3;
+            _respawnTimer.Run();
         }
         else
         {
             EventManager.TriggerEvent(EventName.GameOver, new EventArgs());
         }
+    }
+
+    private void SpawnPlayer()
+    {
+        _player = Instantiate(_playerPrefab,
+                              _playerPrefab.transform.position,
+                              _playerPrefab.transform.rotation).GetComponent<Player>();
     }
 
     /// <summary>

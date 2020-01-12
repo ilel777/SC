@@ -31,7 +31,7 @@ public class Asteroid : MonoBehaviour, ISize
         gameObject.AddComponent<AsteroidMovement>();
         _health = gameObject.AddComponent<Health>();
         _attack = gameObject.AddComponent<Attack>();
-        _explosionPrefab = Resources.Load<GameObject>("Prefabs/BigExplosion");
+        _explosionPrefab = Resources.Load<GameObject>("Prefabs/Asteroid Explosion");
     }
 
     // Start is called before the first frame update
@@ -39,12 +39,15 @@ public class Asteroid : MonoBehaviour, ISize
     {
         rb = GetComponent<Rigidbody>();
 
+        // extract the size from the Collider
+        StoreAsteroidDimensions();
+    }
+
+    void OnEnable()
+    {
         _health.LifePoints = ConfigurationUtils.AsteroidConfig.health;
 
         _attack.Power = ConfigurationUtils.AsteroidConfig.power;
-
-        // extract the size from the Collider
-        StoreAsteroidDimensions();
     }
 
     // Update is called once per frame
@@ -78,7 +81,7 @@ public class Asteroid : MonoBehaviour, ISize
         if (Health.IsDestroyed)
         {
             PoolsContainer.Asteroids.Return(gameObject);
-            GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            GameObject explosion = Instantiate(_explosionPrefab, transform.position, _explosionPrefab.transform.rotation);
             explosion.transform.localScale *= 3;
             Destroy(explosion, 3.0f);
             EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));

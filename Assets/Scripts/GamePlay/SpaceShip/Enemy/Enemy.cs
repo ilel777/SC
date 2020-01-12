@@ -12,10 +12,6 @@ public class Enemy : SpaceShip
     // Support Attack
     private EnemyAttack _attack;
 
-    // Support Explosion
-    [SerializeField]
-    private GameObject _explosionPrefab;
-
     #endregion
 
 
@@ -32,7 +28,6 @@ public class Enemy : SpaceShip
         // initialize attack component
         _attack = gameObject.AddComponent<EnemyAttack>();
 
-        _explosionPrefab = Resources.Load<GameObject>("Prefabs/BigExplosion");
     }
 
     // Start is called before the first frame update
@@ -80,8 +75,7 @@ public class Enemy : SpaceShip
         if (Health.IsDestroyed)
         {
             PoolsContainer.Enemies.Return(gameObject);
-            GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            explosion.transform.localScale *= transform.localScale.x;
+            GameObject explosion = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 3.0f);
             EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(ConfigurationUtils.EnemyShipConfig.scoreValue));
         }

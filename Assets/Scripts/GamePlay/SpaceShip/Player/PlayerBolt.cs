@@ -26,6 +26,7 @@ public class PlayerBolt : Bolt
     void OnCollisionEnter(Collision collision)
     {
         PoolsContainer.PlayerBolts.Return(gameObject);
+        Destroy(Instantiate(ExplosionPrefab, transform.position, Quaternion.identity), 3.0f);
     }
 
 }

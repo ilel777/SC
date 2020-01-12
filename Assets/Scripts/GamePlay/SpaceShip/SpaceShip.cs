@@ -17,6 +17,9 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     float _shipWidth;
     float _shipHeight;
 
+    // Support Explosion
+    GameObject _explosionPrefab;
+
     #region Properties
 
     /// <summary>
@@ -30,6 +33,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     public float Speed { get => _speed; set => _speed = value; }
     public int Power { get => _power; set => _power = value; }
     public Health Health { get => _health; }
+    public GameObject ExplosionPrefab { get => _explosionPrefab; set => _explosionPrefab = value; }
 
 
     #endregion
@@ -45,6 +49,8 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     {
         //get Rigidbody
         _rb = GetComponent<Rigidbody>();
+
+        _explosionPrefab = Resources.Load<GameObject>("Prefabs/SpaceShip Explosion");
 
         StoreShipDimensions();
     }

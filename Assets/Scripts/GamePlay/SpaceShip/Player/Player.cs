@@ -59,6 +59,8 @@ public class Player : SpaceShip
         if (Health.IsDestroyed)
         {
             Destroy(gameObject);
+            GameObject explosion = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 3.0f);
             EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());
         }
     }

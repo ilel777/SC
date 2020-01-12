@@ -9,9 +9,13 @@ public abstract class Bolt : MonoBehaviour
 
     private Attack _attack;
 
+    // Support Explosion
+    GameObject _explosionPrefab;
+
     // give fields access to child classes
     public Rigidbody Rb { get => _rb; }
     public Attack Attack { get => _attack; set => _attack = value; }
+    public GameObject ExplosionPrefab { get => _explosionPrefab; set => _explosionPrefab = value; }
 
     protected void Awake()
     {
@@ -22,6 +26,7 @@ public abstract class Bolt : MonoBehaviour
     protected void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        ExplosionPrefab = Resources.Load<GameObject>("Prefabs/Bolt Explosion");
     }
 
     protected void Update()
