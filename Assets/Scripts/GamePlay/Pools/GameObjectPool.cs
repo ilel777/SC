@@ -37,7 +37,7 @@ public class GameObjectPool : Pool<GameObject>
     protected override void OnReturn(GameObject item)
     {
         item.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        item.transform.position = Vector3.zero;
+        // item.transform.position = Vector3.zero;
         item.SetActive(false);
     }
 }

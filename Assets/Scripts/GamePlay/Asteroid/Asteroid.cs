@@ -20,6 +20,10 @@ public class Asteroid : MonoBehaviour, ISize
     // Support damage
     Attack _attack;
 
+    // Support Explosion
+    [SerializeField]
+    GameObject _explosionPrefab;
+
     public Health Health { get => _health; }
 
     void Awake()
@@ -27,6 +31,7 @@ public class Asteroid : MonoBehaviour, ISize
         gameObject.AddComponent<AsteroidMovement>();
         _health = gameObject.AddComponent<Health>();
         _attack = gameObject.AddComponent<Attack>();
+        _explosionPrefab = Resources.Load<GameObject>("Prefabs/BigExplosion");
     }
 
     // Start is called before the first frame update
@@ -73,6 +78,9 @@ public class Asteroid : MonoBehaviour, ISize
         if (Health.IsDestroyed)
         {
             PoolsContainer.Asteroids.Return(gameObject);
+            GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            explosion.transform.localScale *= 3;
+            Destroy(explosion, 3.0f);
             EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));
         }
     }
