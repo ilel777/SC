@@ -13,6 +13,7 @@ public class GameObjectPool : Pool<GameObject>
         _poolGameObject = new GameObject();
         _poolGameObject.transform.position = Vector3.zero;
         _poolGameObject.name = "Pool Game Object";
+        // Object.DontDestroyOnLoad(_poolGameObject);
         for (int i = 0; i < 10; i++)
         {
             _items.Add(CreateNewObject());
@@ -31,6 +32,7 @@ public class GameObjectPool : Pool<GameObject>
     protected override GameObject OnGet(GameObject item)
     {
         item.SetActive(true);
+        // item.transform.SetParent(_poolGameObject.transform.parent, true);
         return item;
     }
 
@@ -38,6 +40,7 @@ public class GameObjectPool : Pool<GameObject>
     {
         item.GetComponent<Rigidbody>().velocity = Vector3.zero;
         // item.transform.position = Vector3.zero;
+        // item.transform.SetParent(_poolGameObject.transform, true);
         item.SetActive(false);
     }
 }

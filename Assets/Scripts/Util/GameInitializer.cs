@@ -13,4 +13,9 @@ public class GameInitializer : MonoBehaviour
         ScreenUtils.Initialize();
         PoolsContainer.Initialize();
     }
+
+    void OnDestroy()
+    {
+        PoolsContainer.FreePools();
+    }
 }

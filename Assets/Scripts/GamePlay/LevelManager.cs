@@ -118,6 +118,12 @@ public abstract class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            MenuManager.GoToMenu(MenuName.Pause);
+        }
+
+
         for (int i = _powerups.Count - 1; i >= 0; i--)
         {
             if (_powerups[i].PowerupTimer.Finished)

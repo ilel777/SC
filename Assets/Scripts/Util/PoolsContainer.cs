@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,10 +14,10 @@ public class PoolsContainer
     private AsteroidPool _asteroids;
     private PowerupPool _powerups;
 
+
     #endregion
 
     #region Accessors
-
     public static PlayerBoltPool PlayerBolts { get => _instance._playerBolts; }
     public static EnemyPool Enemies { get => _instance._enemies; }
     public static EnemyBoltPool EnemyBolts { get => _instance._enemyBolts; }
@@ -30,6 +31,11 @@ public class PoolsContainer
     {
         if (_instance != null) return;
         _instance = new PoolsContainer();
+    }
+
+    public static void FreePools()
+    {
+        _instance = null;
     }
 
     #endregion
