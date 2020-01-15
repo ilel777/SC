@@ -10,6 +10,7 @@ TagManager:
   - Player Bolt
   - Boundary
   - Enemy Bolt
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

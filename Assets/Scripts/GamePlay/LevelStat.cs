@@ -24,7 +24,7 @@ public class LevelStat : MonoBehaviour
     public int EnemyShipsDestroyed { get => _enemyShipsDestroyed; set => _enemyShipsDestroyed = value; }
     public int PlayerLives { get => _playerLives; set => _playerLives = value; }
     public int PowerupsCollected { get => _powerupsCollected; set => _powerupsCollected = value; }
-    public Health PlayerHealth { get => _playerHealth; set => _playerHealth = value; }
+    public Health PlayerHealth { get => _playerHealth; }
 
     #endregion
 

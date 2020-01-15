@@ -33,13 +33,14 @@ public abstract class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _levelStatistics = gameObject.AddComponent<LevelStat>();
         _playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
         _respawnTimer = gameObject.AddComponent<Timer>();
         _respawnTimer.AddTimerFinishedEventListener(SpawnPlayer);
         SpawnPlayer();
         // _player = GameObject.FindObjectOfType<Player>();
         _powerups = new List<Powerup>();
+
+        _levelStatistics = gameObject.AddComponent<LevelStat>();
     }
 
 
@@ -50,8 +51,14 @@ public abstract class LevelManager : MonoBehaviour
         EventManager.StartListening(EventName.EnemyShipDestroyed, HandleEnemyShipDestroyedEvent);
         EventManager.StartListening(EventName.PowerupCollected, HandlePowerupCollectedEvent);
         EventManager.StartListening(EventName.PowerupDurationEnded, HandlePowerupDurationEnded);
+        EventManager.StartListening(EventName.GameOver, HandleGameOverEvent);
     }
 
+    private void HandleGameOverEvent(EventArgs arg0)
+    {
+        MenuManager.GoToMenu(MenuName.GameOver);
+        Debug.Log("Game Over");
+    }
 
     private void HandlePowerupCollectedEvent(EventArgs arg)
     {

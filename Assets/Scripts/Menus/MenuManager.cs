@@ -42,6 +42,12 @@ public static class MenuManager
                 if (!GameObject.FindGameObjectWithTag("PauseMenu"))
                     Object.Instantiate(Resources.Load("Prefabs/Pause Menu"));
                 break;
+            case MenuName.GameOver:
+                if (!GameObject.FindObjectOfType<GameOverMenu>())
+                {
+                    Object.Instantiate(Resources.Load("Prefabs/Game Over Menu"));
+                }
+                break;
         }
     }
 }

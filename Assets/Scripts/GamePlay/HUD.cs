@@ -16,7 +16,7 @@ public class HUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelStat = GameObject.FindObjectOfType<LevelStat>();
+        levelStat = GameObject.FindObjectOfType<LevelManager>().LevelStatistics;
     }
 
     // Update is called once per frame
@@ -27,7 +27,9 @@ public class HUD : MonoBehaviour
         asteroidsDestroyed.text = "Asteroids Destroyed: " + levelStat.AsteroidsDestroyed;
         livesLeft.text = "Lives Left: " + levelStat.PlayerLives;
         powerupsCollected.text = "Powerups Collected: " + levelStat.PowerupsCollected;
-        playerHealth.text = "Player Health: " + levelStat.PlayerHealth.LifePoints;
+
+        if (levelStat.PlayerHealth)
+            playerHealth.text = "Player Health: " + levelStat.PlayerHealth.LifePoints;
     }
 
     //     void OnEnable()
