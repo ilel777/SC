@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class WaveManager : MonoBehaviour
     float waveSpawnZ, waveSpawnXOffset;
 
     int _objectSpawned;
-    int _waveNumber;
+    int _waveCount;
     float _speedScale;
 
     // stores the max width and height of objects to be spawned
@@ -23,6 +24,10 @@ public class WaveManager : MonoBehaviour
     Timer _spawnWaveWait;
     // support waiting at the start of level before spawning items
     Timer _startWait;
+    private GameObject _msg;
+
+    // support spawn Message
+    float _spawnMessageDelay;
 
 
     // Start is called before the first frame update
@@ -56,11 +61,16 @@ public class WaveManager : MonoBehaviour
         }
         // InvokeRepeating("SpawnWave", 1.0f, 1.0f);
 
+        _msg = Instantiate(Resources.Load<GameObject>("Prefabs/Spawn Message"));
+        _msg.SetActive(false);
+
         _spawnItemWait = 1.0f;
+        _spawnMessageDelay = 1.0f;
+
         _startWait = gameObject.AddComponent<Timer>();
         _startWait.Duration = 0.5f;
         _spawnWaveWait = gameObject.AddComponent<Timer>();
-        _spawnWaveWait.Duration = 1.5f;
+        _spawnWaveWait.Duration = 3.0f;
 
         _startWait.AddTimerFinishedEventListener(StartSpawnWave);
         _spawnWaveWait.AddTimerFinishedEventListener(StartSpawnWave);
@@ -73,9 +83,19 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(SpawnWave());
     }
 
-    IEnumerator SpawnWave()
+    private IEnumerator ShowSpawnMessage()
+    {
+        _msg.SetActive(true);
+        _msg.GetComponentInChildren<Text>().text = "Wave " + (_waveCount + 1);
+        yield return new WaitForSeconds(_spawnMessageDelay);
+        _msg.SetActive(false);
+    }
+
+    private IEnumerator SpawnWave()
     {
         int itemsNumber = 5;
+
+        yield return StartCoroutine(ShowSpawnMessage());
 
         while (itemsNumber > 0)
         {
@@ -88,6 +108,7 @@ public class WaveManager : MonoBehaviour
         }
 
         _spawnWaveWait.Run();
+        _waveCount++;
         yield return null;
     }
 
