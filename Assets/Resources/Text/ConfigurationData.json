@@ -29,5 +29,12 @@
     "enemyBoltConfig": {
         "impulseForce": 90.0,
         "power": 30
+    },
+    "waveConfig": {
+        "spawnItemWait": 1.0,
+        "spawnMessageDelay": 1.0,
+        "startWait": 0.5,
+        "spawnWaveWait": 3.0,
+        "itemsNumber": 5
     }
 }

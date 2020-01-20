@@ -12,6 +12,7 @@ public static class ConfigurationUtils
     public static CollectibleConfig CollectibleConfig { get => configurationData.collectibleConfig; }
     public static PlayerBoltConfig PlayerBoltConfig { get => configurationData.playerBoltConfig; }
     public static EnemyBoltConfig EnemyBoltConfig { get => configurationData.enemyBoltConfig; }
+    public static WaveConfig WaveConfig { get => configurationData.waveConfig; }
     public static void Initialize()
     {
         configurationData = ConfigurationData.getConfigurationData();

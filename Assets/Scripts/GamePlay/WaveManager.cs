@@ -64,13 +64,13 @@ public class WaveManager : MonoBehaviour
         _msg = Instantiate(Resources.Load<GameObject>("Prefabs/Spawn Message"));
         _msg.SetActive(false);
 
-        _spawnItemWait = 1.0f;
-        _spawnMessageDelay = 1.0f;
+        _spawnItemWait = ConfigurationUtils.WaveConfig.spawnItemWait;
+        _spawnMessageDelay = ConfigurationUtils.WaveConfig.spawnMessageDelay;
 
         _startWait = gameObject.AddComponent<Timer>();
-        _startWait.Duration = 0.5f;
+        _startWait.Duration = ConfigurationUtils.WaveConfig.startWait;
         _spawnWaveWait = gameObject.AddComponent<Timer>();
-        _spawnWaveWait.Duration = 3.0f;
+        _spawnWaveWait.Duration = ConfigurationUtils.WaveConfig.spawnWaveWait;
 
         _startWait.AddTimerFinishedEventListener(StartSpawnWave);
         _spawnWaveWait.AddTimerFinishedEventListener(StartSpawnWave);
@@ -93,8 +93,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-        int itemsNumber = 5;
-
+        int itemsNumber = ConfigurationUtils.WaveConfig.itemsNumber;
         yield return StartCoroutine(ShowSpawnMessage());
 
         while (itemsNumber > 0)
