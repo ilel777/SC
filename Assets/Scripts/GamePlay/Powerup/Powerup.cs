@@ -36,7 +36,8 @@ public abstract class Powerup : MonoBehaviour, ISize
         // make sure the powerup is out of screen
         if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
         {
-            PoolsContainer.Powerups.Return(gameObject);
+            Debug.Log(name);
+            PoolsContainer.PowerupPools[name].Return(gameObject);
         }
     }
 

@@ -10,7 +10,7 @@ public class ConfigurationData
     public PlayerShipConfig playerShipConfig;
     public EnemyShipConfig enemyShipConfig;
     public AsteroidConfig asteroidConfig;
-    public CollectibleConfig collectibleConfig;
+    public CollectibleConfig[] collectiblesConfig;
     public PlayerBoltConfig playerBoltConfig;
     public EnemyBoltConfig enemyBoltConfig;
     public WaveConfig waveConfig;
@@ -38,7 +38,10 @@ public class ConfigurationData
         asteroidConfig.power = 1000;
 
         // set default values for collectible config
-        collectibleConfig.speed = 55;
+        collectiblesConfig = new CollectibleConfig[2];
+        // collectibleConfig.speed = 55;
+        collectiblesConfig[0] = new CollectibleConfig(55, "Health Powerup");
+        collectiblesConfig.SetValue(new CollectibleConfig(60, "FireRate Powerup"), 1);
 
         // set default values for player bolt config
         playerBoltConfig.impulseForce = 100.0f;
@@ -85,7 +88,7 @@ public class ConfigurationData
 
 
 [System.Serializable]
-public struct PlayerShipConfig
+public class PlayerShipConfig
 {
     public float speed;
     public uint health;
@@ -94,7 +97,7 @@ public struct PlayerShipConfig
 }
 
 [System.Serializable]
-public struct EnemyShipConfig
+public class EnemyShipConfig
 {
     public float speed;
     public uint health;
@@ -104,13 +107,20 @@ public struct EnemyShipConfig
 }
 
 [System.Serializable]
-public struct CollectibleConfig
+public class CollectibleConfig
 {
+    public string prefabName;
     public float speed;
+
+    public CollectibleConfig(float speed, string prefabName)
+    {
+        this.speed = speed;
+        this.prefabName = prefabName;
+    }
 }
 
 [System.Serializable]
-public struct AsteroidConfig
+public class AsteroidConfig
 {
     public float speed;
     public uint health;
@@ -120,21 +130,21 @@ public struct AsteroidConfig
 }
 
 [System.Serializable]
-public struct PlayerBoltConfig
+public class PlayerBoltConfig
 {
     public float impulseForce;
     public uint power;
 }
 
 [System.Serializable]
-public struct EnemyBoltConfig
+public class EnemyBoltConfig
 {
     public float impulseForce;
     public uint power;
 }
 
 [System.Serializable]
-public struct WaveConfig
+public class WaveConfig
 {
     public float spawnItemWait;
     public float spawnMessageDelay;

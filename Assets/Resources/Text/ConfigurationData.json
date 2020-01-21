@@ -19,9 +19,16 @@
         "rotationSpeed": 0.25,
         "scoreValue": 100
     },
-    "collectibleConfig": {
-        "speed": 55.0
-    },
+    "collectiblesConfig": [
+        {
+            "name": "Health Powerup",
+            "speed": 55.0
+        },
+        {
+            "name": "FireRate Powerup",
+            "speed": 60.0
+        }
+    ],
     "playerBoltConfig": {
         "impulseForce": 100.0,
         "power": 50

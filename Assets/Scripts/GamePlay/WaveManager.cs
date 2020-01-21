@@ -40,7 +40,7 @@ public class WaveManager : MonoBehaviour
         _obstaclesPools = new List<Pool<GameObject>>();
         _obstaclesPools.Add(PoolsContainer.Enemies);
         _obstaclesPools.Add(PoolsContainer.Asteroids);
-        _obstaclesPools.Add(PoolsContainer.Powerups);
+        _obstaclesPools.AddRange(PoolsContainer.PowerupPools.Values);
 
         foreach (Pool<GameObject> pool in _obstaclesPools)
         {

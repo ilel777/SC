@@ -18,7 +18,7 @@ public class PowerupMovement : Movement
 
     void OnEnable()
     {
-        Speed = ConfigurationUtils.CollectibleConfig.speed;
+        Speed = ConfigurationUtils.CollectiblesConfig[0].speed;
     }
 
     protected override void Move()

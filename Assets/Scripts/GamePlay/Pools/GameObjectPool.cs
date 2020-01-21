@@ -6,10 +6,14 @@ public class GameObjectPool : Pool<GameObject>
 {
     GameObject _prefab;
     GameObject _poolGameObject;
+    string _name;
 
-    public GameObjectPool(GameObject prefab, int initialCapacity = 10) : base(initialCapacity)
+    public GameObjectPool(GameObject prefab, int initialCapacity = 10) : this(prefab, "any name", initialCapacity) { }
+
+    public GameObjectPool(GameObject prefab, string name, int initialCapacity = 10) : base(initialCapacity)
     {
         _prefab = prefab;
+        _name = name;
         _poolGameObject = new GameObject();
         _poolGameObject.transform.position = Vector3.zero;
         _poolGameObject.name = "Pool Game Object";
@@ -25,6 +29,7 @@ public class GameObjectPool : Pool<GameObject>
     protected override GameObject CreateNewObject()
     {
         GameObject item = GameObject.Instantiate(_prefab, _poolGameObject.transform);
+        item.name = _name;
         item.SetActive(false);
         return item;
     }

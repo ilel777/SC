@@ -12,7 +12,7 @@ public class PoolsContainer
     private EnemyBoltPool _enemyBolts;
     private EnemyPool _enemies;
     private AsteroidPool _asteroids;
-    private PowerupPool _powerups;
+    private Dictionary<String, PowerupPool> _powerupPools;
 
 
     #endregion
@@ -22,7 +22,7 @@ public class PoolsContainer
     public static EnemyPool Enemies { get => _instance._enemies; }
     public static EnemyBoltPool EnemyBolts { get => _instance._enemyBolts; }
     public static AsteroidPool Asteroids { get => _instance._asteroids; }
-    public static PowerupPool Powerups { get => _instance._powerups; }
+    public static Dictionary<String, PowerupPool> PowerupPools { get => _instance._powerupPools; }
 
     #endregion
 
@@ -48,7 +48,12 @@ public class PoolsContainer
         _enemyBolts = new EnemyBoltPool(Resources.Load<GameObject>("Prefabs/Bolt"), 100);
         _enemies = new EnemyPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Enemy"), 10);
         _asteroids = new AsteroidPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Asteroid"), 10);
-        _powerups = new PowerupPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Health Powerup"), 20);
+        // _powerups = new PowerupPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Health Powerup"), 20);
+        _powerupPools = new Dictionary<string, PowerupPool>();
+        foreach (CollectibleConfig config in ConfigurationUtils.CollectiblesConfig)
+        {
+            _powerupPools.Add(config.prefabName, new PowerupPool(Resources.Load<GameObject>("Prefabs/SpaceItems/" + config.prefabName), config.prefabName, 10));
+        }
     }
 
     #endregion

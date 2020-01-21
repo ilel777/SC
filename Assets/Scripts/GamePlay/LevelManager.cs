@@ -74,8 +74,9 @@ public abstract class LevelManager : MonoBehaviour
 
     private void HandlePowerupDurationEnded(EventArgs arg)
     {
-        (arg as PowerupDurationEndedEventArgs).Powerup.DisableEffect(_player);
-        PoolsContainer.Powerups.Return((arg as PowerupDurationEndedEventArgs).Powerup.gameObject);
+        Powerup p = (arg as PowerupDurationEndedEventArgs).Powerup;
+        p.DisableEffect(_player);
+        PoolsContainer.PowerupPools[p.gameObject.name].Return((arg as PowerupDurationEndedEventArgs).Powerup.gameObject);
     }
 
     /// <summary>
