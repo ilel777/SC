@@ -27,10 +27,15 @@ public class GameObjectPool : Pool<GameObject>
     protected override GameObject CreateNewObject()
     {
         GameObject item = GameObject.Instantiate(_prefab, _poolGameObject.transform);
-        item.name = _config.name;
-        item.GetComponent<IConfig>().DefaultConfig = _config;
+        OnCreate(item);
         item.SetActive(false);
         return item;
+    }
+
+    protected override void OnCreate(GameObject item)
+    {
+        item.name = _config.name;
+        item.GetComponent<IConfig>().DefaultConfig = _config;
     }
 
     protected override GameObject OnGet(GameObject item)

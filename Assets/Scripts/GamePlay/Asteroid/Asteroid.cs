@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
-public class Asteroid : MonoBehaviour, ISize
+public class Asteroid : MonoBehaviour, ISize, IConfig
 {
     // Movement Support
     private Rigidbody rb;
@@ -22,7 +24,13 @@ public class Asteroid : MonoBehaviour, ISize
     [SerializeField]
     GameObject _explosionPrefab;
 
+    // Support config
+    AsteroidConfig _defaultConfig;
+
     public Health Health { get => _health; }
+
+    public GameObjectConfig DefaultConfig { get => _defaultConfig; set => _defaultConfig = value as AsteroidConfig; }
+
 
     void Awake()
     {
@@ -33,19 +41,29 @@ public class Asteroid : MonoBehaviour, ISize
     }
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        yield return new WaitWhile(() => _defaultConfig == null);
+        ConfigureAsteroid();
 
         // extract the size from the Collider
         StoreAsteroidDimensions();
     }
 
+    private void ConfigureAsteroid()
+    {
+        if (_defaultConfig != null)
+        {
+            _health.LifePoints = (_defaultConfig).health.lifePoints;
+            _attack.Power = (_defaultConfig).attack.power;
+        }
+    }
+
     void OnEnable()
     {
-        _health.LifePoints = ConfigurationUtils.AsteroidConfig.health.lifePoints;
-
-        _attack.Power = ConfigurationUtils.AsteroidConfig.attack.power;
+        ConfigureAsteroid();
     }
 
     // Update is called once per frame
@@ -68,7 +86,7 @@ public class Asteroid : MonoBehaviour, ISize
     //         || other.gameObject.CompareTag("Boundary"))
     //     {
     //         PoolsContainer.Asteroids.Return(gameObject);
-    //         EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));
+    //         EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs((_defaultConfig).scoreValue));
     //     }
     // }
 
@@ -82,7 +100,7 @@ public class Asteroid : MonoBehaviour, ISize
             GameObject explosion = Instantiate(_explosionPrefab, transform.position, _explosionPrefab.transform.rotation);
             explosion.transform.localScale *= 3;
             Destroy(explosion, 3.0f);
-            EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs(ConfigurationUtils.AsteroidConfig.scoreValue));
+            EventManager.TriggerEvent(EventName.AsteroidDestroyed, new AsteroidDestroyedEventArgs((_defaultConfig).scoreValue));
         }
     }
 

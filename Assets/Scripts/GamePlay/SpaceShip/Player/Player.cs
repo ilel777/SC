@@ -25,6 +25,8 @@ public class Player : SpaceShip
     {
         base.Awake();
 
+        base.DefaultConfig = ConfigurationUtils.PlayerShipConfig;
+
         // initialize movement component
         _movement = gameObject.AddComponent<PlayerMovement>();
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class EnemyMovement : Movement
 
     private Rigidbody _rb;
     private ISize _size;
+    private EnemyShipConfig _config;
     private Timer _dodgeCooldown;
     private float _thrustForce;
     private float _minDodgeForce;
@@ -15,22 +17,28 @@ public class EnemyMovement : Movement
 
     #endregion
 
-    void Start()
+    IEnumerator Start()
     {
         _rb = GetComponent<Rigidbody>();
         _size = GetComponent<ISize>();
-
+        _config = GetComponent<IConfig>().DefaultConfig as EnemyShipConfig;
 
         _dodgeCooldown = gameObject.AddComponent<Timer>();
         _dodgeCooldown.Duration = 1.0f;
         _minDodgeForce = 10;
         _maxDodgeForce = 30;
+
+
+        yield return new WaitUntil(() => _config != null);
+
+        ConfigureMovement();
     }
 
-    void OnEnable()
+    protected override void ConfigureMovement()
     {
         // configure movement component
-        Speed = ConfigurationUtils.EnemyShipConfig.movement.speed;
+        if (_config != null)
+            Speed = _config.movement.speed;
     }
 
     protected override void Move()
@@ -54,7 +62,7 @@ public class EnemyMovement : Movement
 
     void Dodge()
     {
-        float rndLocation = Random.Range(ScreenUtils.ScreenLeft + _size.GetWidth(), ScreenUtils.ScreenRight - _size.GetWidth());
+        float rndLocation = UnityEngine.Random.Range(ScreenUtils.ScreenLeft + _size.GetWidth(), ScreenUtils.ScreenRight - _size.GetWidth());
         Vector3 movementDirection = rndLocation < _rb.position.x ? Vector3.right : Vector3.left;
         float xDistance = Mathf.Abs(rndLocation - _rb.position.x);
 
@@ -62,7 +70,7 @@ public class EnemyMovement : Movement
         minThrustForce = _minDodgeForce < xDistance ? _minDodgeForce : 0;
         maxThrustForce = _maxDodgeForce > xDistance ? xDistance : _maxDodgeForce;
 
-        thrustForce = Random.Range(minThrustForce, maxThrustForce);
+        thrustForce = UnityEngine.Random.Range(minThrustForce, maxThrustForce);
 
         _rb.AddRelativeForce(movementDirection * thrustForce * _rb.mass * _rb.drag, ForceMode.Impulse);
     }

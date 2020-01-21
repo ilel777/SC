@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,19 +10,30 @@ public class AsteroidMovement : Movement
     private Rigidbody _rb;
     private Vector3 _torqueVector;
     private float _rotationSpeed;
+    private AsteroidConfig _config;
 
     #endregion
-
-    void Start()
+    void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
     }
 
-    void OnEnable()
+    IEnumerator Start()
     {
-        _torqueVector = Random.insideUnitSphere.normalized;
-        _rotationSpeed = ConfigurationUtils.AsteroidConfig.movement.rotationSpeed;
-        Speed = ConfigurationUtils.AsteroidConfig.movement.speed;
+        _rb = GetComponent<Rigidbody>();
+        yield return new WaitUntil(() => GetComponent<Asteroid>().DefaultConfig != null);
+        _config = GetComponent<Asteroid>().DefaultConfig as AsteroidConfig;
+        ConfigureMovement();
+    }
+
+    protected override void ConfigureMovement()
+    {
+        _torqueVector = UnityEngine.Random.insideUnitSphere.normalized;
+        if (_config != null)
+        {
+            _rotationSpeed = _config.movement.rotationSpeed;
+            Speed = _config.movement.speed;
+            Debug.Log(Speed);
+        }
     }
 
     protected override void Move()

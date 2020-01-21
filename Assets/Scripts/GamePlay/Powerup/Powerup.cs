@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Powerup : MonoBehaviour, ISize
+public abstract class Powerup : MonoBehaviour, ISize, IConfig
 {
     // Support Powerup Effect Duration
     Timer _powerupTimer;
@@ -11,8 +11,12 @@ public abstract class Powerup : MonoBehaviour, ISize
     // store powerup dimensions
     float _width, _height;
 
+    // Support config
+    CollectibleConfig _defaultConfig;
+
     public float EffectDuration { get => 3; }
     public Timer PowerupTimer { get => _powerupTimer; set => _powerupTimer = value; }
+    public GameObjectConfig DefaultConfig { get => _defaultConfig; set => _defaultConfig = value as CollectibleConfig; }
 
     // support movement
     Rigidbody _rb;

@@ -17,11 +17,11 @@ public abstract class Movement : MonoBehaviour
 
     #endregion
 
+    protected abstract void ConfigureMovement();
 
-    // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-
+        ConfigureMovement();
     }
 
     protected virtual void FixedUpdate()

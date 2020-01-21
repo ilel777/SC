@@ -8,10 +8,16 @@ public class PlayerBoltPool : GameObjectPool
     {
     }
 
-    protected override GameObject CreateNewObject()
+    //     protected override GameObject CreateNewObject()
+    //     {
+    //         GameObject bolt = base.CreateNewObject();
+    //         bolt.AddComponent<PlayerBolt>();
+    //         return bolt;
+    //     }
+
+    protected override void OnCreate(GameObject item)
     {
-        GameObject bolt = base.CreateNewObject();
-        bolt.AddComponent<PlayerBolt>();
-        return bolt;
+        item.AddComponent<PlayerBolt>();
+        base.OnCreate(item);
     }
 }

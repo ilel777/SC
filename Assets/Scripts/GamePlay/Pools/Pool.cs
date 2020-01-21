@@ -38,6 +38,7 @@ public abstract class Pool<T>
 
     protected abstract T CreateNewObject();
     protected abstract void OnReturn(T item);
+    protected abstract void OnCreate(T item);
 
 
     #endregion

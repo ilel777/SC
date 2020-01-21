@@ -8,20 +8,20 @@ public class PlayerMovement : Movement
 
     private Rigidbody _rb;
     private ISize _size;
+    private PlayerShipConfig _config;
 
     #endregion
+
+    void Awake()
+    {
+        _config = GetComponent<IConfig>().DefaultConfig as PlayerShipConfig;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _size = GetComponent<ISize>();
-    }
-
-    void OnEnable()
-    {
-        // configure movement component
-        Speed = ConfigurationUtils.PlayerShipConfig.movement.speed;
     }
 
     protected override void Move()
@@ -52,4 +52,13 @@ public class PlayerMovement : Movement
             );
     }
 
+    protected override void ConfigureMovement()
+    {
+        // configure movement component
+        if (_config != null)
+        {
+            Speed = _config.movement.speed;
+        }
+
+    }
 }

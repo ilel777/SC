@@ -2,6 +2,8 @@
 
 public class EnemyBolt : Bolt
 {
+    public new EnemyBoltConfig DefaultConfig { get => base.DefaultConfig as EnemyBoltConfig; }
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -10,7 +12,7 @@ public class EnemyBolt : Bolt
         tag = "Enemy Bolt";
         gameObject.layer = 10;
 
-        Attack.Power = ConfigurationUtils.EnemyBoltConfig.attack.power;
+        Attack.Power = DefaultConfig.attack.power;
     }
 
 

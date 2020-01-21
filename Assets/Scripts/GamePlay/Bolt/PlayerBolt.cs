@@ -2,6 +2,9 @@
 
 public class PlayerBolt : Bolt
 {
+
+    public new PlayerBoltConfig DefaultConfig { get => base.DefaultConfig as PlayerBoltConfig; }
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -10,7 +13,7 @@ public class PlayerBolt : Bolt
         tag = "Player Bolt";
         gameObject.layer = 9;
 
-        Attack.Power = ConfigurationUtils.PlayerBoltConfig.attack.power;
+        Attack.Power = DefaultConfig.attack.power;
     }
 
 
