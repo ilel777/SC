@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBoltPool : BoltPool
+public class PlayerBoltPool : GameObjectPool
 {
-    public PlayerBoltPool(GameObject boltPrefab, int initialCapacity = 10) : base(boltPrefab, initialCapacity)
+    public PlayerBoltPool(BoltConfig config, int initialCapacity = 10) : base(config, initialCapacity)
     {
-        PoolGameObject.name = "Player Bolt Pool";
     }
 
     protected override GameObject CreateNewObject()

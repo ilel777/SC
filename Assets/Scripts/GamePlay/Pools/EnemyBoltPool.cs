@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class EnemyBoltPool : BoltPool
+public class EnemyBoltPool : GameObjectPool
 {
-    public EnemyBoltPool(GameObject boltPrefab, int initialCapacity = 10) : base(boltPrefab, initialCapacity)
+    public EnemyBoltPool(BoltConfig config, int initialCapacity = 10) : base(config, initialCapacity)
     {
-        PoolGameObject.name = "Enemy Bolt Pool";
     }
 
     protected override GameObject CreateNewObject()

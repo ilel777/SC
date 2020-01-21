@@ -1,7 +1,7 @@
 {
     "playerShipConfig": {
-        "name": "",
-        "prefabName": "Player",
+        "name": "Player",
+        "prefabPath": "Player",
         "movement": {
             "speed": 80.0,
             "rotationSpeed": 0.0
@@ -15,8 +15,8 @@
         }
     },
     "enemyShipConfig": {
-        "name": "",
-        "prefabName": "Enemy",
+        "name": "Enemy",
+        "prefabPath": "SpaceItems/Enemy",
         "movement": {
             "speed": 80.0,
             "rotationSpeed": 0.0
@@ -31,8 +31,8 @@
         "scoreValue": 150
     },
     "asteroidConfig": {
-        "name": "",
-        "prefabName": "Asteroid",
+        "name": "Asteroid",
+        "prefabPath": "SpaceItems/Asteroid",
         "movement": {
             "speed": 80.0,
             "rotationSpeed": 0.25
@@ -48,16 +48,16 @@
     },
     "collectiblesConfig": [
         {
-            "name": "",
-            "prefabName": "Health Powerup",
+            "name": "Health Powerup",
+            "prefabPath": "SpaceItems/Health Powerup",
             "movement": {
                 "speed": 55.0,
                 "rotationSpeed": 0.0
             }
         },
         {
-            "name": "",
-            "prefabName": "FireRate Powerup",
+            "name": "FireRate Powerup",
+            "prefabPath": "SpaceItems/FireRate Powerup",
             "movement": {
                 "speed": 60.0,
                 "rotationSpeed": 0.0
@@ -65,8 +65,8 @@
         }
     ],
     "playerBoltConfig": {
-        "name": "",
-        "prefabName": "Player Bolt",
+        "name": "Player Bolt",
+        "prefabPath": "Bolt",
         "movement": {
             "speed": 100.0,
             "rotationSpeed": 0.0
@@ -77,8 +77,8 @@
         }
     },
     "enemyBoltConfig": {
-        "name": "",
-        "prefabName": "Enemy Bolt",
+        "name": "Enemy Bolt",
+        "prefabPath": "Bolt",
         "movement": {
             "speed": 90.0,
             "rotationSpeed": 0.0

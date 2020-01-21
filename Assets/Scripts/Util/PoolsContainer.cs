@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,19 +9,19 @@ public class PoolsContainer
     private static PoolsContainer _instance;
     private PlayerBoltPool _playerBolts;
     private EnemyBoltPool _enemyBolts;
-    private EnemyPool _enemies;
-    private AsteroidPool _asteroids;
-    private Dictionary<String, PowerupPool> _powerupPools;
+    private GameObjectPool _enemies;
+    private GameObjectPool _asteroids;
+    private Dictionary<String, GameObjectPool> _powerupPools;
 
 
     #endregion
 
     #region Accessors
     public static PlayerBoltPool PlayerBolts { get => _instance._playerBolts; }
-    public static EnemyPool Enemies { get => _instance._enemies; }
+    public static GameObjectPool Enemies { get => _instance._enemies; }
     public static EnemyBoltPool EnemyBolts { get => _instance._enemyBolts; }
-    public static AsteroidPool Asteroids { get => _instance._asteroids; }
-    public static Dictionary<String, PowerupPool> PowerupPools { get => _instance._powerupPools; }
+    public static GameObjectPool Asteroids { get => _instance._asteroids; }
+    public static Dictionary<String, GameObjectPool> PowerupPools { get => _instance._powerupPools; }
 
     #endregion
 
@@ -44,15 +43,15 @@ public class PoolsContainer
 
     PoolsContainer()
     {
-        _playerBolts = new PlayerBoltPool(Resources.Load<GameObject>("Prefabs/Bolt"), 100);
-        _enemyBolts = new EnemyBoltPool(Resources.Load<GameObject>("Prefabs/Bolt"), 100);
-        _enemies = new EnemyPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Enemy"), 10);
-        _asteroids = new AsteroidPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Asteroid"), 10);
+        _playerBolts = new PlayerBoltPool(ConfigurationUtils.PlayerBoltConfig, 100);
+        _enemyBolts = new EnemyBoltPool(ConfigurationUtils.EnemyBoltConfig, 100);
+        _enemies = new GameObjectPool(ConfigurationUtils.EnemyShipConfig, 10);
+        _asteroids = new GameObjectPool(ConfigurationUtils.AsteroidConfig, 10);
         // _powerups = new PowerupPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Health Powerup"), 20);
-        _powerupPools = new Dictionary<string, PowerupPool>();
+        _powerupPools = new Dictionary<string, GameObjectPool>();
         foreach (CollectibleConfig config in ConfigurationUtils.CollectiblesConfig)
         {
-            _powerupPools.Add(config.prefabName, new PowerupPool(Resources.Load<GameObject>("Prefabs/SpaceItems/" + config.prefabName), config.prefabName, 10));
+            _powerupPools.Add(config.name, new GameObjectPool(config, 10));
         }
     }
 

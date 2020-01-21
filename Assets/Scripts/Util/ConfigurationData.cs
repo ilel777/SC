@@ -92,11 +92,11 @@ public class ConfigurationData
 public abstract class GameObjectConfig
 {
     public string name;
-    public string prefabName;
+    public string prefabPath;
 
-    protected GameObjectConfig(string prefabName)
+    protected GameObjectConfig(string prefabPath)
     {
-        this.prefabName = prefabName;
+        this.prefabPath = prefabPath;
     }
 }
 
