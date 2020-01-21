@@ -14,6 +14,7 @@ public class Enemy : SpaceShip
 
 
     #region Properties
+    public new EnemyShipConfig DefaultConfig { get => base.DefaultConfig as EnemyShipConfig; }
     #endregion
 
     new void Awake()
@@ -34,13 +35,13 @@ public class Enemy : SpaceShip
         base.Start();
 
         // configure attack component
-        _attack.Power = ConfigurationUtils.EnemyShipConfig.attack.power;
-        _attack.FireRate = 1 / ConfigurationUtils.EnemyShipConfig.attack.cooldown;
+        _attack.Power = DefaultConfig.attack.power;
+        _attack.FireRate = 1 / DefaultConfig.attack.cooldown;
         _attack.BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.movement.speed;
         _attack.Bolts = PoolsContainer.EnemyBolts;
 
         // configure health component
-        Health.LifePoints = ConfigurationUtils.EnemyShipConfig.health.lifePoints;
+        Health.LifePoints = DefaultConfig.health.lifePoints;
 
 
         transform.Rotate(Vector3.up, Mathf.PI * Mathf.Rad2Deg);
@@ -64,7 +65,7 @@ public class Enemy : SpaceShip
 
         gameObject.SetActive(false);
         PoolsContainer.Enemies.Return(gameObject);
-        EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(ConfigurationUtils.EnemyShipConfig.scoreValue));
+        EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(DefaultConfig.scoreValue));
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -75,7 +76,7 @@ public class Enemy : SpaceShip
             PoolsContainer.Enemies.Return(gameObject);
             GameObject explosion = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 3.0f);
-            EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(ConfigurationUtils.EnemyShipConfig.scoreValue));
+            EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(DefaultConfig.scoreValue));
         }
     }
 }

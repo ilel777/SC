@@ -15,6 +15,7 @@ public class Player : SpaceShip
 
 
     #region Properties
+    public new PlayerShipConfig DefaultConfig { get => base.DefaultConfig as PlayerShipConfig; }
     #endregion
 
 
@@ -39,13 +40,12 @@ public class Player : SpaceShip
         base.Start();
 
         // configure attack component
-        _attack.Power = ConfigurationUtils.PlayerShipConfig.attack.power;
-        _attack.FireRate = 1 / ConfigurationUtils.PlayerShipConfig.attack.cooldown;
+        _attack.Power = DefaultConfig.attack.power;
+        _attack.FireRate = 1 / DefaultConfig.attack.cooldown;
         _attack.BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.movement.speed;
         _attack.Bolts = PoolsContainer.PlayerBolts;
 
-
-        Health.LifePoints = ConfigurationUtils.PlayerShipConfig.health.lifePoints;
+        Health.LifePoints = DefaultConfig.health.lifePoints;
     }
 
 

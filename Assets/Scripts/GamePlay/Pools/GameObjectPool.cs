@@ -28,6 +28,7 @@ public class GameObjectPool : Pool<GameObject>
     {
         GameObject item = GameObject.Instantiate(_prefab, _poolGameObject.transform);
         item.name = _config.name;
+        item.GetComponent<IConfig>().DefaultConfig = _config;
         item.SetActive(false);
         return item;
     }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SpaceShip : MonoBehaviour, ISize
+public abstract class SpaceShip : MonoBehaviour, ISize, IConfig
 {
     // Support movement
     private Rigidbody _rb;
@@ -20,6 +18,10 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     // Support Explosion
     GameObject _explosionPrefab;
 
+    // Support config object
+    SpaceShipConfig _defaultConfig;
+
+
     #region Properties
 
     /// <summary>
@@ -34,6 +36,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize
     public int Power { get => _power; set => _power = value; }
     public Health Health { get => _health; }
     public GameObject ExplosionPrefab { get => _explosionPrefab; set => _explosionPrefab = value; }
+    public virtual GameObjectConfig DefaultConfig { get => _defaultConfig; set => _defaultConfig = value as SpaceShipConfig; }
 
 
     #endregion
