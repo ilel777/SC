@@ -30,7 +30,7 @@ public class EnemyMovement : Movement
     void OnEnable()
     {
         // configure movement component
-        Speed = ConfigurationUtils.EnemyShipConfig.speed;
+        Speed = ConfigurationUtils.EnemyShipConfig.movement.speed;
     }
 
     protected override void Move()

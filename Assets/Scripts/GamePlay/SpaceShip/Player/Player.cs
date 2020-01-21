@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -40,13 +39,13 @@ public class Player : SpaceShip
         base.Start();
 
         // configure attack component
-        _attack.Power = ConfigurationUtils.PlayerShipConfig.power;
-        _attack.FireRate = 1 / ConfigurationUtils.PlayerShipConfig.cooldown;
-        _attack.BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.impulseForce;
+        _attack.Power = ConfigurationUtils.PlayerShipConfig.attack.power;
+        _attack.FireRate = 1 / ConfigurationUtils.PlayerShipConfig.attack.cooldown;
+        _attack.BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.movement.speed;
         _attack.Bolts = PoolsContainer.PlayerBolts;
 
 
-        Health.LifePoints = ConfigurationUtils.PlayerShipConfig.health;
+        Health.LifePoints = ConfigurationUtils.PlayerShipConfig.health.lifePoints;
     }
 
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : SpaceShip
 {
@@ -36,13 +34,13 @@ public class Enemy : SpaceShip
         base.Start();
 
         // configure attack component
-        _attack.Power = ConfigurationUtils.EnemyShipConfig.power;
-        _attack.FireRate = 1 / ConfigurationUtils.EnemyShipConfig.cooldown;
-        _attack.BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.impulseForce;
+        _attack.Power = ConfigurationUtils.EnemyShipConfig.attack.power;
+        _attack.FireRate = 1 / ConfigurationUtils.EnemyShipConfig.attack.cooldown;
+        _attack.BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.movement.speed;
         _attack.Bolts = PoolsContainer.EnemyBolts;
 
         // configure health component
-        Health.LifePoints = ConfigurationUtils.EnemyShipConfig.health;
+        Health.LifePoints = ConfigurationUtils.EnemyShipConfig.health.lifePoints;
 
 
         transform.Rotate(Vector3.up, Mathf.PI * Mathf.Rad2Deg);

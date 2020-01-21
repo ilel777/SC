@@ -20,8 +20,8 @@ public class AsteroidMovement : Movement
     void OnEnable()
     {
         _torqueVector = Random.insideUnitSphere.normalized;
-        _rotationSpeed = ConfigurationUtils.AsteroidConfig.rotationSpeed;
-        Speed = ConfigurationUtils.AsteroidConfig.speed;
+        _rotationSpeed = ConfigurationUtils.AsteroidConfig.movement.rotationSpeed;
+        Speed = ConfigurationUtils.AsteroidConfig.movement.speed;
     }
 
     protected override void Move()

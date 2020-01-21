@@ -1,41 +1,92 @@
 {
     "playerShipConfig": {
-        "speed": 100.0,
-        "health": 100,
-        "cooldown": 0.5,
-        "power": 200
+        "name": "",
+        "prefabName": "Player",
+        "movement": {
+            "speed": 80.0,
+            "rotationSpeed": 0.0
+        },
+        "health": {
+            "lifePoints": 100
+        },
+        "attack": {
+            "power": 200,
+            "cooldown": 0.5
+        }
     },
     "enemyShipConfig": {
-        "speed": 40.0,
-        "health": 50,
-        "cooldown": 1.0,
-        "power": 70,
+        "name": "",
+        "prefabName": "Enemy",
+        "movement": {
+            "speed": 80.0,
+            "rotationSpeed": 0.0
+        },
+        "health": {
+            "lifePoints": 100
+        },
+        "attack": {
+            "power": 70,
+            "cooldown": 1.0
+        },
         "scoreValue": 150
     },
     "asteroidConfig": {
-        "speed": 40.0,
-        "health": 100,
-        "power": 1000,
-        "rotationSpeed": 0.25,
+        "name": "",
+        "prefabName": "Asteroid",
+        "movement": {
+            "speed": 80.0,
+            "rotationSpeed": 0.25
+        },
+        "health": {
+            "lifePoints": 200
+        },
+        "attack": {
+            "power": 1000,
+            "cooldown": 0.0
+        },
         "scoreValue": 100
     },
     "collectiblesConfig": [
         {
-            "name": "Health Powerup",
-            "speed": 55.0
+            "name": "",
+            "prefabName": "Health Powerup",
+            "movement": {
+                "speed": 55.0,
+                "rotationSpeed": 0.0
+            }
         },
         {
-            "name": "FireRate Powerup",
-            "speed": 60.0
+            "name": "",
+            "prefabName": "FireRate Powerup",
+            "movement": {
+                "speed": 60.0,
+                "rotationSpeed": 0.0
+            }
         }
     ],
     "playerBoltConfig": {
-        "impulseForce": 100.0,
-        "power": 50
+        "name": "",
+        "prefabName": "Player Bolt",
+        "movement": {
+            "speed": 100.0,
+            "rotationSpeed": 0.0
+        },
+        "attack": {
+            "power": 50,
+            "cooldown": 0.0
+        }
     },
     "enemyBoltConfig": {
-        "impulseForce": 90.0,
-        "power": 30
+        "name": "",
+        "prefabName": "Enemy Bolt",
+        "movement": {
+            "speed": 90.0,
+            "rotationSpeed": 0.0
+        },
+        "attack": {
+            "power": 30,
+            "cooldown": 0.0
+        }
     },
     "waveConfig": {
         "spawnItemWait": 1.0,

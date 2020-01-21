@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -18,24 +17,24 @@ public class ConfigurationData
     private ConfigurationData()
     {
         // set default values for player configs
-        playerShipConfig.health = 100;
-        playerShipConfig.speed = 100;
-        playerShipConfig.cooldown = 0.5f;
-        playerShipConfig.power = 200;
+        playerShipConfig = new PlayerShipConfig("Player");
+        playerShipConfig.health = new HealthConfig(100);
+        playerShipConfig.movement = new MovementConfig(80);
+        playerShipConfig.attack = new AttackConfig(200, 0.5f);
 
         // set default values for enemy config
-        enemyShipConfig.health = 50;
-        enemyShipConfig.speed = 40;
+        enemyShipConfig = new EnemyShipConfig("Enemy");
+        enemyShipConfig.health = new HealthConfig(100);
+        enemyShipConfig.movement = new MovementConfig(80);
+        enemyShipConfig.attack = new AttackConfig(70, 1.0f);
         enemyShipConfig.scoreValue = 150;
-        enemyShipConfig.cooldown = 1.0f;
-        enemyShipConfig.power = 70;
 
         // set default values for asteroid config
-        asteroidConfig.health = 100;
-        asteroidConfig.speed = 40;
-        asteroidConfig.rotationSpeed = 0.25f;
+        asteroidConfig = new AsteroidConfig("Asteroid");
+        asteroidConfig.health = new HealthConfig(200);
+        asteroidConfig.movement = new MovementConfig(80, 0.25f);
         asteroidConfig.scoreValue = 100;
-        asteroidConfig.power = 1000;
+        asteroidConfig.attack = new AttackConfig(1000);
 
         // set default values for collectible config
         collectiblesConfig = new CollectibleConfig[2];
@@ -44,14 +43,17 @@ public class ConfigurationData
         collectiblesConfig.SetValue(new CollectibleConfig(60, "FireRate Powerup"), 1);
 
         // set default values for player bolt config
-        playerBoltConfig.impulseForce = 100.0f;
-        playerBoltConfig.power = 50;
+        playerBoltConfig = new PlayerBoltConfig("Player Bolt");
+        playerBoltConfig.movement = new MovementConfig(100);
+        playerBoltConfig.attack = new AttackConfig(50);
 
         // set default values for enemy bolt config
-        enemyBoltConfig.impulseForce = 90.0f;
-        enemyBoltConfig.power = 30;
+        enemyBoltConfig = new EnemyBoltConfig("Enemy Bolt");
+        enemyBoltConfig.movement = new MovementConfig(90);
+        enemyBoltConfig.attack = new AttackConfig(30);
 
         // set default values for wave config
+        waveConfig = new WaveConfig();
         waveConfig.startWait = 0.5f;
         waveConfig.spawnWaveWait = 3.0f;
         waveConfig.spawnMessageDelay = 1.0f;
@@ -86,61 +88,141 @@ public class ConfigurationData
     }
 }
 
-
 [System.Serializable]
-public class PlayerShipConfig
+public abstract class GameObjectConfig
 {
-    public float speed;
-    public uint health;
-    public float cooldown;
-    public uint power;
-}
-
-[System.Serializable]
-public class EnemyShipConfig
-{
-    public float speed;
-    public uint health;
-    public float cooldown;
-    public uint power;
-    public int scoreValue;
-}
-
-[System.Serializable]
-public class CollectibleConfig
-{
+    public string name;
     public string prefabName;
-    public float speed;
 
-    public CollectibleConfig(float speed, string prefabName)
+    protected GameObjectConfig(string prefabName)
     {
-        this.speed = speed;
         this.prefabName = prefabName;
     }
 }
 
 [System.Serializable]
-public class AsteroidConfig
+public class MovementConfig
 {
     public float speed;
-    public uint health;
-    public uint power;
     public float rotationSpeed;
+
+    public MovementConfig(float speed)
+    {
+        this.speed = speed;
+    }
+
+    public MovementConfig(float speed, float rotationSpeed) : this(speed)
+    {
+        this.rotationSpeed = rotationSpeed;
+    }
+}
+[System.Serializable]
+public class AttackConfig
+{
+    public uint power;
+    public float cooldown;
+    private int v;
+
+    public AttackConfig(uint power)
+    {
+        this.power = power;
+    }
+
+    public AttackConfig(uint power, float cooldown) : this(power)
+    {
+        this.cooldown = cooldown;
+    }
+}
+[System.Serializable]
+public class HealthConfig
+{
+    public uint lifePoints;
+
+    public HealthConfig(uint lifePoints)
+    {
+        this.lifePoints = lifePoints;
+    }
+}
+
+[System.Serializable]
+public class SpaceShipConfig : GameObjectConfig
+{
+    public MovementConfig movement;
+    public HealthConfig health;
+    public AttackConfig attack;
+
+    public SpaceShipConfig(string prefabName) : base(prefabName)
+    {
+    }
+}
+
+[System.Serializable]
+public class PlayerShipConfig : SpaceShipConfig
+{
+    public PlayerShipConfig(string prefabName) : base(prefabName)
+    {
+    }
+}
+
+[System.Serializable]
+public class EnemyShipConfig : SpaceShipConfig
+{
     public int scoreValue;
+
+    public EnemyShipConfig(string prefabName) : base(prefabName)
+    {
+    }
 }
 
 [System.Serializable]
-public class PlayerBoltConfig
+public class CollectibleConfig : GameObjectConfig
 {
-    public float impulseForce;
-    public uint power;
+    public MovementConfig movement;
+
+    public CollectibleConfig(float speed, string prefabName) : base(prefabName)
+    {
+        this.movement = new MovementConfig(speed);
+    }
 }
 
 [System.Serializable]
-public class EnemyBoltConfig
+public class AsteroidConfig : GameObjectConfig
 {
-    public float impulseForce;
-    public uint power;
+    public MovementConfig movement;
+    public HealthConfig health;
+    public AttackConfig attack;
+    public int scoreValue;
+
+    public AsteroidConfig(string prefabName) : base(prefabName)
+    {
+    }
+}
+
+[System.Serializable]
+public class BoltConfig : GameObjectConfig
+{
+    public MovementConfig movement;
+    public AttackConfig attack;
+
+    public BoltConfig(string prefabName) : base(prefabName)
+    {
+    }
+}
+
+[System.Serializable]
+public class PlayerBoltConfig : BoltConfig
+{
+    public PlayerBoltConfig(string prefabName) : base(prefabName)
+    {
+    }
+}
+
+[System.Serializable]
+public class EnemyBoltConfig : BoltConfig
+{
+    public EnemyBoltConfig(string prefabName) : base(prefabName)
+    {
+    }
 }
 
 [System.Serializable]

@@ -21,7 +21,7 @@ public class PlayerMovement : Movement
     void OnEnable()
     {
         // configure movement component
-        Speed = ConfigurationUtils.PlayerShipConfig.speed;
+        Speed = ConfigurationUtils.PlayerShipConfig.movement.speed;
     }
 
     protected override void Move()

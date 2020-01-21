@@ -45,9 +45,9 @@ public class Asteroid : MonoBehaviour, ISize
 
     void OnEnable()
     {
-        _health.LifePoints = ConfigurationUtils.AsteroidConfig.health;
+        _health.LifePoints = ConfigurationUtils.AsteroidConfig.health.lifePoints;
 
-        _attack.Power = ConfigurationUtils.AsteroidConfig.power;
+        _attack.Power = ConfigurationUtils.AsteroidConfig.attack.power;
     }
 
     // Update is called once per frame

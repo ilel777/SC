@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyBolt : Bolt
 {
@@ -13,7 +10,7 @@ public class EnemyBolt : Bolt
         tag = "Enemy Bolt";
         gameObject.layer = 10;
 
-        Attack.Power = ConfigurationUtils.EnemyBoltConfig.power;
+        Attack.Power = ConfigurationUtils.EnemyBoltConfig.attack.power;
     }
 
 

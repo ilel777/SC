@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBolt : Bolt
 {
@@ -12,7 +10,7 @@ public class PlayerBolt : Bolt
         tag = "Player Bolt";
         gameObject.layer = 9;
 
-        Attack.Power = ConfigurationUtils.PlayerBoltConfig.power;
+        Attack.Power = ConfigurationUtils.PlayerBoltConfig.attack.power;
     }
 
 
