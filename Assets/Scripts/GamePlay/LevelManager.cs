@@ -108,9 +108,10 @@ public abstract class LevelManager : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        _player = Instantiate(_playerPrefab,
-                              _playerPrefab.transform.position,
-                              _playerPrefab.transform.rotation).GetComponent<Player>();
+        //     _player = Instantiate(_playerPrefab,
+        //                           _playerPrefab.transform.position,
+        //                           _playerPrefab.transform.rotation).GetComponent<Player>();
+        _player = PoolsContainer.SpaceShipPools["Player"].Get().GetComponent<Player>();
     }
 
     /// <summary>

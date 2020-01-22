@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class SpaceShip : MonoBehaviour, ISize, IConfig
@@ -49,7 +50,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize, IConfig
 
 
     // Start is called before the first frame update
-    protected void Start()
+    protected IEnumerator Start()
     {
         //get Rigidbody
         _rb = GetComponent<Rigidbody>();
@@ -57,6 +58,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize, IConfig
         _explosionPrefab = Resources.Load<GameObject>("Prefabs/SpaceShip Explosion");
 
         StoreShipDimensions();
+        yield return new WaitUntil(() => DefaultConfig != null);
     }
 
     // Update is called once per frame

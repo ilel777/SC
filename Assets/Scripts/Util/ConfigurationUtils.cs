@@ -6,8 +6,9 @@ public static class ConfigurationUtils
 {
     private static ConfigurationData configurationData;
 
-    public static PlayerShipConfig PlayerShipConfig { get => configurationData.playerShipConfig; }
-    public static EnemyShipConfig EnemyShipConfig { get => configurationData.enemyShipConfig; }
+    // public static PlayerShipConfig PlayerShipConfig { get => configurationData.playerShipConfig; }
+    // public static EnemyShipConfig EnemyShipConfig { get => configurationData.enemyShipConfig; }
+    public static SpaceShipConfig[] SpaceShipsConfig { get => configurationData.spaceShipsConfig; }
     // public static AsteroidConfig AsteroidConfig { get => configurationData.asteroidConfig; }
     public static ObstacleConfig[] ObstaclesConfig { get => configurationData.obstaclesConfig; }
     public static CollectibleConfig[] CollectiblesConfig { get => configurationData.collectiblesConfig; }

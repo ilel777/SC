@@ -38,7 +38,12 @@ public class WaveManager : MonoBehaviour
 
         // spaceObjects.AddRange(Resources.LoadAll<GameObject>("Prefabs/SpaceItems"));
         _obstaclesPools = new List<Pool<GameObject>>();
-        _obstaclesPools.Add(PoolsContainer.Enemies);
+        // _obstaclesPools.Add(PoolsContainer.Enemies);
+        foreach (string name in PoolsContainer.SpaceShipPools.Keys)
+        {
+            if (name != "Player")
+                _obstaclesPools.Add(PoolsContainer.SpaceShipPools[name]);
+        }
         _obstaclesPools.AddRange(PoolsContainer.ObstaclePools.Values);
         _obstaclesPools.AddRange(PoolsContainer.PowerupPools.Values);
 

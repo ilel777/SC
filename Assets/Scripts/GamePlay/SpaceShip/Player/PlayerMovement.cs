@@ -14,14 +14,17 @@ public class PlayerMovement : Movement
 
     void Awake()
     {
-        _config = GetComponent<IConfig>().DefaultConfig as PlayerShipConfig;
     }
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
         _rb = GetComponent<Rigidbody>();
         _size = GetComponent<ISize>();
+        _config = GetComponent<IConfig>().DefaultConfig as PlayerShipConfig;
+
+        yield return new WaitUntil(() => _config != null);
+        ConfigureMovement();
     }
 
     protected override void Move()
@@ -59,6 +62,5 @@ public class PlayerMovement : Movement
         {
             Speed = _config.movement.speed;
         }
-
     }
 }

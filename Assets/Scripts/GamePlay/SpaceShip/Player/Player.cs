@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -25,7 +26,7 @@ public class Player : SpaceShip
     {
         base.Awake();
 
-        base.DefaultConfig = ConfigurationUtils.PlayerShipConfig;
+        // base.DefaultConfig = ConfigurationUtils.PlayerShipConfig;
 
         // initialize movement component
         _movement = gameObject.AddComponent<PlayerMovement>();
@@ -37,15 +38,15 @@ public class Player : SpaceShip
     }
 
     // Start is called before the first frame update
-    new void Start()
+    new IEnumerator Start()
     {
-        base.Start();
+        yield return base.Start();
 
         // configure attack component
         _attack.Power = DefaultConfig.attack.power;
         _attack.FireRate = 1 / DefaultConfig.attack.cooldown;
         _attack.BoltThrustForce = DefaultBoltConfig.movement.speed;
-        _attack.Bolts = PoolsContainer.PlayerBolts;
+        _attack.Bolts = PoolsContainer.BoltPools[DefaultBoltConfig.name];
 
         Health.LifePoints = DefaultConfig.health.lifePoints;
     }
@@ -59,7 +60,8 @@ public class Player : SpaceShip
         Health.TakeDamage((uint)collision.gameObject.GetComponent<Attack>().Power);
         if (Health.IsDestroyed)
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            PoolsContainer.SpaceShipPools[name].Return(gameObject);
             GameObject explosion = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 3.0f);
             EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());
@@ -71,7 +73,8 @@ public class Player : SpaceShip
         if (other.gameObject.CompareTag("Player Bolt")
             || other.gameObject.CompareTag("Powerup")) return;
 
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        PoolsContainer.SpaceShipPools[name].Return(gameObject);
         EventManager.TriggerEvent(EventName.PlayerDestroyed, new EventArgs());
     }
 

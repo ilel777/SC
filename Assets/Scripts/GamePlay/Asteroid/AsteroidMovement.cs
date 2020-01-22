@@ -18,8 +18,8 @@ public class AsteroidMovement : Movement
     IEnumerator Start()
     {
         _rb = GetComponent<Rigidbody>();
-        yield return new WaitUntil(() => GetComponent<Asteroid>().DefaultConfig != null);
         _config = GetComponent<Asteroid>().DefaultConfig as ObstacleConfig;
+        yield return new WaitUntil(() => _config != null);
         ConfigureMovement();
     }
 
@@ -30,7 +30,6 @@ public class AsteroidMovement : Movement
         {
             _rotationSpeed = _config.movement.rotationSpeed;
             Speed = _config.movement.speed;
-            Debug.Log(Speed);
         }
     }
 

@@ -28,7 +28,7 @@ public class EnemyBolt : Bolt
 
     void OnCollisionEnter(Collision collision)
     {
-        PoolsContainer.EnemyBolts.Return(gameObject);
+        PoolsContainer.BoltPools[name].Return(gameObject);
         Destroy(Instantiate(ExplosionPrefab, transform.position, Quaternion.identity), 3.0f);
     }
 }

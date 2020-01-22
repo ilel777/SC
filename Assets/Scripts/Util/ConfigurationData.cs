@@ -4,8 +4,9 @@ using UnityEngine;
 [System.Serializable]
 public class ConfigurationData
 {
-    public PlayerShipConfig playerShipConfig;
-    public EnemyShipConfig enemyShipConfig;
+    // public PlayerShipConfig playerShipConfig;
+    // public EnemyShipConfig enemyShipConfig;
+    public SpaceShipConfig[] spaceShipsConfig;
     // public AsteroidConfig asteroidConfig;
     public ObstacleConfig[] obstaclesConfig;
     public CollectibleConfig[] collectiblesConfig;
@@ -15,8 +16,11 @@ public class ConfigurationData
 
     private ConfigurationData()
     {
+        // set default values for spaceships configs
+        spaceShipsConfig = new SpaceShipConfig[2];
+
         // set default values for player configs
-        playerShipConfig = new PlayerShipConfig("Player", "Player");
+        PlayerShipConfig playerShipConfig = new PlayerShipConfig("Player", "Player");
         playerShipConfig.health = new HealthConfig(100);
         playerShipConfig.movement = new MovementConfig(80);
         playerShipConfig.attack = new AttackConfig(200, 0.5f);
@@ -26,8 +30,10 @@ public class ConfigurationData
         playerBoltConfig.attack = new AttackConfig(50);
         playerShipConfig.boltConfig = playerBoltConfig;
 
+        spaceShipsConfig.SetValue(playerShipConfig, 0);
+
         // set default values for enemy config
-        enemyShipConfig = new EnemyShipConfig("Enemy", "SpaceItems/Enemy");
+        EnemyShipConfig enemyShipConfig = new EnemyShipConfig("Enemy", "SpaceItems/Enemy");
         enemyShipConfig.health = new HealthConfig(50);
         enemyShipConfig.movement = new MovementConfig(60, 1.0f, 10.0f, 30.0f);
         enemyShipConfig.attack = new AttackConfig(70, 1.0f);
@@ -38,11 +44,13 @@ public class ConfigurationData
         enemyBoltConfig.attack = new AttackConfig(30);
         enemyShipConfig.boltConfig = enemyBoltConfig;
 
+        spaceShipsConfig.SetValue(enemyShipConfig, 1);
+
         // set default values for obstacles
         obstaclesConfig = new ObstacleConfig[1];
 
         // set default values for asteroid config
-        ObstacleConfig asteroidConfig = new ObstacleConfig("Asteroid", "SpaceItems/Asteroid");
+        ObstacleConfig asteroidConfig = new ObstacleConfig("Red Asteroid", "SpaceItems/Asteroid");
         asteroidConfig.health = new HealthConfig(100);
         asteroidConfig.movement = new MovementConfig(60, 0.25f);
         asteroidConfig.scoreValue = 100;

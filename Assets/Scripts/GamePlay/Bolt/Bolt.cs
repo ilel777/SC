@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Bolt : MonoBehaviour, IConfig
 {
@@ -39,14 +37,15 @@ public abstract class Bolt : MonoBehaviour, IConfig
         // make sure the bolt is out of screen
         if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
         {
-            if (gameObject.GetComponent<PlayerBolt>())
-            {
-                PoolsContainer.PlayerBolts.Return(gameObject);
-            }
-            else if (gameObject.GetComponent<EnemyBolt>())
-            {
-                PoolsContainer.EnemyBolts.Return(gameObject);
-            }
+            // if (gameObject.GetComponent<PlayerBolt>())
+            // {
+            //     PoolsContainer.PlayerBolts.Return(gameObject);
+            // }
+            // else if (gameObject.GetComponent<EnemyBolt>())
+            // {
+            //     PoolsContainer.EnemyBolts.Return(gameObject);
+            // }
+            PoolsContainer.BoltPools[name].Return(gameObject);
         }
     }
 

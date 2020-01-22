@@ -38,7 +38,7 @@ public class Enemy : SpaceShip
         _attack.Power = DefaultConfig.attack.power;
         _attack.FireRate = 1 / DefaultConfig.attack.cooldown;
         _attack.BoltThrustForce = DefaultBoltConfig.movement.speed;
-        _attack.Bolts = PoolsContainer.EnemyBolts;
+        _attack.Bolts = PoolsContainer.BoltPools[DefaultBoltConfig.name];
 
         // configure health component
         Health.LifePoints = DefaultConfig.health.lifePoints;
@@ -53,7 +53,7 @@ public class Enemy : SpaceShip
         // make sure the bolt is out of screen
         if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
         {
-            PoolsContainer.Enemies.Return(gameObject);
+            PoolsContainer.SpaceShipPools[name].Return(gameObject);
         }
     }
 
@@ -64,7 +64,7 @@ public class Enemy : SpaceShip
             || other.gameObject.CompareTag("Powerup")) return;
 
         gameObject.SetActive(false);
-        PoolsContainer.Enemies.Return(gameObject);
+        PoolsContainer.SpaceShipPools[name].Return(gameObject);
         EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(DefaultConfig.scoreValue));
     }
 
@@ -73,7 +73,7 @@ public class Enemy : SpaceShip
         Health.TakeDamage((uint)collision.gameObject.GetComponent<Attack>().Power);
         if (Health.IsDestroyed)
         {
-            PoolsContainer.Enemies.Return(gameObject);
+            PoolsContainer.SpaceShipPools[name].Return(gameObject);
             GameObject explosion = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 3.0f);
             EventManager.TriggerEvent(EventName.EnemyShipDestroyed, new EnemyShipDestroyedEventArgs(DefaultConfig.scoreValue));

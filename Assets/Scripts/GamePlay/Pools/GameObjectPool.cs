@@ -14,7 +14,7 @@ public class GameObjectPool : Pool<GameObject>
         _poolGameObject.transform.position = Vector3.zero;
         _poolGameObject.name = _config.name + " Pool";
         // Object.DontDestroyOnLoad(_poolGameObject);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < initialCapacity; i++)
         {
             _items.Add(CreateNewObject());
         }

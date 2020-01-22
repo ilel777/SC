@@ -92,7 +92,6 @@ public class Asteroid : MonoBehaviour, ISize, IConfig
     private void OnCollisionEnter(Collision collision)
     {
         Health.TakeDamage((uint)collision.gameObject.GetComponent<Attack>().Power);
-        Debug.Log(Health.LifePoints);
         if (Health.IsDestroyed)
         {
             PoolsContainer.ObstaclePools[name].Return(gameObject);

@@ -20,13 +20,13 @@ public class PlayerBolt : Bolt
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Powerup")) return;
-        PoolsContainer.PlayerBolts.Return(gameObject);
+        PoolsContainer.BoltPools[name].Return(gameObject);
         // Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        PoolsContainer.PlayerBolts.Return(gameObject);
+        PoolsContainer.BoltPools[name].Return(gameObject);
         Destroy(Instantiate(ExplosionPrefab, transform.position, Quaternion.identity), 3.0f);
     }
 
