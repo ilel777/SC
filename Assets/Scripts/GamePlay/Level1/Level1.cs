@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class Level1 : LevelManager
 {
+    new void Start()
+    {
+        base.Start();
+        Instantiate(Resources.Load<GameObject>("Prefabs/" + ConfigurationUtils.LevelConfig.name + "/Background"));
+    }
 
     public override bool GameOver()
     {

@@ -15,6 +15,8 @@ public static class ConfigurationUtils
     // public static BoltConfig PlayerBoltConfig { get => configurationData.playerBoltConfig; }
     // public static BoltConfig EnemyBoltConfig { get => configurationData.enemyBoltConfig; }
     public static WaveConfig WaveConfig { get => configurationData.waveConfig; }
+    public static LevelConfig LevelConfig { get => configurationData.levelConfig; }
+
 
     public static void Initialize()
     {

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         waveManager = gameObject.AddComponent<WaveManager>();
+        levelManager = gameObject.AddComponent(Type.GetType(ConfigurationUtils.LevelConfig.name)) as LevelManager;
         levelManager = GetComponent<LevelManager>();
     }
 

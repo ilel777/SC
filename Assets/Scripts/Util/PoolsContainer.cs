@@ -62,7 +62,7 @@ public class PoolsContainer
             else
             {
                 _spacesShipPools.Add(config.name, new GameObjectPool(config, 5));
-                _boltPools.Add(config.boltConfig.name, new PlayerBoltPool(config.boltConfig, 10));
+                _boltPools.Add(config.boltConfig.name, new EnemyBoltPool(config.boltConfig, 10));
             }
 
         }

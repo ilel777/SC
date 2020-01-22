@@ -13,9 +13,12 @@ public class ConfigurationData
     // public BoltConfig playerBoltConfig;
     // public BoltConfig enemyBoltConfig;
     public WaveConfig waveConfig;
+    public LevelConfig levelConfig;
 
     private ConfigurationData()
     {
+        // set default values for level configs
+        levelConfig = new LevelConfig("Level01");
         // set default values for spaceships configs
         spaceShipsConfig = new SpaceShipConfig[2];
 
@@ -101,6 +104,17 @@ public class ConfigurationData
     }
 }
 
+
+[System.Serializable]
+public class LevelConfig
+{
+    public string name;
+
+    public LevelConfig(string name)
+    {
+        this.name = name;
+    }
+}
 
 [System.Serializable]
 public abstract class GameObjectConfig

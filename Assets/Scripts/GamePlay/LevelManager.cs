@@ -13,7 +13,7 @@ public abstract class LevelManager : MonoBehaviour
     List<Powerup> _powerups;
 
     // Support storing player prefab for later instantiation
-    GameObject _playerPrefab;
+    // GameObject _playerPrefab;
 
     // Store player reference to apply effects
     Player _player;
@@ -31,9 +31,9 @@ public abstract class LevelManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
-        _playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
+        // _playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
         _respawnTimer = gameObject.AddComponent<Timer>();
         _respawnTimer.AddTimerFinishedEventListener(SpawnPlayer);
         SpawnPlayer();
