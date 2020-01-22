@@ -4,7 +4,10 @@
         "prefabPath": "Player",
         "movement": {
             "speed": 80.0,
-            "rotationSpeed": 0.0
+            "rotationSpeed": 0.0,
+            "dodgeCooldown": 0.0,
+            "minDodgeForce": 0.0,
+            "maxDodgeForce": 0.0
         },
         "health": {
             "lifePoints": 100
@@ -18,11 +21,14 @@
         "name": "Enemy",
         "prefabPath": "SpaceItems/Enemy",
         "movement": {
-            "speed": 80.0,
-            "rotationSpeed": 0.0
+            "speed": 60.0,
+            "rotationSpeed": 0.0,
+            "dodgeCooldown": 1.0,
+            "minDodgeForce": 10.0,
+            "maxDodgeForce": 30.0
         },
         "health": {
-            "lifePoints": 100
+            "lifePoints": 50
         },
         "attack": {
             "power": 70,
@@ -34,11 +40,14 @@
         "name": "Asteroid",
         "prefabPath": "SpaceItems/Asteroid",
         "movement": {
-            "speed": 80.0,
-            "rotationSpeed": 0.25
+            "speed": 60.0,
+            "rotationSpeed": 0.25,
+            "dodgeCooldown": 0.0,
+            "minDodgeForce": 0.0,
+            "maxDodgeForce": 0.0
         },
         "health": {
-            "lifePoints": 200
+            "lifePoints": 100
         },
         "attack": {
             "power": 1000,
@@ -52,7 +61,10 @@
             "prefabPath": "SpaceItems/Health Powerup",
             "movement": {
                 "speed": 55.0,
-                "rotationSpeed": 0.0
+                "rotationSpeed": 0.0,
+                "dodgeCooldown": 0.0,
+                "minDodgeForce": 0.0,
+                "maxDodgeForce": 0.0
             }
         },
         {
@@ -60,7 +72,10 @@
             "prefabPath": "SpaceItems/FireRate Powerup",
             "movement": {
                 "speed": 60.0,
-                "rotationSpeed": 0.0
+                "rotationSpeed": 0.0,
+                "dodgeCooldown": 0.0,
+                "minDodgeForce": 0.0,
+                "maxDodgeForce": 0.0
             }
         }
     ],
@@ -69,7 +84,10 @@
         "prefabPath": "Bolt",
         "movement": {
             "speed": 100.0,
-            "rotationSpeed": 0.0
+            "rotationSpeed": 0.0,
+            "dodgeCooldown": 0.0,
+            "minDodgeForce": 0.0,
+            "maxDodgeForce": 0.0
         },
         "attack": {
             "power": 50,
@@ -81,7 +99,10 @@
         "prefabPath": "Bolt",
         "movement": {
             "speed": 90.0,
-            "rotationSpeed": 0.0
+            "rotationSpeed": 0.0,
+            "dodgeCooldown": 0.0,
+            "minDodgeForce": 0.0,
+            "maxDodgeForce": 0.0
         },
         "attack": {
             "power": 30,

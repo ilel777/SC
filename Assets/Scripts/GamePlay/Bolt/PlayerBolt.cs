@@ -3,7 +3,7 @@
 public class PlayerBolt : Bolt
 {
 
-    public new PlayerBoltConfig DefaultConfig { get => base.DefaultConfig as PlayerBoltConfig; }
+    public new BoltConfig DefaultConfig { get => base.DefaultConfig as BoltConfig; }
 
     // Start is called before the first frame update
     new void Start()

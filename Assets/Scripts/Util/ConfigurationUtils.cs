@@ -10,8 +10,8 @@ public static class ConfigurationUtils
     public static EnemyShipConfig EnemyShipConfig { get => configurationData.enemyShipConfig; }
     public static AsteroidConfig AsteroidConfig { get => configurationData.asteroidConfig; }
     public static CollectibleConfig[] CollectiblesConfig { get => configurationData.collectiblesConfig; }
-    public static PlayerBoltConfig PlayerBoltConfig { get => configurationData.playerBoltConfig; }
-    public static EnemyBoltConfig EnemyBoltConfig { get => configurationData.enemyBoltConfig; }
+    public static BoltConfig PlayerBoltConfig { get => configurationData.playerBoltConfig; }
+    public static BoltConfig EnemyBoltConfig { get => configurationData.enemyBoltConfig; }
     public static WaveConfig WaveConfig { get => configurationData.waveConfig; }
 
     public static void Initialize()

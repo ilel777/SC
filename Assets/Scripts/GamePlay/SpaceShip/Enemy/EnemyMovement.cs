@@ -24,10 +24,9 @@ public class EnemyMovement : Movement
         _config = GetComponent<IConfig>().DefaultConfig as EnemyShipConfig;
 
         _dodgeCooldown = gameObject.AddComponent<Timer>();
-        _dodgeCooldown.Duration = 1.0f;
-        _minDodgeForce = 10;
-        _maxDodgeForce = 30;
-
+        // _dodgeCooldown.Duration = 1.0f;
+        // _minDodgeForce = 10;
+        // _maxDodgeForce = 30;
 
         yield return new WaitUntil(() => _config != null);
 
@@ -38,7 +37,13 @@ public class EnemyMovement : Movement
     {
         // configure movement component
         if (_config != null)
+        {
             Speed = _config.movement.speed;
+            _dodgeCooldown.Duration = _config.movement.dodgeCooldown;
+            _minDodgeForce = _config.movement.minDodgeForce;
+            _maxDodgeForce = _config.movement.maxDodgeForce;
+
+        }
     }
 
     protected override void Move()

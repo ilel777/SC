@@ -2,7 +2,7 @@
 
 public class EnemyBolt : Bolt
 {
-    public new EnemyBoltConfig DefaultConfig { get => base.DefaultConfig as EnemyBoltConfig; }
+    public new BoltConfig DefaultConfig { get => base.DefaultConfig as BoltConfig; }
 
     // Start is called before the first frame update
     new void Start()

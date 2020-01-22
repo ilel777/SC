@@ -6,8 +6,6 @@ public class GameObjectPool : Pool<GameObject>
     GameObject _poolGameObject;
     GameObjectConfig _config;
 
-    // public GameObjectPool(GameObject prefab, int initialCapacity = 10) : this(prefab, "any name", initialCapacity) { }
-
     public GameObjectPool(GameObjectConfig config, int initialCapacity = 10) : base(initialCapacity)
     {
         _config = config;
