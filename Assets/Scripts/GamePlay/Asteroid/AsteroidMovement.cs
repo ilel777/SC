@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class AsteroidMovement : Movement
@@ -10,7 +8,7 @@ public class AsteroidMovement : Movement
     private Rigidbody _rb;
     private Vector3 _torqueVector;
     private float _rotationSpeed;
-    private AsteroidConfig _config;
+    private ObstacleConfig _config;
 
     #endregion
     void Awake()
@@ -21,7 +19,7 @@ public class AsteroidMovement : Movement
     {
         _rb = GetComponent<Rigidbody>();
         yield return new WaitUntil(() => GetComponent<Asteroid>().DefaultConfig != null);
-        _config = GetComponent<Asteroid>().DefaultConfig as AsteroidConfig;
+        _config = GetComponent<Asteroid>().DefaultConfig as ObstacleConfig;
         ConfigureMovement();
     }
 

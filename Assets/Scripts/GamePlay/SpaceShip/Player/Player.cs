@@ -44,7 +44,7 @@ public class Player : SpaceShip
         // configure attack component
         _attack.Power = DefaultConfig.attack.power;
         _attack.FireRate = 1 / DefaultConfig.attack.cooldown;
-        _attack.BoltThrustForce = ConfigurationUtils.PlayerBoltConfig.movement.speed;
+        _attack.BoltThrustForce = DefaultBoltConfig.movement.speed;
         _attack.Bolts = PoolsContainer.PlayerBolts;
 
         Health.LifePoints = DefaultConfig.health.lifePoints;

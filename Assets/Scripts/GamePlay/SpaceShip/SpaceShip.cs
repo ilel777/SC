@@ -37,6 +37,7 @@ public abstract class SpaceShip : MonoBehaviour, ISize, IConfig
     public Health Health { get => _health; }
     public GameObject ExplosionPrefab { get => _explosionPrefab; set => _explosionPrefab = value; }
     public virtual GameObjectConfig DefaultConfig { get => _defaultConfig; set => _defaultConfig = value as SpaceShipConfig; }
+    public BoltConfig DefaultBoltConfig { get => (DefaultConfig as SpaceShipConfig).boltConfig; }
 
 
     #endregion

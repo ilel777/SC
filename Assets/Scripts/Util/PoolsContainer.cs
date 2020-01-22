@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PoolsContainer
 {
@@ -10,8 +9,8 @@ public class PoolsContainer
     private PlayerBoltPool _playerBolts;
     private EnemyBoltPool _enemyBolts;
     private GameObjectPool _enemies;
-    private GameObjectPool _asteroids;
-    private Dictionary<String, GameObjectPool> _powerupPools;
+    private Dictionary<string, GameObjectPool> _powerupPools;
+    private Dictionary<string, GameObjectPool> _obstaclePools;
 
 
     #endregion
@@ -20,8 +19,8 @@ public class PoolsContainer
     public static PlayerBoltPool PlayerBolts { get => _instance._playerBolts; }
     public static GameObjectPool Enemies { get => _instance._enemies; }
     public static EnemyBoltPool EnemyBolts { get => _instance._enemyBolts; }
-    public static GameObjectPool Asteroids { get => _instance._asteroids; }
-    public static Dictionary<String, GameObjectPool> PowerupPools { get => _instance._powerupPools; }
+    public static Dictionary<string, GameObjectPool> PowerupPools { get => _instance._powerupPools; }
+    public static Dictionary<string, GameObjectPool> ObstaclePools { get => _instance._obstaclePools; }
 
     #endregion
 
@@ -43,10 +42,18 @@ public class PoolsContainer
 
     PoolsContainer()
     {
-        _playerBolts = new PlayerBoltPool(ConfigurationUtils.PlayerBoltConfig, 100);
-        _enemyBolts = new EnemyBoltPool(ConfigurationUtils.EnemyBoltConfig, 100);
+        _playerBolts = new PlayerBoltPool(ConfigurationUtils.PlayerShipConfig.boltConfig, 100);
+        _enemyBolts = new EnemyBoltPool(ConfigurationUtils.EnemyShipConfig.boltConfig, 100);
         _enemies = new GameObjectPool(ConfigurationUtils.EnemyShipConfig, 10);
-        _asteroids = new GameObjectPool(ConfigurationUtils.AsteroidConfig, 10);
+
+
+
+        // _asteroids = new GameObjectPool(ConfigurationUtils.AsteroidConfig, 10);
+        _obstaclePools = new Dictionary<string, GameObjectPool>();
+        foreach (ObstacleConfig config in ConfigurationUtils.ObstaclesConfig)
+        {
+            _obstaclePools.Add(config.name, new GameObjectPool(config, 10));
+        }
         // _powerups = new PowerupPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Health Powerup"), 20);
         _powerupPools = new Dictionary<string, GameObjectPool>();
         foreach (CollectibleConfig config in ConfigurationUtils.CollectiblesConfig)

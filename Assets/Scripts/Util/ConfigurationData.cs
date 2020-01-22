@@ -6,10 +6,11 @@ public class ConfigurationData
 {
     public PlayerShipConfig playerShipConfig;
     public EnemyShipConfig enemyShipConfig;
-    public AsteroidConfig asteroidConfig;
+    // public AsteroidConfig asteroidConfig;
+    public ObstacleConfig[] obstaclesConfig;
     public CollectibleConfig[] collectiblesConfig;
-    public BoltConfig playerBoltConfig;
-    public BoltConfig enemyBoltConfig;
+    // public BoltConfig playerBoltConfig;
+    // public BoltConfig enemyBoltConfig;
     public WaveConfig waveConfig;
 
     private ConfigurationData()
@@ -19,6 +20,11 @@ public class ConfigurationData
         playerShipConfig.health = new HealthConfig(100);
         playerShipConfig.movement = new MovementConfig(80);
         playerShipConfig.attack = new AttackConfig(200, 0.5f);
+        // set default values for player bolt config
+        BoltConfig playerBoltConfig = new BoltConfig("Player Bolt", "Bolt");
+        playerBoltConfig.movement = new MovementConfig(100);
+        playerBoltConfig.attack = new AttackConfig(50);
+        playerShipConfig.boltConfig = playerBoltConfig;
 
         // set default values for enemy config
         enemyShipConfig = new EnemyShipConfig("Enemy", "SpaceItems/Enemy");
@@ -26,13 +32,22 @@ public class ConfigurationData
         enemyShipConfig.movement = new MovementConfig(60, 1.0f, 10.0f, 30.0f);
         enemyShipConfig.attack = new AttackConfig(70, 1.0f);
         enemyShipConfig.scoreValue = 150;
+        // set default values for enemy bolt config
+        BoltConfig enemyBoltConfig = new BoltConfig("Enemy Bolt", "Bolt");
+        enemyBoltConfig.movement = new MovementConfig(90);
+        enemyBoltConfig.attack = new AttackConfig(30);
+        enemyShipConfig.boltConfig = enemyBoltConfig;
+
+        // set default values for obstacles
+        obstaclesConfig = new ObstacleConfig[1];
 
         // set default values for asteroid config
-        asteroidConfig = new AsteroidConfig("Asteroid", "SpaceItems/Asteroid");
+        ObstacleConfig asteroidConfig = new ObstacleConfig("Asteroid", "SpaceItems/Asteroid");
         asteroidConfig.health = new HealthConfig(100);
         asteroidConfig.movement = new MovementConfig(60, 0.25f);
         asteroidConfig.scoreValue = 100;
         asteroidConfig.attack = new AttackConfig(1000);
+        obstaclesConfig.SetValue(asteroidConfig, 0);
 
         // set default values for collectible config
         collectiblesConfig = new CollectibleConfig[2];
@@ -41,16 +56,6 @@ public class ConfigurationData
         collectiblesConfig[0].movement = new MovementConfig(55);
         collectiblesConfig.SetValue(new CollectibleConfig("FireRate Powerup", "SpaceItems/FireRate Powerup"), 1);
         collectiblesConfig[1].movement = new MovementConfig(60);
-
-        // set default values for player bolt config
-        playerBoltConfig = new BoltConfig("Player Bolt", "Bolt");
-        playerBoltConfig.movement = new MovementConfig(100);
-        playerBoltConfig.attack = new AttackConfig(50);
-
-        // set default values for enemy bolt config
-        enemyBoltConfig = new BoltConfig("Enemy Bolt", "Bolt");
-        enemyBoltConfig.movement = new MovementConfig(90);
-        enemyBoltConfig.attack = new AttackConfig(30);
 
         // set default values for wave config
         waveConfig = new WaveConfig();
@@ -88,6 +93,7 @@ public class ConfigurationData
     }
 }
 
+
 [System.Serializable]
 public abstract class GameObjectConfig
 {
@@ -102,6 +108,19 @@ public abstract class GameObjectConfig
     protected GameObjectConfig(string name)
     {
         this.name = name;
+    }
+}
+
+[System.Serializable]
+public class ObstacleConfig : GameObjectConfig
+{
+    public MovementConfig movement;
+    public HealthConfig health;
+    public AttackConfig attack;
+    public int scoreValue;
+
+    public ObstacleConfig(string name, string prefabPath) : base(name, prefabPath)
+    {
     }
 }
 
@@ -168,6 +187,7 @@ public class SpaceShipConfig : GameObjectConfig
     public MovementConfig movement;
     public HealthConfig health;
     public AttackConfig attack;
+    public BoltConfig boltConfig;
 
     public SpaceShipConfig(string name, string prefabName) : base(name, prefabName)
     {
@@ -177,6 +197,7 @@ public class SpaceShipConfig : GameObjectConfig
 [System.Serializable]
 public class PlayerShipConfig : SpaceShipConfig
 {
+
     public PlayerShipConfig(string name, string prefabName) : base(name, prefabName)
     {
     }
@@ -202,18 +223,13 @@ public class CollectibleConfig : GameObjectConfig
     }
 }
 
-[System.Serializable]
-public class AsteroidConfig : GameObjectConfig
-{
-    public MovementConfig movement;
-    public HealthConfig health;
-    public AttackConfig attack;
-    public int scoreValue;
-
-    public AsteroidConfig(string name, string prefabPath) : base(name, prefabPath)
-    {
-    }
-}
+// [System.Serializable]
+// public class AsteroidConfig : GameObjectConfig
+// {
+//     public AsteroidConfig(string name, string prefabPath) : base(name, prefabPath)
+//     {
+//     }
+// }
 
 [System.Serializable]
 public class BoltConfig : GameObjectConfig

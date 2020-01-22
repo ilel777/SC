@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Asteroid : MonoBehaviour, ISize, IConfig
@@ -25,11 +24,11 @@ public class Asteroid : MonoBehaviour, ISize, IConfig
     GameObject _explosionPrefab;
 
     // Support config
-    AsteroidConfig _defaultConfig;
+    ObstacleConfig _defaultConfig;
 
     public Health Health { get => _health; }
 
-    public GameObjectConfig DefaultConfig { get => _defaultConfig; set => _defaultConfig = value as AsteroidConfig; }
+    public GameObjectConfig DefaultConfig { get => _defaultConfig; set => _defaultConfig = value as ObstacleConfig; }
 
 
     void Awake()
@@ -72,7 +71,7 @@ public class Asteroid : MonoBehaviour, ISize, IConfig
         // make sure the asteroid is out of screen
         if (transform.position.magnitude > (new Vector2(ScreenUtils.ScreenRight, ScreenUtils.ScreenTop)).magnitude * 2)
         {
-            PoolsContainer.Asteroids.Return(gameObject);
+            PoolsContainer.ObstaclePools[name].Return(gameObject);
         }
     }
 
@@ -96,7 +95,7 @@ public class Asteroid : MonoBehaviour, ISize, IConfig
         Debug.Log(Health.LifePoints);
         if (Health.IsDestroyed)
         {
-            PoolsContainer.Asteroids.Return(gameObject);
+            PoolsContainer.ObstaclePools[name].Return(gameObject);
             GameObject explosion = Instantiate(_explosionPrefab, transform.position, _explosionPrefab.transform.rotation);
             explosion.transform.localScale *= 3;
             Destroy(explosion, 3.0f);

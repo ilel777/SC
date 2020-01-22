@@ -37,7 +37,7 @@ public class Enemy : SpaceShip
         // configure attack component
         _attack.Power = DefaultConfig.attack.power;
         _attack.FireRate = 1 / DefaultConfig.attack.cooldown;
-        _attack.BoltThrustForce = ConfigurationUtils.EnemyBoltConfig.movement.speed;
+        _attack.BoltThrustForce = DefaultBoltConfig.movement.speed;
         _attack.Bolts = PoolsContainer.EnemyBolts;
 
         // configure health component
