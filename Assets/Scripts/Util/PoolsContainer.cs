@@ -46,10 +46,6 @@ public class PoolsContainer
 
     PoolsContainer()
     {
-        // _playerBolts = new PlayerBoltPool(ConfigurationUtils.PlayerShipConfig.boltConfig, 100);
-        // _enemyBolts = new EnemyBoltPool(ConfigurationUtils.EnemyShipConfig.boltConfig, 100);
-        // _enemies = new GameObjectPool(ConfigurationUtils.EnemyShipConfig, 10);
-
         _spacesShipPools = new Dictionary<string, GameObjectPool>();
         _boltPools = new Dictionary<string, GameObjectPool>();
         foreach (SpaceShipConfig config in ConfigurationUtils.SpaceShipsConfig)
@@ -67,13 +63,12 @@ public class PoolsContainer
 
         }
 
-        // _asteroids = new GameObjectPool(ConfigurationUtils.AsteroidConfig, 10);
         _obstaclePools = new Dictionary<string, GameObjectPool>();
         foreach (ObstacleConfig config in ConfigurationUtils.ObstaclesConfig)
         {
             _obstaclePools.Add(config.name, new GameObjectPool(config, 10));
         }
-        // _powerups = new PowerupPool(Resources.Load<GameObject>("Prefabs/SpaceItems/Health Powerup"), 20);
+
         _powerupPools = new Dictionary<string, GameObjectPool>();
         foreach (CollectibleConfig config in ConfigurationUtils.CollectiblesConfig)
         {

@@ -4,23 +4,16 @@ using UnityEngine;
 [System.Serializable]
 public class ConfigurationData
 {
-    // public PlayerShipConfig playerShipConfig;
-    // public EnemyShipConfig enemyShipConfig;
-    public SpaceShipConfig[] spaceShipsConfig;
-    // public AsteroidConfig asteroidConfig;
-    public ObstacleConfig[] obstaclesConfig;
-    public CollectibleConfig[] collectiblesConfig;
-    // public BoltConfig playerBoltConfig;
-    // public BoltConfig enemyBoltConfig;
-    public WaveConfig waveConfig;
-    public LevelConfig levelConfig;
+    public LevelConfig[] levelsConfig;
 
     private ConfigurationData()
     {
         // set default values for level configs
-        levelConfig = new LevelConfig("Level01");
+        levelsConfig = new LevelConfig[2];
+        LevelConfig levelConfig = new LevelConfig("Level01");
+
         // set default values for spaceships configs
-        spaceShipsConfig = new SpaceShipConfig[2];
+        SpaceShipConfig[] spaceShipsConfig = new SpaceShipConfig[2];
 
         // set default values for player configs
         PlayerShipConfig playerShipConfig = new PlayerShipConfig("Player", "Player");
@@ -49,32 +42,42 @@ public class ConfigurationData
 
         spaceShipsConfig.SetValue(enemyShipConfig, 1);
 
+        levelConfig.spaceShipsConfig = spaceShipsConfig;
+
         // set default values for obstacles
-        obstaclesConfig = new ObstacleConfig[1];
+        ObstacleConfig[] obstaclesConfig = new ObstacleConfig[1];
 
         // set default values for asteroid config
-        ObstacleConfig asteroidConfig = new ObstacleConfig("Red Asteroid", "SpaceItems/Asteroid");
+        ObstacleConfig asteroidConfig = new ObstacleConfig("Red Asteroid", "SpaceItems/Red Asteroid");
         asteroidConfig.health = new HealthConfig(100);
         asteroidConfig.movement = new MovementConfig(60, 0.25f);
         asteroidConfig.scoreValue = 100;
         asteroidConfig.attack = new AttackConfig(1000);
         obstaclesConfig.SetValue(asteroidConfig, 0);
 
+        levelConfig.obstaclesConfig = obstaclesConfig;
+
         // set default values for collectible config
-        collectiblesConfig = new CollectibleConfig[2];
+        CollectibleConfig[] collectiblesConfig = new CollectibleConfig[2];
         // collectibleConfig.speed = 55;
         collectiblesConfig[0] = new CollectibleConfig("Health Powerup", "SpaceItems/Health Powerup");
         collectiblesConfig[0].movement = new MovementConfig(55);
         collectiblesConfig.SetValue(new CollectibleConfig("FireRate Powerup", "SpaceItems/FireRate Powerup"), 1);
         collectiblesConfig[1].movement = new MovementConfig(60);
 
+        levelConfig.collectiblesConfig = collectiblesConfig;
+
+
         // set default values for wave config
-        waveConfig = new WaveConfig();
+        WaveConfig waveConfig = new WaveConfig();
         waveConfig.startWait = 0.5f;
         waveConfig.spawnWaveWait = 3.0f;
         waveConfig.spawnMessageDelay = 1.0f;
         waveConfig.spawnItemWait = 1.0f;
         waveConfig.itemsNumber = 5;
+
+        levelConfig.waveConfig = waveConfig;
+        levelsConfig.SetValue(levelConfig, 0);
     }
 
     internal static ConfigurationData getConfigurationData()
@@ -109,6 +112,10 @@ public class ConfigurationData
 public class LevelConfig
 {
     public string name;
+    public SpaceShipConfig[] spaceShipsConfig;
+    public ObstacleConfig[] obstaclesConfig;
+    public CollectibleConfig[] collectiblesConfig;
+    public WaveConfig waveConfig;
 
     public LevelConfig(string name)
     {

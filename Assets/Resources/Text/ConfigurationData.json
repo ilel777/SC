@@ -1,141 +1,140 @@
 {
-    "spaceShipsConfig": [
+    "levelsConfig": [
         {
-            "name": "Player",
-            "prefabPath": "Player",
-            "movement": {
-                "speed": 80.0,
-                "rotationSpeed": 0.0,
-                "dodgeCooldown": 0.0,
-                "minDodgeForce": 0.0,
-                "maxDodgeForce": 0.0
-            },
-            "health": {
-                "lifePoints": 100
-            },
-            "attack": {
-                "power": 200,
-                "cooldown": 0.5
-            },
-            "boltConfig": {
-                "name": "Player Bolt",
-                "prefabPath": "Bolt",
-                "movement": {
-                    "speed": 100.0,
-                    "rotationSpeed": 0.0,
-                    "dodgeCooldown": 0.0,
-                    "minDodgeForce": 0.0,
-                    "maxDodgeForce": 0.0
+            "name": "Level01",
+            "spaceShipsConfig": [
+                {
+                    "name": "Player",
+                    "prefabPath": "Player",
+                    "movement": {
+                        "speed": 80.0,
+                        "rotationSpeed": 0.0,
+                        "dodgeCooldown": 0.0,
+                        "minDodgeForce": 0.0,
+                        "maxDodgeForce": 0.0
+                    },
+                    "health": {
+                        "lifePoints": 100
+                    },
+                    "attack": {
+                        "power": 200,
+                        "cooldown": 0.5
+                    },
+                    "boltConfig": {
+                        "name": "Player Bolt",
+                        "prefabPath": "Bolt",
+                        "movement": {
+                            "speed": 100.0,
+                            "rotationSpeed": 0.0,
+                            "dodgeCooldown": 0.0,
+                            "minDodgeForce": 0.0,
+                            "maxDodgeForce": 0.0
+                        },
+                        "attack": {
+                            "power": 50,
+                            "cooldown": 0.0
+                        }
+                    }
                 },
-                "attack": {
-                    "power": 50,
-                    "cooldown": 0.0
+                {
+                    "name": "Enemy",
+                    "prefabPath": "SpaceItems/Enemy",
+                    "movement": {
+                        "speed": 60.0,
+                        "rotationSpeed": 0.0,
+                        "dodgeCooldown": 1.0,
+                        "minDodgeForce": 10.0,
+                        "maxDodgeForce": 30.0
+                    },
+                    "health": {
+                        "lifePoints": 50
+                    },
+                    "attack": {
+                        "power": 70,
+                        "cooldown": 1.0
+                    },
+                    "boltConfig": {
+                        "name": "Enemy Bolt",
+                        "prefabPath": "Bolt",
+                        "movement": {
+                            "speed": 90.0,
+                            "rotationSpeed": 0.0,
+                            "dodgeCooldown": 0.0,
+                            "minDodgeForce": 0.0,
+                            "maxDodgeForce": 0.0
+                        },
+                        "attack": {
+                            "power": 30,
+                            "cooldown": 0.0
+                        }
+                    }
                 }
-            }
-        },
-        {
-            "name": "Enemy",
-            "prefabPath": "SpaceItems/Enemy",
-            "movement": {
-                "speed": 60.0,
-                "rotationSpeed": 0.0,
-                "dodgeCooldown": 1.0,
-                "minDodgeForce": 10.0,
-                "maxDodgeForce": 30.0
-            },
-            "health": {
-                "lifePoints": 50
-            },
-            "attack": {
-                "power": 70,
-                "cooldown": 1.0
-            },
-            "boltConfig": {
-                "name": "Enemy Bolt",
-                "prefabPath": "Bolt",
-                "movement": {
-                    "speed": 90.0,
-                    "rotationSpeed": 0.0,
-                    "dodgeCooldown": 0.0,
-                    "minDodgeForce": 0.0,
-                    "maxDodgeForce": 0.0
+            ],
+            "obstaclesConfig": [
+                {
+                    "name": "Red Asteroid",
+                    "prefabPath": "SpaceItems/Red Asteroid",
+                    "movement": {
+                        "speed": 60.0,
+                        "rotationSpeed": 0.25,
+                        "dodgeCooldown": 0.0,
+                        "minDodgeForce": 0.0,
+                        "maxDodgeForce": 0.0
+                    },
+                    "health": {
+                        "lifePoints": 100
+                    },
+                    "attack": {
+                        "power": 1000,
+                        "cooldown": 0.0
+                    },
+                    "scoreValue": 100
+                }
+            ],
+            "collectiblesConfig": [
+                {
+                    "name": "Health Powerup",
+                    "prefabPath": "SpaceItems/Health Powerup",
+                    "movement": {
+                        "speed": 55.0,
+                        "rotationSpeed": 0.0,
+                        "dodgeCooldown": 0.0,
+                        "minDodgeForce": 0.0,
+                        "maxDodgeForce": 0.0
+                    }
                 },
-                "attack": {
-                    "power": 30,
-                    "cooldown": 0.0
+                {
+                    "name": "FireRate Powerup",
+                    "prefabPath": "SpaceItems/FireRate Powerup",
+                    "movement": {
+                        "speed": 60.0,
+                        "rotationSpeed": 0.0,
+                        "dodgeCooldown": 0.0,
+                        "minDodgeForce": 0.0,
+                        "maxDodgeForce": 0.0
+                    }
                 }
-            }
-        }
-    ],
-    "obstaclesConfig": [
-        {
-            "name": "Red Asteroid",
-            "prefabPath": "SpaceItems/Red Asteroid",
-            "movement": {
-                "speed": 60.0,
-                "rotationSpeed": 0.25,
-                "dodgeCooldown": 0.0,
-                "minDodgeForce": 0.0,
-                "maxDodgeForce": 0.0
-            },
-            "health": {
-                "lifePoints": 100
-            },
-            "attack": {
-                "power": 1000,
-                "cooldown": 0.0
-            },
-            "scoreValue": 100
-        },
-        {
-            "name": "Blue Asteroid",
-            "prefabPath": "SpaceItems/Blue Asteroid",
-            "movement": {
-                "speed": 30.0,
-                "rotationSpeed": 0.25,
-                "dodgeCooldown": 0.0,
-                "minDodgeForce": 0.0,
-                "maxDodgeForce": 0.0
-            },
-            "health": {
-                "lifePoints": 200
-            },
-            "attack": {
-                "power": 1000,
-                "cooldown": 0.0
-            },
-            "scoreValue": 200
-        }
-    ],
-    "collectiblesConfig": [
-        {
-            "name": "Health Powerup",
-            "prefabPath": "SpaceItems/Health Powerup",
-            "movement": {
-                "speed": 55.0,
-                "rotationSpeed": 0.0,
-                "dodgeCooldown": 0.0,
-                "minDodgeForce": 0.0,
-                "maxDodgeForce": 0.0
+            ],
+            "waveConfig": {
+                "spawnItemWait": 1.0,
+                "spawnMessageDelay": 1.0,
+                "startWait": 0.5,
+                "spawnWaveWait": 3.0,
+                "itemsNumber": 5
             }
         },
         {
-            "name": "FireRate Powerup",
-            "prefabPath": "SpaceItems/FireRate Powerup",
-            "movement": {
-                "speed": 60.0,
-                "rotationSpeed": 0.0,
-                "dodgeCooldown": 0.0,
-                "minDodgeForce": 0.0,
-                "maxDodgeForce": 0.0
+            "name": "",
+            "spaceShipsConfig": [],
+            "obstaclesConfig": [],
+            "collectiblesConfig": [],
+            "waveConfig": {
+                "spawnItemWait": 0.0,
+                "spawnMessageDelay": 0.0,
+                "startWait": 0.0,
+                "spawnWaveWait": 0.0,
+                "itemsNumber": 0
             }
         }
-    ],
-    "waveConfig": {
-        "spawnItemWait": 1.0,
-        "spawnMessageDelay": 1.0,
-        "startWait": 0.5,
-        "spawnWaveWait": 3.0,
-        "itemsNumber": 5
-    }
+    ]
 }
