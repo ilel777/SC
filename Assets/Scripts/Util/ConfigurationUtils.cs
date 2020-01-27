@@ -18,7 +18,8 @@ public static class ConfigurationUtils
 
     public static void Initialize()
     {
-        configurationData = ConfigurationData.getConfigurationData();
+        configurationData = GameObject.FindGameObjectWithTag("ConfigurationData").GetComponent<Configuration>().ConfigurationData;
+        // configurationData = ConfigurationData.getConfigurationData();
     }
 
     public static void SetCurrentLevel(int currentLevel)

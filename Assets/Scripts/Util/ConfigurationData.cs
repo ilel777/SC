@@ -80,7 +80,7 @@ public class ConfigurationData
         levelsConfig.SetValue(levelConfig, 0);
     }
 
-    internal static ConfigurationData getConfigurationData()
+    public static ConfigurationData getConfigurationData()
     {
         ConfigurationData configData = new ConfigurationData();
         try

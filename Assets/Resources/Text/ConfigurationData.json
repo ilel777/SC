@@ -136,5 +136,8 @@
                 "itemsNumber": 0
             }
         }
-    ]
+    ],
+    "confData": {
+        "instanceID": 0
+    }
 }
